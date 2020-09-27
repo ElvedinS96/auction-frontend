@@ -1,11 +1,11 @@
 import React from "react";
 import "../../index.css"
 
-const StatusBar = ({ statusMessage, ...props }) => {
+const StatusBar = ({ statusMessage, href, refText, ...props }) => {
     return (
         <div {...props}>
             <label>
-                {statusMessage}
+                {statusMessage} <a href={href}>{refText}</a>
             </label>
         </div>
     );
