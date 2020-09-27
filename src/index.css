@@ -242,3 +242,20 @@ letter-spacing: 0.84px;
 .status a {
   text-decoration: none;
 }
+
+.helper {
+  display: flex;
+  margin: auto;
+  width: 50%;
+  min-width: 500px;
+  font-family: "Lato";
+  padding: 3em 0 3em 0;
+}
+
+.helper p {
+  font-size: 0.8em;
+color: #9B9B9B;
+letter-spacing: 0.63px;
+line-height: 25px;
+padding-top: 1em;
+}
