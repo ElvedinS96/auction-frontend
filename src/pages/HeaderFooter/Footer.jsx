@@ -7,9 +7,9 @@ const Footer = props => {
             <div>
                 <div className="footer-text">AUCTION</div>
                 <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Tearms and Conditions</a></li>
-                    <li><a href="#">Privacy and Policy</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/terms">Tearms and Conditions</a></li>
+                    <li><a href="/privacy">Privacy and Policy</a></li>
                 </ul>
             </div>
             <div>

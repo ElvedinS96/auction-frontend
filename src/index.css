@@ -1,9 +1,22 @@
 @import url("https://fonts.googleapis.com/css?family=Lato");
 
-body {
-  width: 100%;
+* {
   margin: 0;
   padding: 0;
+}
+
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 10em;
+}
+
+.main {
+  min-height: 100%;
 }
 
 .form-box {
@@ -88,7 +101,9 @@ body {
   background: #252525;
   border: 1px solid #979797;
   width: 100%;
-  height: 200px;
+  height: 10em;
+  position: absolute;
+  bottom: 0;
 }
 
 .footer ul {
@@ -152,6 +167,8 @@ margin-bottom: 1em;
   text-decoration: none;
   color: #FFFFFF;
   letter-spacing: 0.49px;
+  background-color: #252525;
+  border: none;
 }
 
 .header-or {
@@ -220,4 +237,25 @@ letter-spacing: 0.84px;
   letter-spacing: 0.63px;
   padding-left: 5.5em;
   height: 3em;
+}
+
+.status a {
+  text-decoration: none;
+}
+
+.helper {
+  display: flex;
+  margin: auto;
+  width: 50%;
+  min-width: 500px;
+  font-family: "Lato";
+  padding: 3em 0 3em 0;
+}
+
+.helper p {
+  font-size: 0.8em;
+color: #9B9B9B;
+letter-spacing: 0.63px;
+line-height: 25px;
+padding-top: 1em;
 }
