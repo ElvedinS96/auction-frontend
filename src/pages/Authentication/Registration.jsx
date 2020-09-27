@@ -20,18 +20,22 @@ const Registration = props => {
         firstName: "",
         lastName: "",
         email: "",
-        password: ""
+        password: "",
+        confirmPassword: ""
     })
+
+    const [confirmPassword, setConfirmPassword] = React.useState("")
 
     const [message, setMessage] = React.useState("")
     const [statusStyle, setStatusStyle] = React.useState("")
+    const [refText, setRefText] = React.useState("")
 
     let url = props.baseUrl + "/user"
 
     return (
         <div>
             <PageName pageName="register" />
-            <StatusBar statusMessage={message} className={statusStyle} />
+            <StatusBar statusMessage={message} href="/login" refText={refText} className={statusStyle} />
             <div className={"form-box"}>
                 <div className={"form"}>
                     <div className={"form-title"}>
@@ -41,6 +45,7 @@ const Registration = props => {
                     <GenericField id={"lastName"} name={"lastName"} label={"Last Name"} className={"input-field"} type={"text"} onChange={(e) => handleFieldChange(e, setUser)} validationMessage={validation.lastName} />
                     <GenericField id={"email"} name={"email"} label={"Email"} className={"input-field"} type={"text"} onChange={(e) => handleFieldChange(e, setUser)} validationMessage={validation.email} />
                     <GenericField id={"password"} name={"password"} label={"Password"} className={"input-field"} type={"password"} onChange={(e) => handleFieldChange(e, setUser)} validationMessage={validation.password} />
+                    <GenericField id={"confirmPassword"} name={"confirmPassword"} label={"Confirm Password"} className={"input-field"} type={"password"} onChange={(e) => setConfirmPassword(e.target.value)} validationMessage={validation.confirmPassword} />
                     <button type={"button"} className={"btn-submit"} onClick={(e) => handleRegisterClick(e, user)} >REGISTER</button>
                     <p className="have-account">
                         Already have an account? <a className="login-word" href="/login">Login</a>
@@ -57,7 +62,8 @@ const Registration = props => {
         if (validate(user)) {
             axios.post(url, user)
                 .then(response => {
-                    setMessage("You are registered")
+                    setMessage("You are registered! Login ")
+                    setRefText("here")
                     setStatusStyle("status status-success")
                 })
                 .catch(error => {
@@ -96,9 +102,13 @@ const Registration = props => {
             validationMessage.password = "Password must be longer than 5 letters"
             isValid = false;
         }
-        console.log(validationMessage)
+
+        if (user.password != confirmPassword) {
+            validationMessage.confirmPassword = "Password is not matching"
+            isValid = false;
+        }
+
         setValidation(validationMessage)
-        console.log(validation)
 
         return isValid
     }

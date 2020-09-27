@@ -44,7 +44,7 @@ const Login = props => {
         axios.post(url, user)
             .then(response => {
                 document.cookie = "token=" + response.data.token + "; max-age=600;"
-                history.push(from)
+                window.location.href = "/"
             })
             .catch(error => {
                 setErrorMessage("Invalid username or password")

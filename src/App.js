@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link, BrowserRouter } from "react-router-dom"
 import Registration from "./pages/Authentication/Registration"
 import Login from "./pages/Authentication/Login"
-import './App.css';
+import "./index.css"
 import Footer from "./pages/HeaderFooter/Footer"
 import Header from "./pages/HeaderFooter/Header"
 
