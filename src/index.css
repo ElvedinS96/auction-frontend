@@ -1,18 +1,16 @@
 @import url("https://fonts.googleapis.com/css?family=Lato");
 
 * {
-  margin: 0;
-  padding: 0;
+  margin: 0px;
+  padding: 0px;
 }
 
 body {
   width: 100%;
-  min-height: 100%;
-  margin: 0;
-  padding: 0;
   position: relative;
   min-height: 100vh;
   padding-bottom: 10em;
+  overflow-x: hidden;
 }
 
 .main {
@@ -258,4 +256,15 @@ color: #9B9B9B;
 letter-spacing: 0.63px;
 line-height: 25px;
 padding-top: 1em;
+}
+
+@media screen and (max-width: 600px) {
+    .form {
+      width: 95%;
+      min-width: 100px;
+    }
+    .helper {
+      width: 95%;
+      min-width: 100px;
+    }
 }
