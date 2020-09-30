@@ -268,3 +268,86 @@ padding-top: 1em;
       min-width: 100px;
     }
 }
+
+.product-right {
+  font-family: "Lato";
+}
+
+.product-right h2{
+  color: #252525;
+  letter-spacing: 1.61px;
+}
+
+.product-right h5 {
+  margin-top: 1em;
+  color: #8367D8;
+  letter-spacing: 0.84px;
+}
+
+.bidding {
+  margin: 1em 0 1em 0;
+}
+
+.bidding-field {
+  display: flex;
+}
+
+.product-right button {
+  margin-left: 1.5em;
+  padding: 0 0.5em 0 0.5em;
+  background: #FFFFFF;
+  border: 3px solid #8367D8;
+  box-shadow: 3px 3px 0 0 rgba(131,103,216,0.31);
+  color: #252525;
+  letter-spacing: 0.63px;
+  font-weight: bold;
+  font-size: 0.5em;
+}
+
+.product-right button:hover {
+  background: #f0f0f0;
+}
+
+.bidding label {
+  font-size: 0.5em;
+  color: #9B9B9B;
+  letter-spacing: 0.52px;
+  line-height: 22px;
+}
+
+.bid-input {
+  width: 10em;
+  background: #ECECEC;
+  border: 1px solid #D8D8D8;
+  height: 100%;
+}
+
+.bidding-info {
+  margin: 1em 0 2em 0;
+  font-size: 0.6em;
+  color: #9B9B9B;
+  letter-spacing: 0.56px;
+}
+
+.bidding-info p {
+  display: inline;
+  color: #8367D8;;
+}
+
+.product-details hr {
+  margin: 1em 0 1em 0;
+  background: #ECECEC;
+}
+
+.product-details h6 {
+  margin-left: 1em;
+  color: #252525;
+  letter-spacing: 0.63px;
+}
+
+.product-details p {
+  font-size: 0.6em;
+  color: #252525;
+  letter-spacing: 0.52px;
+  line-height: 1.7em;
+}

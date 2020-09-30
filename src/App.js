@@ -8,10 +8,12 @@ import Header from "./pages/HeaderFooter/Header"
 import PrivacyAndPolicy from "./pages/HelperPages/PrivacyAndPolicy"
 import TermsAndConditions from "./pages/HelperPages/TermsAndConditions"
 import AboutUs from "./pages/HelperPages/AboutUs"
+import Product from "./pages/Product/Product"
 
 function App() {
 
   const BASE_URL = "https://auctionapp-server.herokuapp.com"
+  const BASE_URL2 = "http://localhost:8081"
 
   return (
     <div>
@@ -23,6 +25,7 @@ function App() {
           <Route path="/privacy"><PrivacyAndPolicy /></Route>
           <Route path="/login"> <Login baseUrl={BASE_URL} /> </Route>
           <Route path="/register"> <Registration baseUrl={BASE_URL} /> </Route>
+          <Route path="/product/:id"><Product baseUrl={BASE_URL2} /></Route>
         </Switch>
       </BrowserRouter>
       <Footer />
