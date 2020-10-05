@@ -269,8 +269,11 @@ padding-top: 1em;
     }
 }
 
+
 .product-right {
   font-family: "Lato";
+  width: 30%;
+  margin-left: 4em;
 }
 
 .product-right h2{
@@ -350,4 +353,94 @@ padding-top: 1em;
   color: #252525;
   letter-spacing: 0.52px;
   line-height: 1.7em;
+}
+
+.product {
+  display: flex;
+  margin: auto;
+  margin-top: 3em;
+  width: 85%;
+}
+
+.product-left {
+  width: 50%;
+  height: 100%;
+}
+
+.each-fade {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.each-fade div {
+  width: 80%;
+}
+
+.each-fade div img {
+  width: 100%;
+ 
+}
+
+.related-product {
+  width: 25%;
+}
+
+.product-preview {
+  display: flex;
+  flex-direction: column;
+  font-family: "Lato";
+  width:100%;
+}
+
+.product-preview a {
+  display: flex;
+  align-items: center;
+}
+
+.product-preview img {
+  width: 100%;
+  overflow-y: hidden;
+}
+
+.product-preview label {
+  font-size: 0.7em;
+}
+
+.related-products {
+  margin: auto;
+  margin-top: 4em;
+  margin-bottom: 7em;
+  font-family: "Lato";
+  width: 80%;
+}
+
+.related-products hr {
+  margin: 1em 0 1em 0;
+  background: #ECECEC;
+  width: 90%;
+}
+
+.related-products div {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 750px) {
+    .product {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    .product-right {
+      width: 80%;
+      margin: auto;
+      margin-top: 2em;
+    }
+    .product-left {
+      width: 80%;
+      margin: auto;
+    }
 }

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios"
 import "../../index.css"
 import ProductDetails from "../../Components/Product/ProductDetails"
+import ProductImages from "../../Components/Product/ProductImages"
+import RelatedProducts from "../../Components/Product/RelatedProducts"
 import { useParams } from "react-router-dom";
 
 
@@ -14,8 +16,12 @@ const Product = ({ ...props }) => {
         name: "",
         description: "",
         price: null,
-        endDate: null
+        endDate: null,
+        urls: []
     })
+    const [images, setImages] = useState([])
+
+    const [relatedProducts, setRelatedProducts] = useState([])
 
     useEffect(() => {
         url = url + "/" + id
@@ -28,16 +34,30 @@ const Product = ({ ...props }) => {
                     endDate: response.data.endDate
                 }
                 setProduct(responseProduct)
+                setImages(response.data.imagesUrl)
+
+                axios.get(url + "/related?subcategory=" + response.data.subcategoryId)
+                    .then(relatedResponse => {
+                        setRelatedProducts(relatedResponse.data)
+                    })
+                    .catch(error => {
+                        //TODO handle 500 page
+                    })
             })
             .catch(error => {
                 //TODO Show not found page
             })
-    })
+    }, [])
 
     return (
         <div>
-            <ProductDetails product={product} />
-
+            <div className="product">
+                <ProductImages urls={images} />
+                <ProductDetails product={product} />
+            </div>
+            <div>
+                <RelatedProducts relatedProducts={relatedProducts} />
+            </div>
         </div>
     );
 
