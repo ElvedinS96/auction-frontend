@@ -9,6 +9,8 @@ import PrivacyAndPolicy from "./pages/HelperPages/PrivacyAndPolicy"
 import TermsAndConditions from "./pages/HelperPages/TermsAndConditions"
 import AboutUs from "./pages/HelperPages/AboutUs"
 import Product from "./pages/Product/Product"
+import NotFound from "./Components/Error/NotFound"
+import InternalServerError from "./Components/Error/InternalServerError"
 
 function App() {
 
@@ -20,6 +22,8 @@ function App() {
       <Header />
       <BrowserRouter>
         <Switch>
+          <Route path="/404"><NotFound /></Route>
+          <Route path="/500"><InternalServerError /></Route>
           <Route path="/about"><AboutUs /></Route>
           <Route path="/terms"><TermsAndConditions /></Route>
           <Route path="/privacy"><PrivacyAndPolicy /></Route>

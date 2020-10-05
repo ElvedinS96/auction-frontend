@@ -428,6 +428,27 @@ padding-top: 1em;
   justify-content: space-between;
 }
 
+.status-code {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Lato";
+  font-size: 20em;
+  color: #8367D8;
+  letter-spacing: 10.5px;
+  text-shadow: 8px 10px 0 #DADADA;
+}
+
+.err-page-msg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Lato";
+  font-size: 1em;
+  color: #252525;
+  letter-spacing: 1.26px;
+}
+
 @media screen and (max-width: 750px) {
     .product {
       display: flex;

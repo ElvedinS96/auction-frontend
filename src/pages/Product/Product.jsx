@@ -41,11 +41,11 @@ const Product = ({ ...props }) => {
                         setRelatedProducts(relatedResponse.data)
                     })
                     .catch(error => {
-                        //TODO handle 500 page
+                        window.location.href = "/500"
                     })
             })
             .catch(error => {
-                //TODO Show not found page
+                window.location.href = "/404"
             })
     }, [])
 
