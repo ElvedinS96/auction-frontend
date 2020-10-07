@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link, BrowserRouter } from "react-router-dom"
+import { Switch, Route, BrowserRouter } from "react-router-dom"
 import Registration from "./pages/Authentication/Registration"
 import Login from "./pages/Authentication/Login"
 import "./index.css"
@@ -8,6 +8,9 @@ import Header from "./pages/HeaderFooter/Header"
 import PrivacyAndPolicy from "./pages/HelperPages/PrivacyAndPolicy"
 import TermsAndConditions from "./pages/HelperPages/TermsAndConditions"
 import AboutUs from "./pages/HelperPages/AboutUs"
+import Product from "./pages/Product/Product"
+import NotFound from "./Components/Error/NotFound"
+import InternalServerError from "./Components/Error/InternalServerError"
 
 function App() {
 
@@ -18,11 +21,14 @@ function App() {
       <Header />
       <BrowserRouter>
         <Switch>
+          <Route path="/404"><NotFound /></Route>
+          <Route path="/500"><InternalServerError /></Route>
           <Route path="/about"><AboutUs /></Route>
           <Route path="/terms"><TermsAndConditions /></Route>
           <Route path="/privacy"><PrivacyAndPolicy /></Route>
           <Route path="/login"> <Login baseUrl={BASE_URL} /> </Route>
           <Route path="/register"> <Registration baseUrl={BASE_URL} /> </Route>
+          <Route path="/product/:id"><Product baseUrl={BASE_URL} /></Route>
         </Switch>
       </BrowserRouter>
       <Footer />
