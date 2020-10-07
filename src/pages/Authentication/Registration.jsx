@@ -103,7 +103,7 @@ const Registration = props => {
             isValid = false;
         }
 
-        if (user.password != confirmPassword) {
+        if (user.password !== confirmPassword) {
             validationMessage.confirmPassword = "Password is not matching"
             isValid = false;
         }
