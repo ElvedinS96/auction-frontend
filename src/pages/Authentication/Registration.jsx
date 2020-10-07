@@ -41,11 +41,11 @@ const Registration = props => {
                     <div className={"form-title"}>
                         REGISTER
                 </div>
-                    <GenericField id={"firstName"} name={"firstName"} label={"First Name"} className={"input-field"} type={"text"} onChange={(e) => handleFieldChange(e, setUser)} validationMessage={validation.firstName} />
-                    <GenericField id={"lastName"} name={"lastName"} label={"Last Name"} className={"input-field"} type={"text"} onChange={(e) => handleFieldChange(e, setUser)} validationMessage={validation.lastName} />
-                    <GenericField id={"email"} name={"email"} label={"Email"} className={"input-field"} type={"text"} onChange={(e) => handleFieldChange(e, setUser)} validationMessage={validation.email} />
-                    <GenericField id={"password"} name={"password"} label={"Password"} className={"input-field"} type={"password"} onChange={(e) => handleFieldChange(e, setUser)} validationMessage={validation.password} />
-                    <GenericField id={"confirmPassword"} name={"confirmPassword"} label={"Confirm Password"} className={"input-field"} type={"password"} onChange={(e) => setConfirmPassword(e.target.value)} validationMessage={validation.confirmPassword} />
+                    <GenericField genericClass="generic-field" id={"firstName"} name={"firstName"} label={"First Name"} className={"input-field"} type={"text"} onChange={(e) => handleFieldChange(e, setUser)} validationMessage={validation.firstName} />
+                    <GenericField genericClass="generic-field" id={"lastName"} name={"lastName"} label={"Last Name"} className={"input-field"} type={"text"} onChange={(e) => handleFieldChange(e, setUser)} validationMessage={validation.lastName} />
+                    <GenericField genericClass="generic-field" id={"email"} name={"email"} label={"Email"} className={"input-field"} type={"text"} onChange={(e) => handleFieldChange(e, setUser)} validationMessage={validation.email} />
+                    <GenericField genericClass="generic-field" id={"password"} name={"password"} label={"Password"} className={"input-field"} type={"password"} onChange={(e) => handleFieldChange(e, setUser)} validationMessage={validation.password} />
+                    <GenericField genericClass="generic-field" id={"confirmPassword"} name={"confirmPassword"} label={"Confirm Password"} className={"input-field"} type={"password"} onChange={(e) => setConfirmPassword(e.target.value)} validationMessage={validation.confirmPassword} />
                     <button type={"button"} className={"btn-submit"} onClick={(e) => handleRegisterClick(e, user)} >REGISTER</button>
                     <p className="have-account">
                         Already have an account? <a className="login-word" href="/login">Login</a>
@@ -103,7 +103,7 @@ const Registration = props => {
             isValid = false;
         }
 
-        if (user.password != confirmPassword) {
+        if (user.password !== confirmPassword) {
             validationMessage.confirmPassword = "Password is not matching"
             isValid = false;
         }
