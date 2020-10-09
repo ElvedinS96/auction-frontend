@@ -11,16 +11,19 @@ import AboutUs from "./pages/HelperPages/AboutUs"
 import Product from "./pages/Product/Product"
 import NotFound from "./Components/Error/NotFound"
 import InternalServerError from "./Components/Error/InternalServerError"
+import Home from "./pages/Home/Home"
 
 function App() {
 
   const BASE_URL = "https://auctionapp-server.herokuapp.com"
+  const BASE_URL_LOCAL = "http://localhost:8081"
 
   return (
     <div>
       <Header />
       <BrowserRouter>
         <Switch>
+          <Route path="/" exact><Home baseUrl={BASE_URL_LOCAL} /></Route>
           <Route path="/404"><NotFound /></Route>
           <Route path="/500"><InternalServerError /></Route>
           <Route path="/about"><AboutUs /></Route>

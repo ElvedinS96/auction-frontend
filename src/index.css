@@ -449,6 +449,89 @@ padding-top: 1em;
   letter-spacing: 1.26px;
 }
 
+.home-top {
+  width: 100%;
+  background: #FAFAFA;
+  display: flex;
+}
+
+.home-category {
+  font-family: "Lato";
+  background: #FFFFFF;
+  box-shadow: 3px 3px 0 0 rgba(0,0,0,0.11);
+  width: 11em;
+  margin-left: 5em;
+}
+
+.home-category h5 {
+  font-weight: bold;
+  color: #8367D8;
+  letter-spacing: 0.56px;
+  margin-bottom: 1em;
+  padding: 1em 0 0 1em;
+}
+
+.category-item {
+  color: #252525;
+  letter-spacing: 0.56px;
+  font-size: 0.8em;
+  margin-bottom: 0.5em;
+  padding: 1em 0 0 1em;
+}
+
+.line {
+  border-top: 1px solid #ECECEC;
+}
+
+.home-top-feature {
+  display: flex;
+  align-items: center;
+}
+
+.home-top-feature img {
+  width: 15em;
+}
+
+.home-top-product {
+  font-family: "Lato";
+  width: 30%;
+  margin: 0 5em 0 4em;
+}
+
+.home-top-product h2{
+  color: #252525;
+  letter-spacing: 1.61px;
+}
+
+.home-top-product h5 {
+  margin: 1em 0 1em 0;
+  color: #8367D8;
+  letter-spacing: 0.84px;
+}
+
+.home-top-product button {
+  margin-top: 1.5em;
+  padding: 1em 3em 1em 3em;
+  background: #FFFFFF;
+  border: 3px solid #8367D8;
+  box-shadow: 3px 3px 0 0 rgba(131,103,216,0.31);
+  color: #252525;
+  letter-spacing: 0.63px;
+  font-weight: bold;
+  font-size: 0.5em;
+}
+
+.home-top-product button:hover {
+  background: #f0f0f0;
+}
+
+.home-top-product p {
+  font-size: 0.6em;
+  color: #252525;
+  letter-spacing: 0.56px;
+  line-height: 1.7em;
+}
+
 @media screen and (max-width: 750px) {
     .product {
       display: flex;
