@@ -449,6 +449,11 @@ padding-top: 1em;
   letter-spacing: 1.26px;
 }
 
+.home {
+  font-family: "Lato";
+  width: 100%;
+}
+
 .home-top {
   width: 100%;
   background: #FAFAFA;
@@ -456,7 +461,6 @@ padding-top: 1em;
 }
 
 .home-category {
-  font-family: "Lato";
   background: #FFFFFF;
   box-shadow: 3px 3px 0 0 rgba(0,0,0,0.11);
   width: 11em;
@@ -493,7 +497,6 @@ padding-top: 1em;
 }
 
 .home-top-product {
-  font-family: "Lato";
   width: 30%;
   margin: 0 5em 0 4em;
 }
@@ -530,6 +533,20 @@ padding-top: 1em;
   color: #252525;
   letter-spacing: 0.56px;
   line-height: 1.7em;
+}
+
+.feature-products {
+  margin: 1em 5em 1em 5em;
+  width: 80%;
+}
+
+.feature-products hr {
+  margin: 0.5em 0 0.5em 0;
+  border-top: 2px solid #ECECEC;
+}
+
+.feature-products-list {
+  display: flex;
 }
 
 @media screen and (max-width: 750px) {
