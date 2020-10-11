@@ -6,13 +6,32 @@ import "../../Components/Home/Category"
 import Category from "../../Components/Home/Category";
 import FeatureProduct from "../../Components/Home/FeatureProduct";
 import FeatureCollection from "../../Components/Home/FeatureCollection";
-import FeatureProducts from "../../Components/Home/FeatureProducts";
+import LandingProducts from "../../Components/Home/LandingProducts";
 
 const Home = ({ ...props }) => {
 
     const [categories, setCategories] = useState([])
     const [featureCollections, setFeatureCollections] = useState([])
     const [feature, setFeature] = useState([])
+    const [newArrivals, setNewArrivals] = useState([])
+    const [topRated, setTopRated] = useState([])
+    const [lastChance, setLastChance] = useState([])
+    const [showProducts, setShowProducts] = useState([])
+
+    function onClick(name) {
+        switch (name) {
+            case "new-arrivals":
+                setShowProducts(newArrivals)
+                break;
+            case "top-rated":
+                setShowProducts(topRated)
+                break;
+            case "last-chance":
+                setShowProducts(lastChance)
+                break;
+        }
+    }
+
 
     function getCategories() {
         var url = props.baseUrl + "/category"
@@ -47,12 +66,49 @@ const Home = ({ ...props }) => {
             })
     }
 
+    function getNewArrivals() {
+        var url = props.baseUrl + "/product/new-arrivals"
+        axios.get(url)
+            .then(response => {
+                setNewArrivals(response.data)
+                setShowProducts(response.data)
+            })
+            .catch(error => {
+                window.location.href = "/500"
+            })
+    }
+
+    function getTopRated() {
+        var url = props.baseUrl + "/product/top-rated"
+        axios.get(url)
+            .then(response => {
+                setTopRated(response.data)
+            })
+            .catch(error => {
+                window.location.href = "/500"
+            })
+    }
+
+    function getLastChance() {
+        var url = props.baseUrl + "/product/last-chance"
+        axios.get(url)
+            .then(response => {
+                setLastChance(response.data)
+            })
+            .catch(error => {
+                window.location.href = "/500"
+            })
+    }
+
     useEffect(() => {
         getCategories()
         getFeatureCollections()
         getFeatureProducts()
-
-    }, [])
+        getNewArrivals()
+        getTopRated()
+        getLastChance()
+        onClick("new-arrivals")
+    }, [], showProducts)
 
     return (
         <div className="home">
@@ -64,7 +120,16 @@ const Home = ({ ...props }) => {
                 <FeatureCollection collections={featureCollections} />
             </div>
             <div>
-                <FeatureProducts products={feature} />
+                <LandingProducts products={feature} heading="Feature products" hr={true} viewClass="landing-product" listClass="feature-products" />
+                <div className="feature-products">
+                    <div className="home-nav">
+                        <button autoFocus onClick={() => onClick("new-arrivals")} >New Arrivals</button>
+                        <button onClick={() => onClick("top-rated")}>Top Rated</button>
+                        <button onClick={() => onClick("last-chance")}> Last Chance</button>
+                    </div>
+                    <LandingProducts products={showProducts} heading="" hr={false} viewClass="landing-product" listClass="arrivals" />
+                </div >
+
             </div>
         </div>
 

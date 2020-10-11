@@ -546,8 +546,49 @@ padding-top: 1em;
 }
 
 .feature-products-list {
-  display: flex;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
 }
+
+.home-nav {
+  margin-top: 2em;
+  display: flex;
+  width: 100%;
+}
+
+.home-nav h4 {
+  margin-right: 2em;
+}
+
+.home-nav button {
+  background: transparent;
+  box-shadow: 0px 0px 0px transparent;
+  border: 0px solid transparent;
+  text-shadow: 0px 0px 0px transparent;
+  font-family: "Lato";
+  font-size: 1em;
+  font-weight: bold;
+  margin-right: 2em;
+  padding-bottom: 0.5em;
+}
+
+.home-nav button:active {
+  outline: none;
+  border: none;
+}
+
+.home-nav button:focus {
+  outline: none;
+  border-bottom: 3px solid#8367D8;;
+}
+
+.landing-product {
+}
+
+.arrivals {
+  margin: 2em 0 1em 0;
+}
+
 
 @media screen and (max-width: 750px) {
     .product {

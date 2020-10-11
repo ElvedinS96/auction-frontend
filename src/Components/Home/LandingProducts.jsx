@@ -2,18 +2,26 @@ import React from "react";
 import "../../index.css"
 import ProductPreview from "../Product/ProductPreview"
 
-const FeatureProducts = ({ ...props }) => {
+const LandingProducts = ({ ...props }) => {
 
     const listFeatures = props.products.map((product) =>
-        <div className="related-product">
+        <div className={props.viewClass}>
             <ProductPreview product={product} />
         </div>
     )
 
+    function getHr(hr) {
+        if (hr) {
+            return (
+                <hr></hr>
+            )
+        }
+    }
+
     return (
-        <div className="feature-products">
-            < h4 > Feature Products</h4 >
-            <hr></hr>
+        <div className={props.listClass}>
+            < h4 >{props.heading}</h4 >
+            {getHr(props.hr)}
             <div className="feature-products-list">
                 {listFeatures}
             </div>
@@ -22,4 +30,4 @@ const FeatureProducts = ({ ...props }) => {
     )
 }
 
-export default FeatureProducts;
+export default LandingProducts;
