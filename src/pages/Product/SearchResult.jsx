@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom"
 import axios from "axios"
 import "../../index.css"
-import LandingProducts from "../Home/LandingProducts";
+import LandingProducts from "../../Components/Home/LandingProducts";
 
 const SearchResult = ({ ...props }) => {
 

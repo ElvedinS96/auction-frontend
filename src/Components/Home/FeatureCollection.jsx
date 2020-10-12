@@ -3,14 +3,14 @@ import "../../index.css"
 
 const FeatureCollection = ({ ...props }) => {
 
-    const listFeatures = props.products.map((product) =>
+    const listFeatures = props.collections.map((collection) =>
         <div className="landing-product">
             <div className="product-preview">
                 <div>
-                    <img src={product[0].imagesUrl[0]} alt="product" />
+                    <a href={"/products?category=" + collection.categoryName}><img src={collection.products[0].imagesUrl[0]} alt="product" /></a>
                 </div>
-                <h4>{product[0].name}</h4>
-                <label>Start from: ${product[0].price}</label>
+                <h4>{collection.categoryName + " Collection"}</h4>
+                <label>Start from: ${collection.products[0].price}</label>
             </div>
         </div>
     )

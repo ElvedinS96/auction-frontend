@@ -118,7 +118,7 @@ const Home = ({ ...props }) => {
                 <FeatureProduct />
             </div>
             <div className="feature-collection">
-                <FeatureCollection products={featureCollections} />
+                <FeatureCollection collections={featureCollections} />
             </div>
             <div>
                 <LandingProducts products={feature} heading="Feature products" hr={true} viewClass="landing-product" listClass="feature-products" />

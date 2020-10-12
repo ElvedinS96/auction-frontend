@@ -12,7 +12,7 @@ import Product from "./pages/Product/Product"
 import NotFound from "./Components/Error/NotFound"
 import InternalServerError from "./Components/Error/InternalServerError"
 import Home from "./pages/Home/Home"
-import SearchResult from './Components/Product/SearchResult';
+import SearchResult from './pages/Product/SearchResult';
 
 function App() {
 
