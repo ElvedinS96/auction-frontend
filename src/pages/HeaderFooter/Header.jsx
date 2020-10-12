@@ -27,7 +27,7 @@ const Header = props => {
                 </div>
             </div>
             <div className="header header-middle">
-                <div className="header-title">AUCTION</div>
+                <div className="header-title"><a href="/">AUCTION</a></div>
             </div>
         </div>
     )

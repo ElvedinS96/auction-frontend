@@ -5,7 +5,7 @@ import ProductPreview from "./ProductPreview"
 const RelatedProducts = ({ ...props }) => {
 
     const listProducts = props.relatedProducts.map((product) =>
-        <div className="related-product">
+        <div className={props.viewClass}>
             <ProductPreview product={product} />
         </div>
     )
