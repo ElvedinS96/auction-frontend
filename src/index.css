@@ -13,6 +13,11 @@ body {
   overflow-x: hidden;
 }
 
+#root {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 .main {
   min-height: 100%;
 }
@@ -638,7 +643,7 @@ padding-top: 1em;
 
 @media screen and (max-width: 930px) {
 
-    body {
+    #root {
       overflow-x: hidden;
     }
 
@@ -653,20 +658,25 @@ padding-top: 1em;
 
     .feature-products-list {
       display: flex;
-    }
-
-    .feature-products-collections {
-      display: flex;
-    }
-
-    .feature-products {
       overflow-x: scroll;
       overflow-y: hidden;
       -webkit-overflow-scrolling: touch;
     }
 
+    .feature-products-collections {
+      display: flex;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+
+
     .landing-product {
       min-width: 50%;
+    }
+
+    .home-top-feature img {
+      width: 10em;
     }
 
     
