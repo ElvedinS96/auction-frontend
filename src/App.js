@@ -12,6 +12,7 @@ import Product from "./pages/Product/Product"
 import NotFound from "./Components/Error/NotFound"
 import InternalServerError from "./Components/Error/InternalServerError"
 import Home from "./pages/Home/Home"
+import SearchResult from './pages/Product/SearchResult';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/login"> <Login baseUrl={BASE_URL} /> </Route>
           <Route path="/register"> <Registration baseUrl={BASE_URL} /> </Route>
           <Route path="/product/:id"><Product baseUrl={BASE_URL} /></Route>
+          <Route path="/products"><SearchResult baseUrl={BASE_URL} /></Route>
         </Switch>
       </BrowserRouter>
       <Footer />

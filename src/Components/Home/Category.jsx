@@ -5,7 +5,7 @@ const Category = ({ ...props }) => {
 
     const listCategories = props.categories.map((category) =>
         <div >
-            <div className="category-item">{category.name}</div>
+            <div className="category-item"><a href={"/products?category=" + category.name}>{category.name}</a></div>
             <hr className="line"></hr>
         </div>
 
