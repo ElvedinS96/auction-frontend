@@ -23,7 +23,7 @@ function App() {
       <Header />
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact><Home baseUrl={BASE_URL_LOCAL} /></Route>
+          <Route path="/" exact><Home baseUrl={BASE_URL} /></Route>
           <Route path="/404"><NotFound /></Route>
           <Route path="/500"><InternalServerError /></Route>
           <Route path="/about"><AboutUs /></Route>
