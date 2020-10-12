@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Lato");
 
 * {
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -473,7 +473,7 @@ padding-top: 1em;
 .home-category {
   background: #FFFFFF;
   box-shadow: 3px 3px 0 0 rgba(0,0,0,0.11);
-  width: 11em;
+  min-width: 11em;
   margin-left: 5em;
 }
 
@@ -624,4 +624,51 @@ padding-top: 1em;
       width: 80%;
       margin: auto;
     }
+}
+
+@media screen and (max-width: 1200px) {
+    .home-category {
+      margin-left: 0;
+    }
+    .feature-products {
+      margin: 1em 0 1em 1em;
+      width: 100%;
+    }
+}
+
+@media screen and (max-width: 930px) {
+
+    body {
+      overflow-x: hidden;
+    }
+
+    .home-top-feature {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+    .home-top-product {
+      width: 80%;
+      margin: 0 5em 2em 4em;
+    }
+
+    .feature-products-list {
+      display: flex;
+    }
+
+    .feature-products-collections {
+      display: flex;
+    }
+
+    .feature-products {
+      overflow-x: scroll;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .landing-product {
+      min-width: 50%;
+    }
+
+    
+
 }
