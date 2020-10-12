@@ -191,6 +191,11 @@ letter-spacing: 0.84px;
   color: inherit;
 }
 
+.category-item a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .login-acccount {
   padding-right: 4em;
 }
@@ -597,6 +602,10 @@ padding-top: 1em;
 
 .arrivals {
   margin: 2em 0 1em 0;
+}
+
+.search-result {
+  font-family: "Lato";
 }
 
 

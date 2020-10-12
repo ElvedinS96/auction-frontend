@@ -12,6 +12,7 @@ import Product from "./pages/Product/Product"
 import NotFound from "./Components/Error/NotFound"
 import InternalServerError from "./Components/Error/InternalServerError"
 import Home from "./pages/Home/Home"
+import SearchResult from './Components/Product/SearchResult';
 
 function App() {
 
@@ -23,7 +24,7 @@ function App() {
       <Header />
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact><Home baseUrl={BASE_URL} /></Route>
+          <Route path="/" exact><Home baseUrl={BASE_URL_LOCAL} /></Route>
           <Route path="/404"><NotFound /></Route>
           <Route path="/500"><InternalServerError /></Route>
           <Route path="/about"><AboutUs /></Route>
@@ -32,6 +33,7 @@ function App() {
           <Route path="/login"> <Login baseUrl={BASE_URL} /> </Route>
           <Route path="/register"> <Registration baseUrl={BASE_URL} /> </Route>
           <Route path="/product/:id"><Product baseUrl={BASE_URL} /></Route>
+          <Route path="/products"><SearchResult baseUrl={BASE_URL_LOCAL} /></Route>
         </Switch>
       </BrowserRouter>
       <Footer />
