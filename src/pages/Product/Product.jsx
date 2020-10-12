@@ -45,6 +45,7 @@ const Product = ({ ...props }) => {
                     })
             })
             .catch(error => {
+                alert(error)
                 window.location.href = "/404"
             })
     }, [])
@@ -56,7 +57,7 @@ const Product = ({ ...props }) => {
                 <ProductDetails product={product} />
             </div>
             <div>
-                <RelatedProducts relatedProducts={relatedProducts} />
+                <RelatedProducts relatedProducts={relatedProducts} viewClass="related-product" />
             </div>
         </div>
     );
