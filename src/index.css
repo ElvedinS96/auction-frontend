@@ -186,6 +186,11 @@ color: #8367d8bb;
 letter-spacing: 0.84px;
 }
 
+.header-title a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .login-acccount {
   padding-right: 4em;
 }
@@ -548,6 +553,11 @@ padding-top: 1em;
 .feature-products-list {
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
+}
+
+.feature-products-collections {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
 }
 
 .home-nav {

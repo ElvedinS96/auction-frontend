@@ -51,6 +51,7 @@ const Home = ({ ...props }) => {
                 setFeatureCollections(response.data)
             })
             .catch(error => {
+                alert(error)
                 window.location.href = "/500"
             })
     }
@@ -117,7 +118,7 @@ const Home = ({ ...props }) => {
                 <FeatureProduct />
             </div>
             <div className="feature-collection">
-                <FeatureCollection collections={featureCollections} />
+                <FeatureCollection products={featureCollections} />
             </div>
             <div>
                 <LandingProducts products={feature} heading="Feature products" hr={true} viewClass="landing-product" listClass="feature-products" />
