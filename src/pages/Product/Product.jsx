@@ -5,6 +5,7 @@ import ProductDetails from "../../Components/Product/ProductDetails"
 import ProductImages from "../../Components/Product/ProductImages"
 import RelatedProducts from "../../Components/Product/RelatedProducts"
 import { useParams } from "react-router-dom";
+import PageName from "../HeaderFooter/PageName";
 
 
 const Product = ({ ...props }) => {
@@ -52,12 +53,13 @@ const Product = ({ ...props }) => {
 
     return (
         <div>
+            <PageName pageName="SINGLE PRODUCT" pageNav="SHOP / SINGLE PRODUCT" />
             <div className="product">
                 <ProductImages urls={images} />
                 <ProductDetails product={product} />
             </div>
             <div>
-                <RelatedProducts relatedProducts={relatedProducts} viewClass="related-product" />
+                <RelatedProducts relatedProducts={relatedProducts} viewClass="landing-product" />
             </div>
         </div>
     );

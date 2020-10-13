@@ -11,6 +11,7 @@ body {
   min-height: 100vh;
   padding-bottom: 10em;
   overflow-x: hidden;
+  font-family: "Lato";
 }
 
 #root {
@@ -153,9 +154,56 @@ margin-bottom: 1em;
 }
 
 .header-middle {
+  display: flex;
+  align-items: center;
+  min-width: 100%;
   background: #FFFFFF;
   height: 3em;
   padding-left: 4em;
+}
+
+.logo {
+  height: inherit;
+  width: 5%;
+  display: flex;
+  margin-right: 0em;
+}
+
+.logo-line {
+  background-color: #C4BFD6;
+  border: 2px solid #C4BFD6;
+  border-radius: 5%;
+}
+
+.line1 {
+  display: flex;
+  max-height: 35%;
+  padding-top: 1.3em;
+}
+
+.logo-line1 {
+  transform: rotate(50deg);
+}
+
+.line2 {
+  display: flex;
+  padding: 1em 1em 0.5em 0.2em;
+  max-height: 35%;
+}
+
+.logo-line2 {
+  transform: rotate(-40deg);
+}
+
+.line3 {
+display: flex;
+padding-top: 2em;
+margin-left: -1em;
+max-height: 35%;
+}
+
+.logo-line3 {
+  transform: rotate(90deg);
 }
 
 .social-networks {
@@ -186,9 +234,10 @@ margin-bottom: 1em;
 .header-title {
   font-family: "Lato";
   font-weight: lighter;
-font-size: 1em;
-color: #8367d8bb;
-letter-spacing: 0.84px;
+  font-size: 1em;
+  color: #8367d8bb;
+  letter-spacing: 0.84px;
+  padding: 1.6em 0 0 0.8em;
 }
 
 .header-title a {
@@ -242,14 +291,32 @@ letter-spacing: 0.84px;
 .page-name {
   display: flex;
   align-items: center;
+  justify-content: center;
   background: #FAFAFA;
   font-family: "Lato";
   text-transform: uppercase;
   font-size: 0.7em;
   color: #252525;
   letter-spacing: 0.63px;
-  padding-left: 5.5em;
+  width: 100%;
   height: 3em;
+}
+
+.page-name-content {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.page-home-nav {
+  display: flex;
+}
+
+.page-name-nav {
+  font-size: 1em;
+  color: #8a8888;
+  letter-spacing: 0.56px;
+  font-weight: lighter;
 }
 
 .status a {
@@ -287,8 +354,9 @@ padding-top: 1em;
 
 .product-right {
   font-family: "Lato";
-  width: 30%;
   margin-left: 4em;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .product-right h2{
@@ -341,7 +409,7 @@ padding-top: 1em;
 }
 
 .bidding-info {
-  margin: 1em 0 2em 0;
+  margin: 3em 0 4em 0;
   font-size: 0.6em;
   color: #9B9B9B;
   letter-spacing: 0.56px;
@@ -371,15 +439,16 @@ padding-top: 1em;
 }
 
 .product {
-  display: flex;
+  display: grid;
+  grid-template-columns: 50% 30%;
   margin: auto;
   margin-top: 3em;
   width: 85%;
 }
 
 .product-left {
-  width: 50%;
-  height: 100%;
+  max-width: 80%;
+  max-height: 100%;
 }
 
 .each-fade {
@@ -400,7 +469,7 @@ padding-top: 1em;
 }
 
 .related-product {
-  width: 25%;
+  width: 100%;
 }
 
 .product-preview {
@@ -417,6 +486,7 @@ padding-top: 1em;
 
 .product-preview img {
   width: 100%;
+  margin-bottom: 1em;
   overflow-y: hidden;
 }
 
@@ -475,11 +545,17 @@ padding-top: 1em;
   display: flex;
 }
 
+.home-top-inside {
+  width: 80%;
+  display: flex;
+  margin: auto;
+}
+
 .home-category {
   background: #FFFFFF;
   box-shadow: 3px 3px 0 0 rgba(0,0,0,0.11);
   min-width: 11em;
-  margin-left: 5em;
+  
 }
 
 .home-category h5 {
@@ -498,8 +574,9 @@ padding-top: 1em;
   padding: 1em 0 0 1em;
 }
 
-.line {
-  border-top: 1px solid #ECECEC;
+hr {
+  background-color: #ECECEC;
+  border: 1px solid #ECECEC;
 }
 
 .home-top-feature {
@@ -513,7 +590,7 @@ padding-top: 1em;
 
 .home-top-product {
   width: 30%;
-  margin: 0 5em 0 4em;
+  margin: 0 4em 0 4em;
 }
 
 .home-top-product h2{
@@ -551,19 +628,20 @@ padding-top: 1em;
 }
 
 .feature-products {
-  margin: 1em 5em 1em 5em;
   width: 80%;
+  margin: auto;
+  margin-top: 4em;
 }
 
 .feature-products hr {
   margin: 0.5em 0 0.5em 0;
-  border-top: 2px solid #ECECEC;
 }
 
 .feature-products-list {
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
 }
+
 
 .feature-products-collections {
   display: grid;
@@ -603,6 +681,7 @@ padding-top: 1em;
 }
 
 .landing-product {
+  padding: 1em;
 }
 
 .arrivals {
@@ -632,11 +711,12 @@ padding-top: 1em;
 }
 
 @media screen and (max-width: 1200px) {
-    .home-category {
-      margin-left: 0;
+    .home-top-inside {
+      margin-left: 1em;
+      width: 100%;
     }
     .feature-products {
-      margin: 1em 0 1em 1em;
+      margin-left: 1em;
       width: 100%;
     }
 }
