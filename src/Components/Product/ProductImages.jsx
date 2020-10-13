@@ -15,7 +15,7 @@ const ProductImages = ({ ...props }) => {
 
     return (
         <div class="product-left">
-            <div className="slide-container">
+            <div >
                 <Fade autoplay={false} indicators={true}>
                     {listImages}
                 </Fade>

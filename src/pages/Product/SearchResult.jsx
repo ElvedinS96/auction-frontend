@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom"
 import axios from "axios"
 import "../../index.css"
 import LandingProducts from "../../Components/Home/LandingProducts";
+import PageName from "../HeaderFooter/PageName";
 
 const SearchResult = ({ ...props }) => {
 
@@ -35,6 +36,7 @@ const SearchResult = ({ ...props }) => {
     return (
 
         <div className="search-result" >
+            <PageName pageName="SEARCH RESULT" />
             <LandingProducts products={products} heading="Search Result" hr={true} viewClass="landing-product" listClass="feature-products" />
         </div>
     );
