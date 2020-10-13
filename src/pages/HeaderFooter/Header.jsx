@@ -26,8 +26,21 @@ const Header = props => {
                     <a className="header-text" href="/register">{loginText.create}</a>
                 </div>
             </div>
-            <div className="header header-middle">
-                <div className="header-title"><a href="/">AUCTION</a></div>
+            <div className="header-middle">
+                <div className="logo">
+                    <div className="line1">
+                        <div className="logo-line logo-line1"></div>
+                    </div>
+                    <div className="line2">
+                        <div className="logo-line logo-line2"></div>
+                    </div>
+                    <div className="line3">
+                        <div className="logo-line logo-line3"></div>
+                    </div>
+                    <span className="header-title"><a href="/">AUCTION</a></span>
+
+                </div>
+
             </div>
         </div>
     )

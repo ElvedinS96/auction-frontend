@@ -11,10 +11,10 @@ const RelatedProducts = ({ ...props }) => {
     )
 
     return (
-        <div className="related-products">
+        <div className="feature-products">
             <h3>Related products</h3>
             <hr />
-            <div>
+            <div className="feature-products-collections">
                 {listProducts}
             </div>
         </div>
