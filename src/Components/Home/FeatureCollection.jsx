@@ -7,10 +7,12 @@ const FeatureCollection = ({ ...props }) => {
         <div className="landing-product">
             <div className="product-preview">
                 <div>
-                    <a href={"/products?category=" + collection.categoryName}><img src={collection.products[0].imagesUrl[0]} alt="product" /></a>
+                    <a href={"/products?category=" + collection.category.name + "&feature=true"}>
+                        <img src={collection.category.imageUrl} alt="product" />
+                    </a>
                 </div>
-                <h4>{collection.categoryName + " Collection"}</h4>
-                <label>Start from: ${collection.products[0].price}</label>
+                <h4>{collection.category.name + " Collection"}</h4>
+                <label>Start from: ${collection.lowestPrice}.00</label>
             </div>
         </div>
     )
