@@ -7,7 +7,7 @@ const FeatureCollection = ({ ...props }) => {
         <div className="landing-product">
             <div className="product-preview">
                 <div>
-                    <a href={"/products?category=" + collection.category.name + "&feature=true"}>
+                    <a href={"/products?category=" + collection.category.id + "&feature=true"}>
                         <img src={collection.category.imageUrl} alt="product" />
                     </a>
                 </div>
