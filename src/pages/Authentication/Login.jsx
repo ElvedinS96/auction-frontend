@@ -23,7 +23,7 @@ const Login = props => {
                     <div className={"form-title"}>
                         LOGIN
                 </div>
-                    <GenericField genericClass="generic-field" id={"email"} name={"email"} label={"Email"} className={"input-field"} type={"text"} onChange={(e) => handleFieldChange(e, setUser)} />
+                    <GenericField genericClass="generic-field" id={"email"} name={"email"} label={"Enter Email"} className={"input-field"} type={"text"} onChange={(e) => handleFieldChange(e, setUser)} />
                     <GenericField genericClass="generic-field" id={"password"} name={"password"} label={"Password"} className={"input-field"} type={"password"} onChange={(e) => handleFieldChange(e, setUser)} />
                     <small>
                         <label className={"validation-error"}>{errorMessage}</label>

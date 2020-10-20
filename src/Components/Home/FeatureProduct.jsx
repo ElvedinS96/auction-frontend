@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import "../../index.css"
 
 const FeatureProduct = ({ ...props }) => {
@@ -6,13 +7,13 @@ const FeatureProduct = ({ ...props }) => {
     return (
         <div className="home-top-feature">
             <div className="home-top-product">
-                <h2>Running Shoes</h2>
-                <h5>Start from - $240.00</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut consequat nulla. Duis nec fermentum erat, et varius augue. Vivamus sed tempor libero. </p>
-                <button type="btn">BID NOW</button>
+                <h2>{props.product.name}</h2>
+                <h5>Start from - ${props.product.price}.00</h5>
+                <p>{props.product.description}</p>
+                <button type="btn">BID NOW <span className="bid-arrow">&#10095;</span></button>
             </div>
             <div>
-                <img src="https://www.freepngimg.com/thumb/shoes/28084-5-sneaker-transparent-image-thumb.png" alt="product" />
+                <img src={props.product.image} alt="product" />
             </div>
         </div>
     );

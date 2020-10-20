@@ -21,7 +21,7 @@ const SearchResult = ({ ...props }) => {
             setProducts(props.products)
         }
         else {
-            var url = props.baseUrl + "/product/category?category=" + query.get("category")
+            var url = props.baseUrl + "/product/category?category=" + query.get("category") + "&feature=" + query.get("feature")
             axios.get(url)
                 .then(response => {
                     setProducts(response.data)

@@ -11,7 +11,7 @@ const ProductDetails = ({ ...props }) => {
             <div className="bidding">
                 <div className="bidding-field">
                     <GenericField type="text" className="bid-input" />
-                    <button type="btn">PLACE BID</button>
+                    <button type="btn">PLACE BID <span className="bid-arrow">&#10095;</span></button>
                 </div>
                 <label>Enter $260.00 or more</label>
             </div>
