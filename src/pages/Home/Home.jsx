@@ -17,6 +17,12 @@ const Home = ({ ...props }) => {
     const [topRated, setTopRated] = useState([])
     const [lastChance, setLastChance] = useState([])
     const [showProducts, setShowProducts] = useState([])
+    const [featureProduct, setFeatureProduct] = useState({
+        name: "",
+        description: "",
+        price: "",
+        image: ""
+    })
 
     function onClick(name) {
         switch (name) {
@@ -45,7 +51,7 @@ const Home = ({ ...props }) => {
     }
 
     function getFeatureCollections() {
-        var url = props.baseUrl + "/product/feature-collections"
+        var url = props.baseUrl + "/category/feature"
         axios.get(url)
             .then(response => {
                 setFeatureCollections(response.data)
@@ -60,6 +66,13 @@ const Home = ({ ...props }) => {
         axios.get(url)
             .then(response => {
                 setFeature(response.data)
+                var featureProduct = {
+                    name: response.data[0].name,
+                    description: response.data[0].description,
+                    price: response.data[0].price,
+                    image: response.data[0].imagesUrl[0]
+                }
+                setFeatureProduct(featureProduct)
             })
             .catch(error => {
                 window.location.href = "/500"
@@ -115,11 +128,11 @@ const Home = ({ ...props }) => {
             <div className="home-top">
                 <div className="home-top-inside">
                     <Category categories={categories} />
-                    <FeatureProduct />
+                    <FeatureProduct product={featureProduct} />
                 </div>
             </div>
             <div className="feature-collection">
-                <FeatureCollection collections={featureCollections} />
+                <FeatureCollection collections={featureCollections} product={featureProduct} />
             </div>
             <div>
                 <LandingProducts products={feature} heading="Feature products" hr={true} viewClass="landing-product" listClass="feature-products" />
