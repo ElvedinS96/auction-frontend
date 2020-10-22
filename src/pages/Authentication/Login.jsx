@@ -4,7 +4,8 @@ import { handleFieldChange } from "../index.jsx"
 import axios from "axios"
 import "../../index.css"
 import PageName from "../HeaderFooter/PageName"
-
+import { useHistory } from "react-router-dom";
+import Header from "../HeaderFooter/Header";
 
 const Login = props => {
     const [user, setUser] = React.useState({
@@ -14,9 +15,11 @@ const Login = props => {
     const [errorMessage, setErrorMessage] = React.useState("")
 
     let url = props.baseUrl + "/login"
+    let history = useHistory()
 
     return (
         <div>
+            <Header />
             <PageName pageName="login" />
             <div className={"form-box"}>
                 <div className={"form"}>
@@ -37,8 +40,8 @@ const Login = props => {
 
         axios.post(url, user)
             .then(response => {
-                document.cookie = "token=" + response.data.token + "; max-age=600;"
-                window.location.href = "/"
+                document.cookie = "token=" + response.data.token + "; path=/; max-age=600;"
+                history.goBack()
             })
             .catch(error => {
                 setErrorMessage("Invalid username or password")

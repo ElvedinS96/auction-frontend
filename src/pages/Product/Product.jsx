@@ -4,16 +4,22 @@ import "../../index.css"
 import ProductDetails from "../../Components/Product/ProductDetails"
 import ProductImages from "../../Components/Product/ProductImages"
 import RelatedProducts from "../../Components/Product/RelatedProducts"
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import PageName from "../HeaderFooter/PageName";
+import tokenExists from "../../Util/tokenExists";
+import StatusBar from "../../Components/StatusBar/StatusBar"
+import Header from "../../pages/HeaderFooter/Header"
+import BiddingTable from "../../Components/Product/BiddingTable";
 
 
 const Product = ({ ...props }) => {
 
     let { id } = useParams()
     let url = props.baseUrl + "/product"
+    let history = useHistory()
 
     const [product, setProduct] = useState({
+        id: 0,
         name: "",
         description: "",
         price: null,
@@ -21,14 +27,17 @@ const Product = ({ ...props }) => {
         urls: []
     })
     const [images, setImages] = useState([])
-
     const [relatedProducts, setRelatedProducts] = useState([])
+    const [statusMessage, setStatusMessage] = useState("")
+    const [statusClass, setSatusClass] = useState("")
+    const [bid, setBid] = useState(0)
 
     useEffect(() => {
         url = url + "/" + id
         axios.get(url)
             .then(response => {
                 var responseProduct = {
+                    id: response.data.id,
                     name: response.data.name,
                     description: response.data.description,
                     price: response.data.price,
@@ -51,15 +60,37 @@ const Product = ({ ...props }) => {
             })
     }, [])
 
+    function handleBidClick(product) {
+        if (tokenExists()) {
+            //TODO BIDDING
+            alert(bid)
+            window.location.reload()
+        }
+        else {
+            history.push("/login")
+        }
+    }
+
+    function ProductBottom() {
+        if (tokenExists()) {
+            return <BiddingTable />
+        }
+        else {
+            return <RelatedProducts relatedProducts={relatedProducts} viewClass="landing-product" />
+        }
+    }
+
     return (
         <div>
+            <Header />
             <PageName pageName="SINGLE PRODUCT" pageNav="SHOP / SINGLE PRODUCT" />
+            <StatusBar statusMessage={statusMessage} className={statusClass} />
             <div className="product">
                 <ProductImages urls={images} />
-                <ProductDetails product={product} />
+                <ProductDetails product={product} onClick={() => handleBidClick(product)} inputOnChange={(e) => setBid(e.target.value)} />
             </div>
             <div>
-                <RelatedProducts relatedProducts={relatedProducts} viewClass="landing-product" />
+                <ProductBottom />
             </div>
         </div>
     );

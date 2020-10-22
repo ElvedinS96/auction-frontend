@@ -273,22 +273,37 @@ max-height: 35%;
 }
 
 .status {
-  color: black;
+  display: flex;
+  justify-content: center;
+  background: #F0F3EE;
   letter-spacing: 0.63px;
   font-family: "Lato";
+  font-weight: bold;
+  font-size: 16px;
   width: 100%;
-  height: 2em;
+  height: 3em;
+  display: flex;
+  align-items: center; 
+}
+
+.status-content {
+  width: 80%;
+  height: 100%;
   display: flex;
   align-items: center;
-  padding-left: 1em;  
+  justify-content: space-between;
 }
 
 .status-success {
-  background-color: rgb(141, 194, 141);
+  color: #417505;
 }
 
 .status-error {
-  background-color: rgba(209, 132, 122, 0.808);
+  color: tomato;
+}
+
+.status-info {
+  color: #AB944E;
 }
 
 .page-name {
@@ -409,6 +424,8 @@ padding-top: 1em;
   background: #ECECEC;
   border: 1px solid #D8D8D8;
   height: 100%;
+  padding-left: 1em;
+  font-family: "Lato";
 }
 
 .bidding-info {
@@ -518,6 +535,41 @@ padding-top: 1em;
 .related-products div {
   display: flex;
   justify-content: space-between;
+}
+
+.related-products table {
+  border: 1px solid #D8D8D8;
+  width: 80%;
+  font-size: 15px;
+}
+.heading-row {
+  background: #F0F0F0;
+  height: 3em;
+  text-align: left;
+}
+
+.bider-row {
+  height: 3em;
+  max-width: 100%;
+}
+
+.bider-row img {
+  margin: 1em 0 1em 2em;
+  max-height: 3em;
+  border-radius: 50%;
+}
+
+.bider-name {
+  padding-left: 2em;
+  width: 70%;
+}
+
+.bider-name-img {
+  width: 10%;
+}
+
+.bider-name-text {
+  font-weight: bold;
 }
 
 .status-code {

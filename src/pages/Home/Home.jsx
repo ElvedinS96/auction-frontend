@@ -7,6 +7,7 @@ import Category from "../../Components/Home/Category";
 import FeatureProduct from "../../Components/Home/FeatureProduct";
 import FeatureCollection from "../../Components/Home/FeatureCollection";
 import LandingProducts from "../../Components/Home/LandingProducts";
+import Header from "../HeaderFooter/Header";
 
 const Home = ({ ...props }) => {
 
@@ -67,6 +68,7 @@ const Home = ({ ...props }) => {
             .then(response => {
                 setFeature(response.data)
                 var featureProduct = {
+                    id: response.data[0].id,
                     name: response.data[0].name,
                     description: response.data[0].description,
                     price: response.data[0].price,
@@ -113,6 +115,10 @@ const Home = ({ ...props }) => {
             })
     }
 
+    function handleBidNowClick(id) {
+        window.location.href = "/product/" + id
+    }
+
     useEffect(() => {
         getCategories()
         getFeatureCollections()
@@ -124,28 +130,32 @@ const Home = ({ ...props }) => {
     }, [], showProducts)
 
     return (
-        <div className="home">
-            <div className="home-top">
-                <div className="home-top-inside">
-                    <Category categories={categories} />
-                    <FeatureProduct product={featureProduct} />
+        <div>
+            <Header />
+            <div className="home">
+                <div className="home-top">
+                    <div className="home-top-inside">
+                        <Category categories={categories} />
+                        <FeatureProduct product={featureProduct} onClick={() => handleBidNowClick(featureProduct.id)} />
+                    </div>
+                </div>
+                <div className="feature-collection">
+                    <FeatureCollection collections={featureCollections} product={featureProduct} />
+                </div>
+                <div>
+                    <LandingProducts products={feature} heading="Feature products" hr={true} viewClass="landing-product" listClass="feature-products" />
+                    <div className="feature-products">
+                        <div className="home-nav">
+                            <button autoFocus onClick={() => onClick("new-arrivals")} >New Arrivals</button>
+                            <button onClick={() => onClick("top-rated")}>Top Rated</button>
+                            <button onClick={() => onClick("last-chance")}> Last Chance</button>
+                        </div>
+                        <LandingProducts products={showProducts} heading="" hr={false} viewClass="landing-product" listClass="arrivals" />
+                    </div >
+
                 </div>
             </div>
-            <div className="feature-collection">
-                <FeatureCollection collections={featureCollections} product={featureProduct} />
-            </div>
-            <div>
-                <LandingProducts products={feature} heading="Feature products" hr={true} viewClass="landing-product" listClass="feature-products" />
-                <div className="feature-products">
-                    <div className="home-nav">
-                        <button autoFocus onClick={() => onClick("new-arrivals")} >New Arrivals</button>
-                        <button onClick={() => onClick("top-rated")}>Top Rated</button>
-                        <button onClick={() => onClick("last-chance")}> Last Chance</button>
-                    </div>
-                    <LandingProducts products={showProducts} heading="" hr={false} viewClass="landing-product" listClass="arrivals" />
-                </div >
 
-            </div>
         </div>
 
     )

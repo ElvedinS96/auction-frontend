@@ -5,6 +5,7 @@ import axios from "axios"
 import "../../index.css"
 import StatusBar from "../../Components/StatusBar/StatusBar"
 import PageName from "../HeaderFooter/PageName"
+import Header from "../HeaderFooter/Header";
 
 
 const Registration = props => {
@@ -34,6 +35,7 @@ const Registration = props => {
 
     return (
         <div>
+            <Header />
             <PageName pageName="register" />
             <StatusBar statusMessage={message} href="/login" refText={refText} className={statusStyle} />
             <div className={"form-box"}>
@@ -68,6 +70,7 @@ const Registration = props => {
                 })
                 .catch(error => {
                     setMessage("User with given email already exists")
+                    setRefText("")
                     setStatusStyle("status status-error")
                 })
         }

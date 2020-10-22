@@ -4,9 +4,9 @@ import "../../index.css"
 const StatusBar = ({ statusMessage, href, refText, ...props }) => {
     return (
         <div {...props}>
-            <label>
-                {statusMessage} <a href={href}>{refText}</a>
-            </label>
+            <div className="status-content">
+                <div>{statusMessage} <a href={href}>{refText}</a></div>
+            </div>
         </div>
     );
 }

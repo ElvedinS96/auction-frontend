@@ -10,8 +10,8 @@ const ProductDetails = ({ ...props }) => {
             <h5>Start from - ${props.product.price}</h5>
             <div className="bidding">
                 <div className="bidding-field">
-                    <GenericField type="text" className="bid-input" />
-                    <button type="btn">PLACE BID <span className="bid-arrow">&#10095;</span></button>
+                    <GenericField type="number" className="bid-input" onChange={props.inputOnChange} />
+                    <button type="btn" onClick={props.onClick}>PLACE BID <span className="bid-arrow">&#10095;</span></button>
                 </div>
                 <label>Enter $260.00 or more</label>
             </div>
