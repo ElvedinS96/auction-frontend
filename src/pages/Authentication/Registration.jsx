@@ -6,6 +6,7 @@ import "../../index.css"
 import StatusBar from "../../Components/StatusBar/StatusBar"
 import PageName from "../HeaderFooter/PageName"
 import Header from "../HeaderFooter/Header";
+import { useEffect } from "react";
 
 
 const Registration = props => {
@@ -32,6 +33,11 @@ const Registration = props => {
     const [refText, setRefText] = React.useState("")
 
     let url = props.baseUrl + "/user"
+
+    useEffect(() => {
+        localStorage.statusMessage = ""
+        localStorage.statusClass = ""
+    })
 
     return (
         <div>

@@ -1,45 +1,57 @@
 import React from "react"
+import { useState } from "react"
+import { useEffect } from "react"
+import axios from "axios"
+import showDate from "../../Util/showDate"
 
 const BiddingTable = ({ ...props }) => {
 
-    var bidders = [{
-        url: "https://cactusthemes.com/blog/wp-content/uploads/2018/01/tt_avatar_small.jpg",
-        name: "John Doe",
-        date: "29.12.2020",
-        bid: 100
-    },
-    {
-        url: "https://www.shareicon.net/data/512x512/2016/07/26/802031_user_512x512.png",
-        name: "Jane Doe",
-        date: "29.12.2020",
-        bid: 100
-    },
-    {
-        url: "https://cactusthemes.com/blog/wp-content/uploads/2018/01/tt_avatar_small.jpg",
-        name: "John Doe",
-        date: "29.12.2020",
-        bid: 100
-    }
-    ]
+    const [bidders, setBidders] = useState([])
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+
+            const url = props.baseUrl + "/product/" + localStorage.productId
+            axios.get(url)
+                .then(response => {
+                    setBidders(response.data.bids)
+                })
+                .catch(error => {
+                    alert(error)
+                    window.location.href = "/404"
+                })
+
+        }, 1000);
+        return () => clearInterval(interval);
+    })
 
     const listBidders = bidders.map((bidder) =>
         <tr className="bider-row">
-            <td className="bider-name-img"><img src={bidder.url} /></td>
-            <td className="bider-name-text">{bidder.name}</td>
-            <td>{bidder.date}</td>
-            <td className="bider-name-text">${bidder.bid}.00</td>
+            <td className="bider-name-img"><img src={bidder.userImage} /></td>
+            <td className="bider-name-text">{bidder.userName}</td>
+            <td>{showDate(bidder.bidTime)}</td>
+            <td className="bider-name-text">${bidder.bidAmount}.00</td>
         </tr>
     )
 
+    function Biddings() {
+        if (props.bidders.length == 0) {
+            return <tr className="bider-row"><td colSpan={4} className="bider-name">No one has bid yet</td></tr>
+        }
+        else {
+            return listBidders
+        }
+    }
+
     return (
-        <div className="related-products">
+        <div className="product-bidding-table">
             <table cellspacing="0">
                 <tr className="heading-row">
                     <th colSpan={2} className="bider-name">Bider</th>
                     <th>Date</th>
                     <th>Bid</th>
                 </tr>
-                {listBidders}
+                {<Biddings />}
             </table>
         </div>
     )

@@ -40,7 +40,7 @@ const Login = props => {
 
         axios.post(url, user)
             .then(response => {
-                document.cookie = "token=" + response.data.token + "; path=/; max-age=600;"
+                document.cookie = "token=" + response.data.token + "; path=/; max-age=6000;"
                 history.goBack()
             })
             .catch(error => {

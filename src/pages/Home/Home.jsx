@@ -120,6 +120,9 @@ const Home = ({ ...props }) => {
     }
 
     useEffect(() => {
+        console.log(Date.now())
+        console.log("1603654252")
+        console.log((Date.now() - new Date(1603654252000)) / (1000 * 60))
         getCategories()
         getFeatureCollections()
         getFeatureProducts()
