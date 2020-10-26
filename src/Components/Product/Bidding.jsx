@@ -11,6 +11,7 @@ const Bidding = ({ ...props }) => {
     const [highestBid, setHighestBid] = useState(0)
     const [numberOfBids, setNumberOfBids] = useState(0)
     const [timeLeft, setTimeLeft] = useState("")
+    const [disabled, setDisabled] = useState(false)
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -27,6 +28,9 @@ const Bidding = ({ ...props }) => {
                         localStorage.statusMessage = "There are higher bids than yours. You could give a second try!"
                         localStorage.statusClass = "status status-info"
                     }
+                    if ((Date.now() - response.data.auctionEndDate) >= 0) {
+                        setDisabled(true)
+                    }
                     setTimeLeft(calculateTimeLeft(Date.now(), response.data.auctionEndDate))
                 })
                 .catch(error => {
@@ -42,8 +46,8 @@ const Bidding = ({ ...props }) => {
         <div>
             <div className="bidding">
                 <div className="bidding-field">
-                    <GenericField type="number" className="bid-input" onChange={props.inputOnChange} />
-                    <button type="btn" onClick={props.onClick}>PLACE BID <span className="bid-arrow">&#10095;</span></button>
+                    <GenericField type="number" className="bid-input" onChange={props.inputOnChange} disabled={disabled} />
+                    <button type="btn" onClick={props.onClick} disabled={disabled}>PLACE BID <span className="bid-arrow">&#10095;</span></button>
                 </div>
                 <label>Enter ${highestBid + 1}.00 or more</label>
             </div>
