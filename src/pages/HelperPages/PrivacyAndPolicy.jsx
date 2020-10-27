@@ -1,10 +1,12 @@
 import React from "react";
 import "../../index.css"
+import Header from "../HeaderFooter/Header";
 import PageName from "../HeaderFooter/PageName"
 
 const PrivacyAndPolicy = props => {
     return (
         <div>
+            <Header />
             <PageName pageName="privacy and policy" />
             <div className="helper">
                 <div >

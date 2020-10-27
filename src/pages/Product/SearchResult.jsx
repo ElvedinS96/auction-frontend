@@ -6,6 +6,7 @@ import axios from "axios"
 import "../../index.css"
 import LandingProducts from "../../Components/Home/LandingProducts";
 import PageName from "../HeaderFooter/PageName";
+import Header from "../HeaderFooter/Header";
 
 const SearchResult = ({ ...props }) => {
 
@@ -33,11 +34,22 @@ const SearchResult = ({ ...props }) => {
 
     }, [])
 
+    function Products() {
+        if (products.length == 0) {
+            return <div className="info-message">No available products for this search</div>
+        }
+        else {
+            return <LandingProducts products={products} heading="Search Result" hr={true} viewClass="landing-product" listClass="feature-products" />
+        }
+    }
+
+
     return (
 
         <div className="search-result" >
+            <Header />
             <PageName pageName="SEARCH RESULT" />
-            <LandingProducts products={products} heading="Search Result" hr={true} viewClass="landing-product" listClass="feature-products" />
+            <Products />
         </div>
     );
 
