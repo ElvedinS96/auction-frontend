@@ -68,7 +68,6 @@ const Product = ({ ...props }) => {
                     })
             })
             .catch(error => {
-                alert(error)
                 window.location.href = "/404"
             })
     }, [])
@@ -106,7 +105,6 @@ const Product = ({ ...props }) => {
                         localStorage.userBid = bid
                     })
                     .catch(error => {
-                        alert(error)
                         window.location.href = "/login"
                     })
             }

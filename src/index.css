@@ -496,7 +496,7 @@ padding-top: 1em;
   display: flex;
   flex-direction: column;
   font-family: "Lato";
-  width:100%;
+  width: 100%;
 }
 
 .product-preview a {
@@ -505,9 +505,12 @@ padding-top: 1em;
 }
 
 .product-preview img {
-  width: 100%;
+  max-width: 100%;
   margin-bottom: 1em;
   overflow-y: hidden;
+  max-height: 13em;
+  min-height: 13em;
+
 }
 
 .product-preview label {
@@ -766,6 +769,10 @@ hr {
   font-family: "Lato";
 }
 
+.info-message {
+  padding: 1em 0 0 4em;
+}
+
 
 @media screen and (max-width: 750px) {
     .product {
@@ -781,6 +788,13 @@ hr {
     .product-left {
       width: 80%;
       margin: auto;
+    }
+    .product-preview img {
+      max-width: 100%;
+      margin-bottom: 1em;
+      overflow-y: hidden;
+      min-height: 10em;
+      max-height: 10em;
     }
     .product-bidding-table {
       width: 100%;

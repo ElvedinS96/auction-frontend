@@ -15,7 +15,8 @@ const Registration = props => {
         firstName: "",
         lastName: "",
         email: "",
-        password: ""
+        password: "",
+        imageUrl: "https://clinicforspecialchildren.org/wp-content/uploads/2016/08/avatar-placeholder.gif"
     })
 
     const [validation, setValidation] = React.useState({

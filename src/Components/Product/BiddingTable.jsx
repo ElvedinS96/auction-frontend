@@ -17,7 +17,6 @@ const BiddingTable = ({ ...props }) => {
                     setBidders(response.data.bids)
                 })
                 .catch(error => {
-                    alert(error)
                     window.location.href = "/404"
                 })
 
