@@ -4,7 +4,6 @@ import Registration from "./pages/Authentication/Registration"
 import Login from "./pages/Authentication/Login"
 import "./index.css"
 import Footer from "./pages/HeaderFooter/Footer"
-import Header from "./pages/HeaderFooter/Header"
 import PrivacyAndPolicy from "./pages/HelperPages/PrivacyAndPolicy"
 import TermsAndConditions from "./pages/HelperPages/TermsAndConditions"
 import AboutUs from "./pages/HelperPages/AboutUs"
@@ -13,15 +12,14 @@ import NotFound from "./Components/Error/NotFound"
 import InternalServerError from "./Components/Error/InternalServerError"
 import Home from "./pages/Home/Home"
 import SearchResult from './pages/Product/SearchResult';
+import Header from './pages/HeaderFooter/Header';
 
 function App() {
 
   const BASE_URL = "https://auctionapp-server.herokuapp.com"
-  const BASE_URL_LOCAL = "http://localhost:8081"
 
   return (
     <div>
-      <Header />
       <BrowserRouter>
         <Switch>
           <Route path="/" exact><Home baseUrl={BASE_URL} /></Route>

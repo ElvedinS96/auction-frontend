@@ -5,6 +5,8 @@ import axios from "axios"
 import "../../index.css"
 import StatusBar from "../../Components/StatusBar/StatusBar"
 import PageName from "../HeaderFooter/PageName"
+import Header from "../HeaderFooter/Header";
+import { useEffect } from "react";
 
 
 const Registration = props => {
@@ -13,7 +15,8 @@ const Registration = props => {
         firstName: "",
         lastName: "",
         email: "",
-        password: ""
+        password: "",
+        imageUrl: "https://clinicforspecialchildren.org/wp-content/uploads/2016/08/avatar-placeholder.gif"
     })
 
     const [validation, setValidation] = React.useState({
@@ -32,8 +35,14 @@ const Registration = props => {
 
     let url = props.baseUrl + "/user"
 
+    useEffect(() => {
+        localStorage.statusMessage = ""
+        localStorage.statusClass = ""
+    })
+
     return (
         <div>
+            <Header />
             <PageName pageName="register" />
             <StatusBar statusMessage={message} href="/login" refText={refText} className={statusStyle} />
             <div className={"form-box"}>
@@ -68,6 +77,7 @@ const Registration = props => {
                 })
                 .catch(error => {
                     setMessage("User with given email already exists")
+                    setRefText("")
                     setStatusStyle("status status-error")
                 })
         }

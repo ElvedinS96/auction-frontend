@@ -10,7 +10,7 @@ const FeatureProduct = ({ ...props }) => {
                 <h2>{props.product.name}</h2>
                 <h5>Start from - ${props.product.price}.00</h5>
                 <p>{props.product.description}</p>
-                <button type="btn">BID NOW <span className="bid-arrow">&#10095;</span></button>
+                <button type="btn" onClick={props.onClick}>BID NOW <span className="bid-arrow">&#10095;</span></button>
             </div>
             <div>
                 <img src={props.product.image} alt="product" />

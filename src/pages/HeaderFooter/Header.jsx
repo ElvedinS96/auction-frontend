@@ -1,6 +1,6 @@
 import React from "react"
 import "../../index.css"
-import getToken from "../../Util/getToken"
+import tokenExists from "../../Util/tokenExists"
 
 const Header = props => {
 
@@ -11,10 +11,10 @@ const Header = props => {
     })
 
     React.useEffect(() => {
-        if (getToken("token") != null) {
+        if (tokenExists()) {
             setLoginText({ login: "Logout", or: "", create: "" })
         }
-    }, [loginText])
+    }, [])
 
     return (
         <div>
@@ -46,8 +46,9 @@ const Header = props => {
     )
 
     function handleLoginClick() {
-        if (getToken("token") != null) {
-            document.cookie = "token=; Max-Age=-99999999;"
+
+        if (tokenExists()) {
+            document.cookie = "token=; path=/; max-age=-9999999;"
             setLoginText({ login: "Login", or: "or", create: "Create an Account" })
             window.location.href = "/"
         }

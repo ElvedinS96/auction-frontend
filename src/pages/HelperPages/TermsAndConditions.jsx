@@ -1,10 +1,12 @@
 import React from "react";
 import "../../index.css"
+import Header from "../HeaderFooter/Header";
 import PageName from "../HeaderFooter/PageName"
 
 const TermsAndConditions = props => {
     return (
         <div>
+            <Header />
             <PageName pageName="terms and conditions" />
             <div className="helper">
                 <div >
