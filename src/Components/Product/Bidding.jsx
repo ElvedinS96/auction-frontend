@@ -75,7 +75,7 @@ const Bidding = ({ ...props }) => {
             <div className="bidding">
                 <div className="bidding-field">
                     <GenericField type="number" className="bid-input" onChange={props.inputOnChange} disabled={disabled} />
-                    <button type="btn" onClick={props.onClick} disabled={disabled}>PLACE BID <span className="bid-arrow">&#10095;</span></button>
+                    <button className="basic-button" type="btn" onClick={props.onClick} disabled={disabled}>PLACE BID <span className="bid-arrow">&#10095;</span></button>
                 </div>
                 <label>Enter ${highestBid + 1}.00 or more</label>
             </div>

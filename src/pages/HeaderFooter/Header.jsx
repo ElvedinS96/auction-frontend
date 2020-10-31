@@ -1,4 +1,5 @@
 import React from "react"
+import { useHistory } from "react-router-dom"
 import "../../index.css"
 import tokenExists from "../../Util/tokenExists"
 
@@ -9,6 +10,7 @@ const Header = props => {
         or: "or",
         create: "Create an Account"
     })
+    const history = useHistory()
 
     React.useEffect(() => {
         if (tokenExists()) {
@@ -53,7 +55,13 @@ const Header = props => {
             window.location.href = "/"
         }
         else {
-            window.location.href = "/login"
+            if (window.location.pathname == "/register") {
+                history.push("/login", { from: 'registration' })
+            }
+            else {
+                history.push("/login")
+            }
+
         }
     }
 }
