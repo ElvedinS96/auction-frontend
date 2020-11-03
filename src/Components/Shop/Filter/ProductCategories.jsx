@@ -1,19 +1,15 @@
 import React from "react";
 import "../../../index.css"
-import { BiPlusMedical } from 'react-icons/bi';
+import { BiPlusMedical, BiX } from 'react-icons/bi';
 import { ImMinus } from 'react-icons/im'
 import { useState } from "react";
 
-const ProductCategories = ({ ...props }) => {
+const ProductCategories = ({ activeCategory, activeSubcategory, ...props }) => {
 
-    const categories = ["Fashion", "Accesories", "Shoes", "Home", "Arts", "Computers"]
-    const subcategories = ["Jacket", "Shirt", "T-Shirt", "Jeans", "Pants"]
-
-    const [activeCategory, setActiveCategory] = useState("")
-    const [activeSubcategory, setActiveSubcategory] = useState("")
+    const [subcategories, setSubcategories] = useState([])
 
     function GetIcon(props) {
-        if (activeCategory == props.category) {
+        if (activeCategory == props.category.id) {
             return <ImMinus color={"#8367D8"} />
         }
         else {
@@ -22,31 +18,32 @@ const ProductCategories = ({ ...props }) => {
     }
 
     const listSub = subcategories.map((subcategory) =>
-        <div className={"filter-subcategories-text"} onClick={() => setActiveSubcategory(subcategory)}>
-            {subcategory} (250)
+        <div className={"filter-subcategories-text"} onClick={() => props.setSubcategory(subcategory.id)}>
+            {subcategory.name} ({subcategory.count})
         </div>
     )
 
     function ListSubcategories(props) {
-        if (activeCategory == props.category) {
+        if (activeCategory == props.category.id) {
+            setSubcategories(props.category.subcategories)
             return <div className="filter-subcategories">{listSub}</div>
         }
         return <div></div>
     }
 
     function onCategoryClick(category) {
-        if (activeCategory == category) {
-            setActiveCategory("")
+        if (activeCategory == category.id) {
+            props.setCategory(0)
         }
         else {
-            setActiveCategory(category)
+            props.setCategory(category.id)
         }
     }
 
-    const listCategories = categories.map((category) =>
+    const listCategories = props.categories.map((category) =>
         <div className="each-filter-text">
             <div className="filter-category" onClick={() => onCategoryClick(category)}>
-                {category}
+                {category.name}
                 <GetIcon category={category} />
             </div>
             <div>
@@ -55,9 +52,18 @@ const ProductCategories = ({ ...props }) => {
         </div >
     )
 
+    function onCancelClick() {
+        props.setCategory(0)
+        props.setSubcategory(0)
+    }
+
     return (
         <div className="filter-box">
-            <h5>PRODUCT CATEGORIES</h5>
+            <div className="heading-filter">
+                <h5>PRODUCT CATEGORIES</h5 >
+                <div className="cancel" onClick={() => onCancelClick()}><BiX /></div>
+            </div>
+
             <div>
                 {listCategories}
             </div>

@@ -7,11 +7,18 @@ import ProductCategories from "./ProductCategories"
 
 const Filters = ({ ...props }) => {
     return (
+
         <div className="filters">
-            <ProductCategories />
-            <FilterByPrice />
-            <FilterByColor />
-            <FilterBySize />
+            <ProductCategories
+                activeCategory={props.activeCategory}
+                activeSubcategory={props.activeSubcategory}
+                setCategory={props.setCategory}
+                setSubcategory={props.setSubcategory}
+                categories={props.filters.categories}
+            />
+            <FilterByPrice prices={props.filters.prices} />
+            <FilterByColor colors={props.filters.colors} setColor={props.setColor} />
+            <FilterBySize sizes={props.filters.sizes} setSize={props.setSize} />
         </div>
     )
 }

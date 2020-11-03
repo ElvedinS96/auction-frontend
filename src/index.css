@@ -989,6 +989,19 @@ hr {
   letter-spacing: 0.84px;
 }
 
+.heading-filter {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cancel {
+  cursor: pointer;
+}
+
+.cancel:hover {
+  color: red;
+}
+
 @media screen and (max-width: 750px) {
     .product {
       display: flex;

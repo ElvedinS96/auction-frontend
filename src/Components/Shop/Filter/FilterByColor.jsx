@@ -1,19 +1,22 @@
 import React from "react";
 import "../../../index.css"
+import { BiX } from "react-icons/bi"
 
 const FilterByColor = ({ ...props }) => {
 
-    const colors = ["Black", "White", "Green", "Grey", "Red", "Blue", "Orange"]
-
-    const listColors = colors.map((color) =>
-        <div className="each-filter-text" onClick={() => alert(color)}>
+    const listColors = props.colors.map((color) =>
+        <div className="each-filter-text" onClick={() => props.setColor(color)}>
             {color}
         </div>
     )
 
     return (
         <div className="filter-box">
-            <h5>FILTER BY COLOR</h5>
+            {console.log(props.colors)}
+            <div className="heading-filter">
+                <h5>FILTER BY COLOR</h5 >
+                <div className="cancel" onClick={() => props.setColor("")}><BiX /></div>
+            </div>
             <div>
                 {listColors}
             </div>
