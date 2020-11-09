@@ -16,7 +16,7 @@ import Header from './pages/HeaderFooter/Header';
 
 function App() {
 
-  const BASE_URL = "https://auctionapp-server.herokuapp.com"
+  const BASE_URL = process.env.REACT_APP_BASE_URL
 
   return (
     <div>
