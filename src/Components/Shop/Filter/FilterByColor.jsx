@@ -12,7 +12,6 @@ const FilterByColor = ({ ...props }) => {
 
     return (
         <div className="filter-box">
-            {console.log(props.colors)}
             <div className="heading-filter">
                 <h5>FILTER BY COLOR</h5 >
                 <div className="cancel" onClick={() => props.setColor("")}><BiX /></div>

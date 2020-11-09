@@ -47,6 +47,8 @@ const Shop = ({ ...props }) => {
     const [activeSize, setActiveSize] = useState("")
     const [activeName, setActiveName] = useState("")
     const [products, setProducts] = useState([])
+    const [minPrice, setMinPrice] = useState(-1)
+    const [maxPrice, setMaxPrice] = useState(-1)
     const [pageNumber, setPageNumber] = useState(1)
     const PAGE_SIZE = 9
     const [exploreClass, setExploreClass] = useState("explore-more")
@@ -57,8 +59,8 @@ const Shop = ({ ...props }) => {
             subcategoryId: activeSubcategory,
             color: activeColor,
             size: activeSize,
-            minPrice: -1,
-            maxPrice: -1,
+            minPrice: minPrice,
+            maxPrice: maxPrice,
             order: dropdownSelected,
             pageNumber: pageNumber,
             pageSize: PAGE_SIZE
@@ -102,7 +104,7 @@ const Shop = ({ ...props }) => {
             .catch(error => {
                 history.push("/500")
             })
-    }, [dropdownSelected, activeCategory, activeSubcategory, activeColor, activeSize, activeName, pageNumber], [])
+    }, [dropdownSelected, activeCategory, activeSubcategory, activeColor, activeSize, activeName, pageNumber, minPrice, maxPrice], [])
 
     function setGrid(value) {
         if (value) {
@@ -145,7 +147,19 @@ const Shop = ({ ...props }) => {
 
     function ShowSearchName() {
         if (activeName != "") {
-            return <div className="wrapper"><div className="active-name">{activeName} <div className="cancel" onClick={() => { onCancelNameClick(); resetPageNumber() }}><BiX /></div></div></div>
+            return <div ><div className="active-name">{activeName} <div className="cancel" onClick={() => { onCancelNameClick(); resetPageNumber() }}><BiX /></div></div></div>
+        }
+        return <div></div>
+    }
+    function ShowSearchColor() {
+        if (activeColor != "") {
+            return <div ><div className="active-name">{activeColor} <div className="cancel" onClick={() => { setActiveColor(""); resetPageNumber() }}><BiX /></div></div></div>
+        }
+        return <div></div>
+    }
+    function ShowSearchSize() {
+        if (activeSize != "") {
+            return <div ><div className="active-name">{activeSize} <div className="cancel" onClick={() => { setActiveSize(""); resetPageNumber() }}><BiX /></div></div></div>
         }
         return <div></div>
     }
@@ -154,7 +168,11 @@ const Shop = ({ ...props }) => {
         <div>
             <Header active={active} inputValue={activeName} onClick={onSearchClick} />
             <PageName pageName="SHOP" pageNav="SHOP / ALL CATEGORIES" />
-            <ShowSearchName />
+            <div className="wrapper selected-filters">
+                <ShowSearchName />
+                <ShowSearchColor />
+                <ShowSearchSize />
+            </div>
             <div className="wrapper">
                 <div className="shop-page">
                     <Filters
@@ -166,6 +184,8 @@ const Shop = ({ ...props }) => {
                         setColor={setActiveColor}
                         setSize={setActiveSize}
                         resetPageNumber={resetPageNumber}
+                        setMinPrice={setMinPrice}
+                        setMaxPrice={setMaxPrice}
                     />
                     <SetView />
                 </div>

@@ -17,7 +17,7 @@ const Filters = ({ ...props }) => {
                 categories={props.filters.categories}
                 resetPageNumber={props.resetPageNumber}
             />
-            <FilterByPrice resetPageNumber={props.resetPageNumber} prices={props.filters.prices} />
+            <FilterByPrice resetPageNumber={props.resetPageNumber} prices={props.filters.prices} setMinPrice={props.setMinPrice} setMaxPrice={props.setMaxPrice} />
             <FilterByColor resetPageNumber={props.resetPageNumber} colors={props.filters.colors} setColor={props.setColor} />
             <FilterBySize resetPageNumber={props.resetPageNumber} sizes={props.filters.sizes} setSize={props.setSize} />
         </div>

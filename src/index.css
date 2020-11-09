@@ -1074,6 +1074,7 @@ hr {
   width: fit-content;
   background-color:#f1f0f0;
   border-radius: 10px;
+  margin-right: 1em;
 }
 
 .explore-more {
@@ -1102,6 +1103,59 @@ hr {
 
 .explore-disable {
   display: none;
+}
+
+.slider {
+    margin-top: -0.3em;
+    padding-top: 0;
+}
+
+.slider>.rc-slider-track {
+    cursor: pointer;
+    background-color: #8367D8;
+    border-radius: 1px;
+    height: 2px;
+}
+
+.slider>.rc-slider-rail {
+    cursor: pointer;
+    background-color: #E4E5EC;
+    border-radius: 1px;
+    height: 2px;
+}
+
+.slider>.rc-slider-step {
+    cursor: pointer;
+    height: 2px;
+}
+
+.slider>.rc-slider-handle {
+    background-image: radial-gradient(circle, #8367D8 40%, #ffffff 40%);
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    border: 1px solid #E4E5EC;
+}
+
+.slider>.rc-slider-handle:hover {
+    border: 1px solid #b4b1af;
+}
+
+.price-labels {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
+}
+
+.price-labels label {
+  margin-top: 0.5em;
+  color: #9B9B9B;
+  letter-spacing: 0.49px;
+  font-size: 0.6em;
+}
+
+.selected-filters {
+  display: flex;
 }
 
 @media screen and (max-width: 750px) {
