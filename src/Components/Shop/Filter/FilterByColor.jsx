@@ -5,7 +5,7 @@ import { BiX } from "react-icons/bi"
 const FilterByColor = ({ ...props }) => {
 
     const listColors = props.colors.map((color) =>
-        <div className="each-filter-text" onClick={() => props.setColor(color)}>
+        <div className="each-filter-text" onClick={() => { props.setColor(color); props.resetPageNumber() }}>
             {color}
         </div>
     )

@@ -5,7 +5,7 @@ import { BiX } from "react-icons/bi"
 const FilterBySize = ({ ...props }) => {
 
     const listSizes = props.sizes.map((size) =>
-        <div className="each-filter-text" onClick={() => props.setSize(size)}>
+        <div className="each-filter-text" onClick={() => { props.setSize(size); props.resetPageNumber() }}>
             {size}
         </div >
     )

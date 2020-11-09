@@ -15,10 +15,11 @@ const Filters = ({ ...props }) => {
                 setCategory={props.setCategory}
                 setSubcategory={props.setSubcategory}
                 categories={props.filters.categories}
+                resetPageNumber={props.resetPageNumber}
             />
-            <FilterByPrice prices={props.filters.prices} />
-            <FilterByColor colors={props.filters.colors} setColor={props.setColor} />
-            <FilterBySize sizes={props.filters.sizes} setSize={props.setSize} />
+            <FilterByPrice resetPageNumber={props.resetPageNumber} prices={props.filters.prices} />
+            <FilterByColor resetPageNumber={props.resetPageNumber} colors={props.filters.colors} setColor={props.setColor} />
+            <FilterBySize resetPageNumber={props.resetPageNumber} sizes={props.filters.sizes} setSize={props.setSize} />
         </div>
     )
 }

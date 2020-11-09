@@ -34,6 +34,11 @@ const Product = ({ ...props }) => {
     const [highestBid, setHighestBid] = useState(0)
     const [productBids, setProductBids] = useState([])
     const [numberOfBids, setNumberOfBids] = useState(0)
+    const [active, setActive] = useState({
+        home: "nav-inactive",
+        shop: "nav-active",
+        account: "nav-inactive"
+    })
 
     useEffect(() => {
         localStorage.statusMessage = ""
@@ -125,7 +130,7 @@ const Product = ({ ...props }) => {
 
     return (
         <div>
-            <Header />
+            <Header active={active} />
             <PageName pageName="SINGLE PRODUCT" pageNav="SHOP / SINGLE PRODUCT" />
             <StatusBar statusMessage={localStorage.statusMessage} className={localStorage.statusClass} />
             <div className="product">

@@ -18,7 +18,7 @@ const ProductCategories = ({ activeCategory, activeSubcategory, ...props }) => {
     }
 
     const listSub = subcategories.map((subcategory) =>
-        <div className={"filter-subcategories-text"} onClick={() => props.setSubcategory(subcategory.id)}>
+        <div className={"filter-subcategories-text"} onClick={() => { props.setSubcategory(subcategory.id); props.resetPageNumber() }}>
             {subcategory.name} ({subcategory.count})
         </div>
     )

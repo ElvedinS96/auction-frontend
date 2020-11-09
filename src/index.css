@@ -166,9 +166,55 @@ margin-bottom: 1em;
   display: flex;
   align-items: center;
   min-width: 100%;
-  background: #FFFFFF;
+  background: #ffffff;
   height: 3em;
-  padding-left: 4em;
+}
+
+.header-middle-wrapper {
+  margin-top: 0em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.search {
+  display: flex;
+  margin-left: 3.5em;
+  margin-top: 0.8em;
+  width: 30%;
+}
+
+.search input {
+  border: 1px solid #D8D8D8;
+  box-shadow: 0 0 9px 0 rgba(0,0,0,0.08);
+  padding: 0.7em 2em 0.7em 1em;
+  color: #252525;
+  letter-spacing: 0.63px;
+  width: 100%;
+}
+
+.search button {
+  background: url("https://firebasestorage.googleapis.com/v0/b/auction-internship-app.appspot.com/o/images%2F585e4ae9cb11b227491c3394.png?alt=media&token=1865bab4-55dd-418b-aa9c-08172ddd7d16") center center no-repeat;
+  background-size: 1em;
+  width: 2.3em;
+  cursor: pointer;
+  border: 1px solid #D8D8D8;
+  
+}
+
+.search button:focus {
+  outline: none;
+}
+
+.search button:hover {
+  background-color: #f8f8f8;
+}
+
+.search input:focus {
+  outline: none;
+}
+
+.search input:active {
+  border: 1px solid #D8D8D8;
 }
 
 .logo {
@@ -1000,6 +1046,62 @@ hr {
 
 .cancel:hover {
   color: red;
+}
+
+.header-nav {
+  margin-top: 0.8em;
+}
+
+.header-nav a {
+  text-decoration: none;
+  margin-left: 1em;
+  font-size: 0.7em;
+  font-family: "Lato";
+  letter-spacing: 0.56px;
+}
+.nav-active {
+  font-weight: bold;
+  color: #8367D8;
+}
+
+.nav-inactive {
+  color: #252525;
+}
+
+.active-name {
+  display: flex;
+  padding: 0.5em;
+  width: fit-content;
+  background-color:#f1f0f0;
+  border-radius: 10px;
+}
+
+.explore-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+
+.explore-more button {
+  background: #8367D8;
+  font-size: 0.7em;
+  color: #FFFFFF;
+  letter-spacing: 0.63px;
+  padding: 0.7em 2em 0.7em 2em;
+  border: none;
+}
+
+.explore-more button:hover {
+  background: #7a5fc8;
+}
+
+.explore-more button:focus {
+  outline: none;
+}
+
+.explore-disable {
+  display: none;
 }
 
 @media screen and (max-width: 750px) {

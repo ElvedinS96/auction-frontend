@@ -24,6 +24,11 @@ const Home = ({ ...props }) => {
         price: "",
         image: ""
     })
+    const [active, setActive] = useState({
+        home: "nav-active",
+        shop: "nav-inactive",
+        account: "nav-inactive"
+    })
 
     function onClick(name) {
         switch (name) {
@@ -134,7 +139,7 @@ const Home = ({ ...props }) => {
 
     return (
         <div>
-            <Header />
+            <Header active={active} />
             <div className="home">
                 <div className="home-top">
                     <div className="home-top-inside">
