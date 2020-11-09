@@ -14,12 +14,14 @@ const Header = props => {
         or: "or",
         create: "Create an Account"
     })
+
     const [active, setActive] = useState({
         home: "nav-inactive",
         shop: "nav-inactive",
         account: "nav-inactive"
     })
     const [searchText, setSearchText] = useState("")
+    const history = useHistory()
 
 
     useEffect(() => {
@@ -81,7 +83,13 @@ const Header = props => {
             window.location.href = "/"
         }
         else {
-            window.location.href = "/login"
+            if (window.location.pathname == "/register") {
+                history.push("/login", { from: 'registration' })
+            }
+            else {
+                history.push("/login")
+            }
+
         }
     }
 
