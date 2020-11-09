@@ -17,7 +17,7 @@ import Shop from './pages/Shop/Shop';
 
 function App() {
 
-  const BASE_URL = "https://auctionapp-server.herokuapp.com"
+  const BASE_URL = "http://localhost:8081"
 
   return (
     <div>

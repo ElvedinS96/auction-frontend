@@ -7,6 +7,7 @@ const StatusBar = ({ statusMessage, href, refText, ...props }) => {
 
     const [message, setMessage] = useState("")
     const [style, setStyle] = useState("")
+    const [referenceText, setRefText] = useState("")
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -18,6 +19,7 @@ const StatusBar = ({ statusMessage, href, refText, ...props }) => {
             else {
                 setMessage(statusMessage)
                 setStyle(props.className)
+                setRefText(refText)
             }
 
         }, 1000);
@@ -27,7 +29,7 @@ const StatusBar = ({ statusMessage, href, refText, ...props }) => {
     return (
         <div className={style}>
             <div className="status-content">
-                <div>{message} <a href={href}>{refText}</a></div>
+                <div>{message} <a href={href}>{referenceText}</a></div>
             </div>
         </div>
     );
