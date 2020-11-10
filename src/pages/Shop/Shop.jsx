@@ -104,7 +104,7 @@ const Shop = ({ ...props }) => {
             .catch(error => {
                 history.push("/500")
             })
-    }, [dropdownSelected, activeCategory, activeSubcategory, activeColor, activeSize, activeName, pageNumber, minPrice, maxPrice], [])
+    }, [dropdownSelected, activeSubcategory, activeColor, activeSize, activeName, pageNumber, minPrice, maxPrice], [])
 
     function setGrid(value) {
         if (value) {
@@ -128,6 +128,7 @@ const Shop = ({ ...props }) => {
     }
 
     function SetView() {
+
         if (gridActive) {
             return <ShopGrid exploreClass={exploreClass} exploreMore={exploreMore} products={products} dropValue={dropdownSelected} handleDropdown={(e) => setDropdownSelected(e.target.value)} onClick={setGrid} gridClass={gridClass} listClass={listClass} />
         }
