@@ -21,8 +21,6 @@ const Header = props => {
         account: "nav-inactive"
     })
     const [searchText, setSearchText] = useState("")
-    const history = useHistory()
-
 
     useEffect(() => {
         if (tokenExists()) {
