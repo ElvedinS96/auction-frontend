@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useHistory } from "react-router-dom"
 import "../../index.css"
 import tokenExists from "../../Util/tokenExists"
+import { AiFillTwitterCircle, AiFillGooglePlusCircle, AiFillInstagram, AiFillFacebook } from "react-icons/ai"
 
 const Header = props => {
 
@@ -35,11 +36,18 @@ const Header = props => {
     return (
         <div>
             <div className="header header-top">
-                <div className="social-networks"></div>
-                <div className="login-acccount">
-                    <button onClick={() => handleLoginClick()} className="header-text">{loginText.login}</button>
-                    <label className="header-or">{loginText.or}</label>
-                    <a className="header-text" href="/register">{loginText.create}</a>
+                <div className="wrapper header-login">
+                    <div className="social-networks">
+                        <AiFillFacebook className="soc-icon" color="grey" />
+                        <AiFillInstagram className="soc-icon" color="grey" />
+                        <AiFillTwitterCircle className="soc-icon" color="grey" />
+                        <AiFillGooglePlusCircle className="soc-icon" color="grey" />
+                    </div>
+                    <div className="login-acccount">
+                        <button onClick={() => handleLoginClick()} className="header-text">{loginText.login}</button>
+                        <label className="header-or">{loginText.or}</label>
+                        <a className="header-text" href="/register">{loginText.create}</a>
+                    </div>
                 </div>
             </div>
             <div className="header-middle">

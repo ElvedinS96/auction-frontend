@@ -167,7 +167,7 @@ const Shop = ({ ...props }) => {
     return (
         <div>
             <Header active={active} inputValue={activeName} onClick={onSearchClick} />
-            <PageName pageName="SHOP" pageNav="SHOP / ALL CATEGORIES" />
+            <PageName pageName="SHOP" pageNav={<div>SHOP /<span style={{ fontWeight: 'bold', marginLeft: '1em' }}>ALL CATEGORIES</span></div>} />
             <div className="wrapper selected-filters">
                 <ShowSearchName />
                 <ShowSearchColor />

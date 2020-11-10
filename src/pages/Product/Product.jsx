@@ -100,7 +100,7 @@ const Product = ({ ...props }) => {
                         }
                     })
                     .then(response => {
-                        localStorage.statusMessage = "Congrats! you are the higest bider!"
+                        localStorage.statusMessage = "Congrats! You are the highest bidder!"
                         localStorage.statusClass = "status status-success"
                         setHighestBid(response.data.bidAmount)
                         setNumberOfBids(numberOfBids + 1)
@@ -131,7 +131,7 @@ const Product = ({ ...props }) => {
     return (
         <div>
             <Header active={active} />
-            <PageName pageName="SINGLE PRODUCT" pageNav="SHOP / SINGLE PRODUCT" />
+            <PageName pageName="SINGLE PRODUCT" pageNav={<div>SHOP /<span style={{ fontWeight: 'bold', marginLeft: '1em' }}>SINGLE PRODUCT</span></div>} />
             <StatusBar statusMessage={localStorage.statusMessage} className={localStorage.statusClass} />
             <div className="product">
                 <ProductImages urls={images} />

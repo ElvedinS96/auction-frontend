@@ -2,10 +2,19 @@ import React from "react"
 import "../../index.css"
 import { RiAuctionFill } from "react-icons/ri"
 import { useHistory } from "react-router-dom"
+import { useState } from "react"
+import { useEffect } from "react"
 
 const ShopProductPreview = ({ ...props }) => {
 
     const history = useHistory()
+    const [price, setPrice] = useState(0)
+
+    useEffect(() => {
+        if (props.product.price != null) {
+            setPrice(props.product.price.toFixed(2))
+        }
+    })
 
     return (
 
@@ -17,7 +26,7 @@ const ShopProductPreview = ({ ...props }) => {
                 </div>
             </div>
             <h4>{props.product.name}</h4>
-            <label>Start from: ${props.product.price}.00</label>
+            <label>Start from: ${price}</label>
         </div>
 
     );

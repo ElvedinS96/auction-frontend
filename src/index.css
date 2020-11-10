@@ -159,7 +159,7 @@ margin-bottom: 1em;
 
 .header-top {
   background: #252525;
-  height: 2em;
+  height: 1.9em;
 }
 
 .header-middle {
@@ -262,8 +262,12 @@ max-height: 35%;
 }
 
 .social-networks {
-  padding-left: 4em;
   color: #D8D8D8;
+  margin-top: 0.2em;
+}
+
+.soc-icon {
+  margin-right: 0.3em;
 }
 
 .header-text {
@@ -305,8 +309,10 @@ max-height: 35%;
   color: inherit;
 }
 
-.login-acccount {
-  padding-right: 4em;
+.header-login {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2em;
 }
 
 .have-account {
@@ -405,12 +411,13 @@ max-height: 35%;
 }
 
 .helper {
-  display: flex;
-  margin: auto;
-  width: 50%;
-  min-width: 500px;
   font-family: "Lato";
   padding: 3em 0 3em 0;
+}
+
+.helper-center {
+  width: 70%;
+  margin: auto;
 }
 
 .helper p {
@@ -805,6 +812,7 @@ hr {
   margin-top: 2em;
   display: flex;
   width: 100%;
+  border-bottom: 3px solid #ECECEC;
 }
 
 .home-nav h4 {
@@ -821,6 +829,7 @@ hr {
   font-weight: bold;
   margin-right: 2em;
   padding-bottom: 0.5em;
+  margin-bottom: -0.15em;
 }
 
 .home-nav button:active {
@@ -830,7 +839,7 @@ hr {
 
 .home-nav button:focus {
   outline: none;
-  border-bottom: 3px solid#8367D8;;
+  border-bottom: 3px solid#8367D8;
 }
 
 .landing-product {
@@ -1182,6 +1191,32 @@ hr {
   display: flex;
 }
 
+.about-us {
+  display: flex;
+}
+
+.about-us-text {
+  width: 45%;
+  padding-right: 10%;
+}
+
+.about-us-images {
+  max-width: 45%;
+}
+
+.about-us-images img {
+  max-width: 100%;
+}
+
+.about-us-bottom-images {
+  display: flex;
+}
+.about-us-bottom-images img {
+  margin-right: 4%;
+  margin-top: 1em;
+  max-width: 48%;
+}
+
 @media screen and (max-width: 750px) {
     .product {
       display: flex;
@@ -1219,6 +1254,19 @@ hr {
       max-height: 3em;
       border-radius: 50%;
     }
+    .about-us {
+      display: flex;
+      flex-direction: column;
+    }
+    .about-us-text {
+      width: 100%;
+      padding-right: 0;
+    }
+
+    .about-us-images {
+      padding-top: 2em;
+      max-width: 100%;
+}
 }
 
 @media screen and (max-width: 1200px) {
