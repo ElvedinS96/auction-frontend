@@ -71,7 +71,10 @@ const Shop = ({ ...props }) => {
 
     useEffect(() => {
         if (query.get("name") != null) {
-            setActiveName(query.get("name"))
+            if (activeName != "") {
+                setActiveName(activeName)
+            }
+            else { setActiveName(query.get("name")) }
         }
 
         var url = props.baseUrl + "/shop"
