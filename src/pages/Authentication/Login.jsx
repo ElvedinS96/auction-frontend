@@ -41,7 +41,12 @@ const Login = props => {
         axios.post(url, user)
             .then(response => {
                 document.cookie = "token=" + response.data.token + "; path=/; max-age=6000;"
-                history.goBack()
+                if (history.location.state != null && history.location.state.from == "registration") {
+                    history.push("/")
+                }
+                else {
+                    history.goBack()
+                }
             })
             .catch(error => {
                 setErrorMessage("Invalid username or password")
