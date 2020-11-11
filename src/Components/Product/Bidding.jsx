@@ -38,7 +38,7 @@ const Bidding = ({ ...props }) => {
                                 localStorage.statusClass = "status status-info"
                             }
                             else {
-                                localStorage.statusMessage = "Congrats! you are the higest bider!"
+                                localStorage.statusMessage = "Congrats! You are the highest bidder!"
                                 localStorage.statusClass = "status status-success"
                             }
                         }
@@ -77,10 +77,10 @@ const Bidding = ({ ...props }) => {
                     <GenericField type="number" className="bid-input" onChange={props.inputOnChange} disabled={disabled} />
                     <button className="basic-button" type="btn" onClick={props.onClick} disabled={disabled}>PLACE BID <span className="bid-arrow">&#10095;</span></button>
                 </div>
-                <label>Enter ${highestBid + 1}.00 or more</label>
+                <label>Enter ${(parseFloat(highestBid) + 1).toFixed(2)} or more</label>
             </div>
             <div className="bidding-info">
-                <div>Highest bid: <p>${highestBid}.00</p></div>
+                <div>Highest bid: <p>${highestBid.toFixed(2)}</p></div>
                 <div>No bids: {numberOfBids}</div>
                 <div>{auctionTime}{time}</div>
             </div>

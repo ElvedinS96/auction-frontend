@@ -93,13 +93,25 @@ const Registration = props => {
             password: ""
         }
 
-        if (!user.firstName) {
+        if (!user.firstName || user.firstName.trim().length == 0) {
             validationMessage.firstName = "First Name is required"
             isValid = false;
         }
 
-        if (!user.lastName) {
+        var regFirstName = /^[A-Za-z0-9\s\-]*$/g
+        if (!regFirstName.test(user.firstName)) {
+            validationMessage.firstName = "First Name cannot contain special characters"
+            isValid = false;
+        }
+
+        if (!user.lastName || user.lastName.trim().length == 0) {
             validationMessage.lastName = "Last Name is required"
+            isValid = false;
+        }
+
+        var regLastName = /^[A-Za-z0-9\s\-]*$/g
+        if (!regLastName.test(user.lastName)) {
+            validationMessage.lastName = "Last Name cannot contain special characters"
             isValid = false;
         }
 
@@ -111,6 +123,10 @@ const Registration = props => {
         if (!user.password || user.password.length < 5) {
             validationMessage.password = "Password must be longer than 5 letters"
             isValid = false;
+        }
+        if (user.password.trim().length == 0) {
+            validationMessage.password = "Password can't be white spaces"
+            isValid = false
         }
 
         if (user.password !== confirmPassword) {

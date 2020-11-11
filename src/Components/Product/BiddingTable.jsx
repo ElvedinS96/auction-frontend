@@ -17,6 +17,8 @@ const BiddingTable = ({ ...props }) => {
                     setBidders(response.data.bids)
                 })
                 .catch(error => {
+                    console.log(error)
+                    alert(error)
                     window.location.href = "/404"
                 })
 
@@ -29,7 +31,7 @@ const BiddingTable = ({ ...props }) => {
             <td className="bider-name-img"><img src={bidder.userImage} /></td>
             <td className="bider-name-text">{bidder.userName}</td>
             <td>{showDate(bidder.bidTime)}</td>
-            <td className="bider-name-text">${bidder.bidAmount}.00</td>
+            <td className="bider-name-text">${parseFloat(bidder.bidAmount).toFixed(2)}</td>
         </tr>
     )
 

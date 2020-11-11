@@ -12,6 +12,11 @@ const SearchResult = ({ ...props }) => {
 
     const query = useQueryy()
     const [products, setProducts] = useState([])
+    const [active, setActive] = useState({
+        home: "nav-inactive",
+        shop: "nav-active",
+        account: "nav-inactive"
+    })
 
     function useQueryy() {
         return new URLSearchParams(useLocation().search);
@@ -47,7 +52,7 @@ const SearchResult = ({ ...props }) => {
     return (
 
         <div className="search-result" >
-            <Header />
+            <Header active={active} />
             <PageName pageName="SEARCH RESULT" />
             <Products />
         </div>
