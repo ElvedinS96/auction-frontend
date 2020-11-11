@@ -1,12 +1,16 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import "../../index.css"
 
 const StatusBar = ({ statusMessage, href, refText, ...props }) => {
 
     const [message, setMessage] = useState("")
     const [style, setStyle] = useState("")
+    const [referenceText, setRefText] = useState("")
+    const history = useHistory()
+
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -18,6 +22,7 @@ const StatusBar = ({ statusMessage, href, refText, ...props }) => {
             else {
                 setMessage(statusMessage)
                 setStyle(props.className)
+                setRefText(refText)
             }
 
         }, 1000);
@@ -27,7 +32,7 @@ const StatusBar = ({ statusMessage, href, refText, ...props }) => {
     return (
         <div className={style}>
             <div className="status-content">
-                <div>{message} <a href={href}>{refText}</a></div>
+                <div>{message} <button onClick={() => history.push(href, { from: 'registration' })}>{referenceText}</button></div>
             </div>
         </div>
     );

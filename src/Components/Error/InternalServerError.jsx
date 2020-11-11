@@ -7,6 +7,7 @@ const InternalServerError = ({ ...props }) => {
         <div>
             <div className="status-code">500</div>
             <div className="err-page-msg">Ooops! Sorry, something went wrong</div>
+            <div className="err-page-btn"><button className="basic-button error-button" type="btn" onClick={() => window.location.href = "/"}>GO HOME</button></div>
         </div>
     );
 }

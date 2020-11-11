@@ -13,10 +13,11 @@ import InternalServerError from "./Components/Error/InternalServerError"
 import Home from "./pages/Home/Home"
 import SearchResult from './pages/Product/SearchResult';
 import Header from './pages/HeaderFooter/Header';
+import Shop from './pages/Shop/Shop';
 
 function App() {
 
-  const BASE_URL = "https://auctionapp-server.herokuapp.com"
+  const BASE_URL = process.env.REACT_APP_BASE_URL
 
   return (
     <div>
@@ -32,6 +33,7 @@ function App() {
           <Route path="/register"> <Registration baseUrl={BASE_URL} /> </Route>
           <Route path="/product/:id"><Product baseUrl={BASE_URL} /></Route>
           <Route path="/products"><SearchResult baseUrl={BASE_URL} /></Route>
+          <Route path="/shop"><Shop baseUrl={BASE_URL} /></Route>
         </Switch>
       </BrowserRouter>
       <Footer />
