@@ -1218,6 +1218,39 @@ hr {
   max-width: 48%;
 }
 
+.profile-header {
+  display: flex;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.profile-header-icon {
+  margin-right: 0.3em;
+}
+
+.nav-profile-button {
+  display: flex;
+  align-items: center;
+  font-family: "Lato";
+  font-weight: bold;
+  font-size: 0.7em;
+  letter-spacing: 0.56px;
+  color: #252525;
+  background-color: #F0F0F0;
+  padding: 0.8em 2.5em 0.8em 2.5em;
+  margin-right: 1em;
+  cursor: pointer;
+}
+
+.nav-profile-button label {
+  cursor: pointer;
+}
+
+.nav-profile-button-active {
+  background-color: #8367D8;
+  color: #FFFFFF;
+}
+
 @media screen and (max-width: 750px) {
     .product {
       display: flex;

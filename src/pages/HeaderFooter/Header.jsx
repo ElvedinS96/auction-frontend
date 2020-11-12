@@ -73,7 +73,7 @@ const Header = props => {
                     <div className="header-nav">
                         <a className={active.home} href="/">HOME</a>
                         <a className={active.shop} href="/shop">SHOP</a>
-                        <a className={active.account} href="#">MY ACCOUNT</a>
+                        <a className={active.account} href="/account">MY ACCOUNT</a>
                     </div>
                 </div>
 
