@@ -7,6 +7,7 @@ import UserProfileHeader from "../../Components/UserProfile/UserProfileHeader";
 import "../../index.css"
 import Header from "../HeaderFooter/Header";
 import { useEffect } from "react";
+import getMonths from "../../Util/getMonths";
 
 const User = props => {
 
@@ -15,7 +16,6 @@ const User = props => {
         shop: "nav-inactive",
         account: "nav-active"
     })
-
     const headerActiveClass = "nav-profile-button-active"
     const [profileHeaderActive, setProfileHeaderActive] = useState("profile")
     const [headerClasses, setHeaderClasses] = useState({
@@ -34,9 +34,35 @@ const User = props => {
         imgUrl: ""
     }])
 
+    const [genderOptions, setGenderOptions] = useState(["Male", "Female", "Other"])
+    const [monthOptions, setMonthOptions] = useState([])
+    const [yearOptions, setYearOptions] = useState([])
+    const [dayOptions, setDayOptions] = useState([])
+
+    const [userInfo, setUserInfo] = useState(
+        {
+            firstName: "John",
+            lastName: "Doe",
+            gender: "Male",
+            birthDay: "5",
+            birthMonth: "August",
+            birthYear: "1990",
+            phoneNumber: "555-5555-555",
+            email: "john.doe@mail.com",
+            imageUrl: "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
+        }
+    )
+
+    function handleUserInfoChange(name, value) {
+        setUserInfo(prevState => ({
+            ...prevState,
+            [name]: value
+        })
+        )
+    }
 
     useEffect(() => {
-        //TODO Axios api call
+        //TODO Axios api call get user bids
         var bids = [{
             id: 10,
             name: "Black Jacket",
@@ -66,8 +92,17 @@ const User = props => {
         }
         ]
         setUserBids(bids)
+        setMonthOptions(getMonths())
+        setYearOptions(Array(2100 - 1900 + 1).fill().map((item, index) => 1900 + index))
+        setDayOptions(Array(31 - 1 + 1).fill().map((item, index) => 1 + index))
+
+        //TODO Axios api call get user info
 
     }, [])
+
+    function getNumberOfDays(month, year) {
+        return new Date(year, month, 0).getDate()
+    }
 
     function onHeaderClick(activeButton) {
         switch (activeButton) {
@@ -88,7 +123,16 @@ const User = props => {
 
     function SetSection() {
         if (profileHeaderActive == "profile") {
-            return <Profile />
+            return <Profile
+                genderOptions={genderOptions}
+
+                monthOptions={monthOptions}
+                yearOptions={yearOptions}
+                dayOptions={dayOptions}
+
+                onChange={handleUserInfoChange}
+                userInfo={userInfo}
+            />
         }
         else if (profileHeaderActive == "bids") {
             return <UserBids bids={userBids} />
@@ -105,7 +149,7 @@ const User = props => {
             <Header active={active} />
             <div className="wrapper">
                 <UserProfileHeader setActive={onHeaderClick} classes={headerClasses} />
-                <SetSection />
+                {SetSection()}
             </div>
         </div>
     )

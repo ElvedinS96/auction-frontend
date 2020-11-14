@@ -8,9 +8,21 @@ const Profile = props => {
 
     return (
         <div>
-            <PersonalInfo />
+            <PersonalInfo
+                genderOptions={props.genderOptions}
+
+                monthOptions={props.monthOptions}
+                yearOptions={props.yearOptions}
+                dayOptions={props.dayOptions}
+
+                onChange={props.onChange}
+                userInfo={props.userInfo}
+
+            />
             <CardInfo />
             <AdressInfo />
+
+            <button>SAVE INFO</button>
         </div>
     )
 }
