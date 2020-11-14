@@ -19,7 +19,13 @@ const Profile = props => {
                 userInfo={props.userInfo}
 
             />
-            <CardInfo />
+            <CardInfo
+                monthOptions={props.monthOptions}
+                yearOptions={props.yearOptions}
+
+                onChange={props.onChange}
+                userInfo={props.userInfo}
+            />
             <AdressInfo
                 onChange={props.onChange}
                 userInfo={props.userInfo}

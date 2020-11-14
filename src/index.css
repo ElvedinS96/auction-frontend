@@ -1558,7 +1558,8 @@ hr {
   background-repeat: no-repeat;
   background-position: right;
   cursor: pointer;
-  margin-right: -0.4em
+  margin-right: -0.4em;
+  padding: 0.25em 0 0.25em 0;
 }
 
 .address-heading {
@@ -1575,6 +1576,54 @@ hr {
 
 .address-width {
   width: 45%;
+}
+
+.card-ckeckbox {
+  padding: 0.2em 0.5em 0.5em 0em;
+}
+
+.card-ckeckbox input[type="checkbox"] {
+  margin-right: 1em;
+  border-color: #D8D8D8;
+  outline: 1px solid #D8D8D8;
+}
+
+.accept-cards {
+  color: #9B9B9B;
+  letter-spacing: 0.56px;
+  line-height: 26px;
+  font-size: 0.7em;
+  padding-left: 2em;
+}
+
+.cards-logos {
+  margin-top: 0.3em;
+  margin-bottom: 0.5em;
+  display: flex;
+}
+
+.cards-logos div {
+  margin-right: 0.5em;
+}
+.card-exp {
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8em;
+  padding-top: 0.2em;
+}
+
+.month-wrapper-exp {
+  width: 35%;
+  padding-right: 0.8em;
+}
+
+.year-wrapper-exp {
+  width: 35%;
+}
+
+.exp-date {
+  justify-content: space-between;
 }
 
 @media screen and (max-width: 750px) {
@@ -1723,6 +1772,14 @@ hr {
     .year-wrapper {
       margin-right: 2.5em;
       width: 18%;
+    }
+
+    .city-zip {
+      flex-direction: column;
+    }
+
+    .address-width {
+      width: 100%;
     }
 
 }

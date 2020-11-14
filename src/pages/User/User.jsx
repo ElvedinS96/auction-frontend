@@ -54,7 +54,14 @@ const User = props => {
             city: "",
             zipCode: "",
             state: "",
-            country: ""
+            country: "",
+            nameOnCard: "",
+            paypal: false,
+            card: false,
+            cardNumber: "",
+            cardExpYear: "",
+            cardExpMonth: "",
+            cvc: ""
         }
     )
 
@@ -151,6 +158,7 @@ const User = props => {
 
     return (
         <div>
+            {console.log(userInfo)}
             <Header active={active} />
             <div className="wrapper">
                 <UserProfileHeader setActive={onHeaderClick} classes={headerClasses} />
