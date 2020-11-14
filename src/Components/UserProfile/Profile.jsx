@@ -20,7 +20,10 @@ const Profile = props => {
 
             />
             <CardInfo />
-            <AdressInfo />
+            <AdressInfo
+                onChange={props.onChange}
+                userInfo={props.userInfo}
+            />
 
             <button>SAVE INFO</button>
         </div>

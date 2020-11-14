@@ -1382,6 +1382,10 @@ hr {
   display: flex;
 }
 
+.profile-box {
+  margin-top: 1em;
+}
+
 .profile-heading {
   padding: 0.5em 1em 0.5em 1.5em;
   background: #FAFAFA;
@@ -1557,6 +1561,21 @@ hr {
   margin-right: -0.4em
 }
 
+.address-heading {
+  color: #252525;
+  letter-spacing: 0.98px;
+  margin-top: 1em;
+}
+
+.city-zip {
+  display: flex;
+  justify-content: space-between;
+  max-width: 100%;
+}
+
+.address-width {
+  width: 45%;
+}
 
 @media screen and (max-width: 750px) {
     .product {
@@ -1689,6 +1708,21 @@ hr {
 
     .profile-info {
       width: 85%;
+    }
+
+    .month-wrapper {
+      width: 25%;
+      margin-right: 2.5em;
+    }
+
+    .day-wrapper {
+      margin-right: 2.5em;
+      width: 10%;
+    }
+
+    .year-wrapper {
+      margin-right: 2.5em;
+      width: 18%;
     }
 
 }

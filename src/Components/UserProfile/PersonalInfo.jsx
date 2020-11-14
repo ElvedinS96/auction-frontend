@@ -6,7 +6,7 @@ import Dropdown from "react-dropdown"
 const PersonalInfo = props => {
 
     return (
-        <div className="user-box">
+        <div className="user-box profile-box">
             <div className="profile-heading">REQUIRED</div>
             <div className="profile">
                 <div className="profile-image">

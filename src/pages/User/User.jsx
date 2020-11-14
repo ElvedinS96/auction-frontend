@@ -49,7 +49,12 @@ const User = props => {
             birthYear: "1990",
             phoneNumber: "555-5555-555",
             email: "john.doe@mail.com",
-            imageUrl: "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
+            imageUrl: "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",
+            street: "",
+            city: "",
+            zipCode: "",
+            state: "",
+            country: ""
         }
     )
 
