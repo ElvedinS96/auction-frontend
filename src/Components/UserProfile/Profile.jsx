@@ -18,6 +18,7 @@ const Profile = props => {
                 onChange={props.onChange}
                 userInfo={props.userInfo}
                 changeImage={props.changeImage}
+                validation={props.validation}
 
             />
             <CardInfo
@@ -26,10 +27,12 @@ const Profile = props => {
 
                 onChange={props.onChange}
                 userInfo={props.userInfo}
+                validation={props.validation}
             />
             <AdressInfo
                 onChange={props.onChange}
                 userInfo={props.userInfo}
+                validation={props.validation}
             />
             <div className="save-info-button">
                 <button onClick={(e) => props.saveInfo()}>SAVE INFO <span className="bid-arrow">&#10095;</span></button>

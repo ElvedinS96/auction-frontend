@@ -23,6 +23,7 @@ const AdressInfo = props => {
                         label={"Street"}
                         type={"text"}
                         className="profile-input"
+                        validationMessage={props.validation.street}
                     />
                     <div className="city-zip">
                         <div className="address-width">
@@ -49,6 +50,7 @@ const AdressInfo = props => {
                                 label={"ZipCode"}
                                 type={"text"}
                                 className="profile-input"
+                                validationMessage={props.validation.zipCode}
                             />
                         </div>
                     </div>
@@ -62,6 +64,7 @@ const AdressInfo = props => {
                         label={"State"}
                         type={"text"}
                         className="profile-input"
+                        validationMessage={props.validation.state}
                     />
                     <GenericField
                         key="country_input"

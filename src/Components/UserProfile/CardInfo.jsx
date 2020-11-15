@@ -52,6 +52,7 @@ const CardInfo = props => {
                                 label={"Name on card"}
                                 type={"text"}
                                 className="profile-input"
+                                validationMessage={props.validation.nameOnCard}
                             />
                         </div>
                         <div className="address-width">
@@ -65,6 +66,7 @@ const CardInfo = props => {
                                 label={"Card Number"}
                                 type={"text"}
                                 className="profile-input"
+                                validationMessage={props.validation.cardNumber}
                             />
                         </div>
                     </div>
@@ -82,6 +84,9 @@ const CardInfo = props => {
                                         options={props.yearOptions}
                                         onChange={(e) => props.onChange("cardExpYear", e.value.toString())}
                                     />
+                                    <small>
+                                        <label className={"validation-error small"}>{props.validation.cardExpYear}</label>
+                                    </small>
                                 </div>
                                 <div className="month-wrapper-exp">
                                     <Dropdown
@@ -93,6 +98,9 @@ const CardInfo = props => {
                                         options={props.monthOptions}
                                         onChange={(e) => props.onChange("cardExpMonth", e.label.toString())}
                                     />
+                                    <small>
+                                        <label className={"validation-error small"}>{props.validation.cardExpMonth}</label>
+                                    </small>
                                 </div>
                             </div>
                         </div>
@@ -108,6 +116,7 @@ const CardInfo = props => {
                                     label={"CVC/CW"}
                                     type={"text"}
                                     className="profile-input"
+                                    validationMessage={props.validation.cvc}
                                 />
                             </div>
                         </div>

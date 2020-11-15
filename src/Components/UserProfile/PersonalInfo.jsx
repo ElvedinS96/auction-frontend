@@ -35,6 +35,7 @@ const PersonalInfo = props => {
                         label={"First Name"}
                         type={"text"}
                         className="profile-input"
+                        validationMessage={props.validation.firstName}
                     />
                     <GenericField
                         key="lastName_input"
@@ -45,6 +46,7 @@ const PersonalInfo = props => {
                         label={"Last Name"}
                         type={"text"}
                         className="profile-input"
+                        validationMessage={props.validation.lastName}
                     />
                     <div className="profile-label">
                         <label className="generic-field">I am</label>
@@ -95,6 +97,9 @@ const PersonalInfo = props => {
                                 />
                             </div>
                         </div>
+                        <small>
+                            <label className={"validation-error small"}>{props.validation.birthdate}</label>
+                        </small>
                     </div>
                     <div>
                         <div className="profile-generic">
@@ -111,7 +116,7 @@ const PersonalInfo = props => {
                                 <div className="phone-verified">Verified</div>
                             </div>
                             <small>
-                                <label className={"validation-error"}></label>
+                                <label className={"validation-error"}>{props.validation.phoneNumber}</label>
                             </small>
 
                         </div>
@@ -125,6 +130,7 @@ const PersonalInfo = props => {
                         label={"Email Address"}
                         type={"text"}
                         className="profile-input"
+                        validationMessage={props.validation.email}
                     />
                 </div>
             </div>

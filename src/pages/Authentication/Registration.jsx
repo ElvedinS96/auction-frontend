@@ -7,6 +7,7 @@ import StatusBar from "../../Components/StatusBar/StatusBar"
 import PageName from "../HeaderFooter/PageName"
 import Header from "../HeaderFooter/Header";
 import { useEffect } from "react";
+import { validateFirstName, validateLastName, validateEmail } from "../../Util/Validation"
 
 
 const Registration = props => {
@@ -93,30 +94,21 @@ const Registration = props => {
             password: ""
         }
 
-        if (!user.firstName || user.firstName.trim().length == 0) {
-            validationMessage.firstName = "First Name is required"
+        var firstNameValidation = validateFirstName(user.firstName)
+        if (!firstNameValidation.valid) {
+            validationMessage.firstName = firstNameValidation.message
             isValid = false;
         }
 
-        var regFirstName = /^[A-Za-z0-9\s\-]*$/g
-        if (!regFirstName.test(user.firstName)) {
-            validationMessage.firstName = "First Name cannot contain special characters"
+        var lastNameValidation = validateLastName(user.lastName)
+        if (!lastNameValidation.valid) {
+            validationMessage.lastName = lastNameValidation.message
             isValid = false;
         }
 
-        if (!user.lastName || user.lastName.trim().length == 0) {
-            validationMessage.lastName = "Last Name is required"
-            isValid = false;
-        }
-
-        var regLastName = /^[A-Za-z0-9\s\-]*$/g
-        if (!regLastName.test(user.lastName)) {
-            validationMessage.lastName = "Last Name cannot contain special characters"
-            isValid = false;
-        }
-
-        if (!user.email || !user.email.includes("@")) {
-            validationMessage.email = "Invalid email"
+        var emailValidation = validateEmail(user.email)
+        if (!emailValidation.valid) {
+            validationMessage.email = emailValidation.message
             isValid = false;
         }
 

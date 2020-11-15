@@ -1664,6 +1664,10 @@ hr {
   background-color: #f8f8f8;
 }
 
+.small {
+  font-size: 0.8em;
+}
+
 @media screen and (max-width: 750px) {
     .product {
       display: flex;

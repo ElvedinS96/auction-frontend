@@ -9,6 +9,7 @@ import Header from "../HeaderFooter/Header";
 import { useEffect } from "react";
 import getMonths from "../../Util/getMonths";
 import { storage } from "../../firebase"
+import { validateFirstName, validateLastName, validateEmail, validateNumber, validateOnlyLettersAndNumbers, validateState, validateCardNumber, validateCVC, validateCardExpiration, validateBirthDate } from "../../Util/Validation"
 
 const User = props => {
 
@@ -46,9 +47,9 @@ const User = props => {
             firstName: "John",
             lastName: "Doe",
             gender: "Male",
-            birthDay: "5",
-            birthMonth: "August",
-            birthYear: "1990",
+            birthDay: "",
+            birthMonth: "",
+            birthYear: "",
             phoneNumber: "555-5555-555",
             email: "john.doe@mail.com",
             imageUrl: "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",
@@ -60,6 +61,26 @@ const User = props => {
             nameOnCard: "",
             paypal: false,
             card: false,
+            cardNumber: "",
+            cardExpYear: "",
+            cardExpMonth: "",
+            cvc: ""
+        }
+    )
+
+    const [validation, setValidation] = useState(
+        {
+            firstName: "",
+            lastName: "",
+            birthDay: "",
+            birthMonth: "",
+            birthYear: "",
+            phoneNumber: "",
+            email: "",
+            street: "",
+            zipCode: "",
+            state: "",
+            nameOnCard: "",
             cardNumber: "",
             cardExpYear: "",
             cardExpMonth: "",
@@ -114,10 +135,6 @@ const User = props => {
 
     }, [])
 
-    function getNumberOfDays(month, year) {
-        return new Date(year, month, 0).getDate()
-    }
-
     function onHeaderClick(activeButton) {
         switch (activeButton) {
             case "profile":
@@ -135,16 +152,117 @@ const User = props => {
         }
     }
 
+    function validate() {
+
+        var isValid = true
+        var validationMessage = {
+            firstName: "",
+            lastName: "",
+            birthdate: "",
+            phoneNumber: "",
+            email: "",
+            street: "",
+            zipCode: "",
+            state: "",
+            nameOnCard: "",
+            cardNumber: "",
+            cardExpYear: "",
+            cardExpMonth: "",
+            cvc: ""
+        }
+
+        var firstNameValidation = validateFirstName(userInfo.firstName)
+        if (!firstNameValidation.valid) {
+            validationMessage.firstName = firstNameValidation.message
+            isValid = false;
+        }
+
+        var lastNameValidation = validateLastName(userInfo.lastName)
+        if (!lastNameValidation.valid) {
+            validationMessage.lastName = lastNameValidation.message
+            isValid = false;
+        }
+
+        var emailValidation = validateEmail(userInfo.email)
+        if (!emailValidation.valid) {
+            validationMessage.email = emailValidation.message
+            isValid = false;
+        }
+
+        var numberValidation = validateNumber(userInfo.phoneNumber)
+        if (!numberValidation.valid) {
+            validationMessage.phoneNumber = numberValidation.message
+            isValid = false;
+        }
+
+        var nameOnCardValidation = validateOnlyLettersAndNumbers(userInfo.nameOnCard, "Name on card")
+        if (!nameOnCardValidation.valid) {
+            validationMessage.nameOnCard = nameOnCardValidation.message
+            isValid = false;
+        }
+
+        var streetValidation = validateOnlyLettersAndNumbers(userInfo.street, "Street")
+        if (!streetValidation.valid) {
+            validationMessage.street = streetValidation.message
+            isValid = false;
+        }
+
+        var zipCodeValidation = validateOnlyLettersAndNumbers(userInfo.zipCode, "Zip Code")
+        if (!zipCodeValidation.valid) {
+            validationMessage.zipCode = zipCodeValidation.message
+            isValid = false;
+        }
+
+        var stateValidation = validateState(userInfo.state)
+        if (!stateValidation.valid) {
+            validationMessage.state = stateValidation.message
+            isValid = false;
+        }
+
+        if (userInfo.cardNumber.length > 0) {
+            var cardNumberValidation = validateCardNumber(userInfo.cardNumber)
+            if (!cardNumberValidation.valid) {
+                validationMessage.cardNumber = cardNumberValidation.message
+                isValid = false;
+            }
+        }
+
+        if (userInfo.cvc.length > 0) {
+            var cvcValidation = validateCVC(userInfo.cvc)
+            if (!cvcValidation.valid) {
+                validationMessage.cvc = cvcValidation.message
+                isValid = false;
+            }
+        }
+
+        var expirationValidation = validateCardExpiration(userInfo.cardExpYear, userInfo.cardExpMonth)
+        if (!expirationValidation.valid) {
+            validationMessage.cardExpMonth = expirationValidation.messageMonth
+            validationMessage.cardExpYear = expirationValidation.messageYear
+            isValid = false;
+        }
+
+        var birthDateValidation = validateBirthDate(userInfo.birthYear, userInfo.birthMonth, userInfo.birthDay)
+        if (!birthDateValidation.valid) {
+            validationMessage.birthdate = birthDateValidation.message
+            isValid = false
+        }
+
+        setValidation(validationMessage)
+    }
+
     function saveInfo() {
-        //TODO validate all data
-        //TODO call api to save data
-        //TODO give user feedback on saving
+        if (validate()) {
+            //TODO call api to save data
+            //TODO give user feedback on saving
+        }
+        window.scrollTo(0, 0)
     }
 
     function changeImage(e) {
         if (e.target.files[0]) {
             const image = e.target.files[0]
-            const uploadTask = storage.ref(`profile_images/${userInfo.id}`).put(image);
+            const uploadTask = storage.ref(`profile_images/${image.name}`).put(image);
             uploadTask.on(
                 "state_changed",
                 snapshot => { },
@@ -177,6 +295,8 @@ const User = props => {
                 userInfo={userInfo}
                 saveInfo={saveInfo}
                 changeImage={changeImage}
+
+                validation={validation}
             />
         }
         else if (profileHeaderActive == "bids") {
