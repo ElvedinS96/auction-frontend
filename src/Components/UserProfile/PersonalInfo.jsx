@@ -14,7 +14,15 @@ const PersonalInfo = props => {
                         <img src={props.userInfo.imageUrl} />
                     </div>
                     <div>
-                        <button>CHANGE PHOTO</button>
+                        <input
+                            type="file"
+                            id="files"
+                            class="hidden"
+                            onChange={(e) => props.changeImage(e)}
+                            accept="image/jpeg, image/x-png"
+                        />
+                        <div className="change-image-button"><label for="files">CHANGE PHOTO</label></div>
+
                     </div>
                 </div>
                 <div className="profile-info">

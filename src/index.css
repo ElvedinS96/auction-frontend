@@ -1403,22 +1403,37 @@ hr {
   max-width: 100%;
 }
 
-.profile-image button {
-  width: 100%;
+.change-image-button {
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
   background-color: #FFFFFF;
-  padding: 0.5em 1em 0.5em 1em;
-  margin-top: 0.5em;
+  margin-top: -1em;
   border: 3px solid #E3E3E3;
   box-shadow: 3px 3px 0 0 rgba(0,0,0,0.05);
   color: #252525;
   letter-spacing: 0.56px;
+  font-size: 0.7em;
   font-weight: bold;
   cursor: pointer;
   outline: none;
 }
 
-.profile-image button:hover {
+.change-image-button:hover {
   background-color: #fbfafa;
+}
+
+.change-image-button label {
+  cursor: pointer;
+  width: 100%;
+  display: block;
+  text-align: center;
+  height: 100%;
+  margin: 0.5em 1em 0.5em 1em;
+}
+
+.hidden {
+  visibility: hidden;
 }
 
 .profile-info {
@@ -1624,6 +1639,29 @@ hr {
 
 .exp-date {
   justify-content: space-between;
+}
+
+.save-info-button {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin: 2em 0 5em 0;
+}
+
+.save-info-button button {
+  background: #FFFFFF;
+  border: 3px solid #8367D8;
+  box-shadow: 3px 3px 0 0 rgba(131,103,216,0.31);
+  color: #252525;
+  letter-spacing: 0.63px;
+  font-weight: bold;
+  padding: 0.5em 3em 0.5em 3em;
+  outline: none;
+  cursor: pointer;
+}
+
+.save-info-button button:hover {
+  background-color: #f8f8f8;
 }
 
 @media screen and (max-width: 750px) {

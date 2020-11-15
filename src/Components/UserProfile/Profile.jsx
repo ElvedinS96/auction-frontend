@@ -17,6 +17,7 @@ const Profile = props => {
 
                 onChange={props.onChange}
                 userInfo={props.userInfo}
+                changeImage={props.changeImage}
 
             />
             <CardInfo
@@ -30,8 +31,9 @@ const Profile = props => {
                 onChange={props.onChange}
                 userInfo={props.userInfo}
             />
-
-            <button>SAVE INFO</button>
+            <div className="save-info-button">
+                <button onClick={(e) => props.saveInfo()}>SAVE INFO <span className="bid-arrow">&#10095;</span></button>
+            </div>
         </div>
     )
 }

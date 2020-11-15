@@ -8,6 +8,7 @@ import "../../index.css"
 import Header from "../HeaderFooter/Header";
 import { useEffect } from "react";
 import getMonths from "../../Util/getMonths";
+import { storage } from "../../firebase"
 
 const User = props => {
 
@@ -41,6 +42,7 @@ const User = props => {
 
     const [userInfo, setUserInfo] = useState(
         {
+            id: 1,
             firstName: "John",
             lastName: "Doe",
             gender: "Male",
@@ -133,6 +135,35 @@ const User = props => {
         }
     }
 
+    function saveInfo() {
+        //TODO validate all data
+        //TODO call api to save data
+        //TODO give user feedback on saving
+    }
+
+    function changeImage(e) {
+        if (e.target.files[0]) {
+            const image = e.target.files[0]
+            const uploadTask = storage.ref(`profile_images/${userInfo.id}`).put(image);
+            uploadTask.on(
+                "state_changed",
+                snapshot => { },
+                error => {
+                    console.log(error);
+                },
+                () => {
+                    storage
+                        .ref("profile_images")
+                        .child(image.name)
+                        .getDownloadURL()
+                        .then(url => {
+                            handleUserInfoChange("imageUrl", url)
+                        });
+                }
+            );
+        }
+    }
+
     function SetSection() {
         if (profileHeaderActive == "profile") {
             return <Profile
@@ -144,6 +175,8 @@ const User = props => {
 
                 onChange={handleUserInfoChange}
                 userInfo={userInfo}
+                saveInfo={saveInfo}
+                changeImage={changeImage}
             />
         }
         else if (profileHeaderActive == "bids") {
