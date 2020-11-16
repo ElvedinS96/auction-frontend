@@ -46,6 +46,9 @@ const User = props => {
     const [monthOptions, setMonthOptions] = useState([])
     const [yearOptions, setYearOptions] = useState([])
     const [dayOptions, setDayOptions] = useState([])
+    const [countries, setCountries] = useState([])
+    const [countryOptions, setCountryOptions] = useState([])
+    const [cityOptions, setCityOptions] = useState([])
 
     const [userInfo, setUserInfo] = useState(
         {
@@ -126,6 +129,39 @@ const User = props => {
         setMonthOptions(getMonths())
         setYearOptions(Array(2100 - 1900 + 1).fill().map((item, index) => 1900 + index))
         setDayOptions(Array(31 - 1 + 1).fill().map((item, index) => 1 + index))
+
+        var response = [
+            {
+                id: 1,
+                name: "Bosnia and Herzegovina",
+                cities: [
+                    "Jajce",
+                    "Sarajevo",
+                    "Mostar"
+                ]
+            },
+            {
+                id: 2,
+                name: "Croatia",
+                cities: [
+                    "Zagreb",
+                    "Split",
+                    "Varazdin"
+                ]
+            },
+            {
+                id: 3,
+                name: "Germany",
+                cities: [
+                    "Berlin",
+                    "Hamburg",
+                    "Dresden"
+                ]
+            }
+        ]
+        setCountries(response)
+
+        setCountryOptions(response.map(country => country.name))
 
         //TODO Axios api call get user info
 
@@ -278,6 +314,12 @@ const User = props => {
         }
     }
 
+    function onCountryChange(name, value) {
+        handleUserInfoChange(name, value)
+        handleUserInfoChange("city", "")
+        setCityOptions(countries.find(country => country.name == value).cities)
+    }
+
     function SetSection() {
         if (profileHeaderActive == "profile") {
             return <Profile
@@ -286,11 +328,14 @@ const User = props => {
                 monthOptions={monthOptions}
                 yearOptions={yearOptions}
                 dayOptions={dayOptions}
+                countryOptions={countryOptions}
+                cityOptions={cityOptions}
 
                 onChange={handleUserInfoChange}
                 userInfo={userInfo}
                 saveInfo={saveInfo}
                 changeImage={changeImage}
+                onCountryChange={onCountryChange}
 
                 validation={validation}
             />
@@ -310,6 +355,7 @@ const User = props => {
 
     return (
         <div>
+            {console.log(countries)}
             <Header active={active} />
             <div className="wrapper">
                 <UserProfileHeader setActive={onHeaderClick} classes={headerClasses} />

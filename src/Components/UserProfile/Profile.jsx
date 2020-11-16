@@ -33,6 +33,9 @@ const Profile = props => {
                 onChange={props.onChange}
                 userInfo={props.userInfo}
                 validation={props.validation}
+                countryOptions={props.countryOptions}
+                onCountryChange={props.onCountryChange}
+                cityOptions={props.cityOptions}
             />
             <div className="save-info-button">
                 <button onClick={(e) => props.saveInfo()}>SAVE INFO <span className="bid-arrow">&#10095;</span></button>
