@@ -1738,6 +1738,14 @@ hr {
       margin-top: 2em;
       margin-bottom: 2em;
     }
+
+    .shop-header {
+      flex-direction: column;
+    }
+
+    .shop-header-view {
+      margin-top: 1em;
+    }
 }
 
 @media screen and (max-width: 1200px) {
@@ -1758,6 +1766,24 @@ hr {
     .user-box {
       margin-top: 1em;
       margin-bottom: 1em;
+    }
+
+    .shop-page {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .shop-products {
+      width: 100%;
+    }
+
+    .shop-page-grid {
+      grid-template-columns: 50% 50%;
+    }
+
+    .filter-box {
+      max-height: 5em;
+      overflow-y: scroll;
     }
 }
 
