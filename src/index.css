@@ -1717,7 +1717,13 @@ hr {
     .about-us-images {
       padding-top: 2em;
       max-width: 100%;
-}
+    }
+    .profile-header {
+      display: flex;
+      flex-direction: column;
+      margin-top: 2em;
+      margin-bottom: 2em;
+    }
 }
 
 @media screen and (max-width: 1200px) {

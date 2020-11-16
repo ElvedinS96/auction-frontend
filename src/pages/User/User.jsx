@@ -8,10 +8,16 @@ import "../../index.css"
 import Header from "../HeaderFooter/Header";
 import { useEffect } from "react";
 import getMonths from "../../Util/getMonths";
+import axios from "axios"
+import getUserFromToken from "../../Util/getUserFromToken"
 import { storage } from "../../firebase"
 import { validateFirstName, validateLastName, validateEmail, validateNumber, validateOnlyLettersAndNumbers, validateState, validateCardNumber, validateCVC, validateCardExpiration, validateBirthDate } from "../../Util/Validation"
+import getToken from "../../Util/getToken";
+import { useHistory } from "react-router-dom";
 
 const User = props => {
+
+    const history = useHistory()
 
     const [active, setActive] = useState({
         home: "nav-inactive",
@@ -27,7 +33,7 @@ const User = props => {
     })
 
     const [userBids, setUserBids] = useState([{
-        id: 0,
+        productId: 0,
         name: "",
         auctionEndDate: "",
         userBid: 0,
@@ -97,36 +103,26 @@ const User = props => {
     }
 
     useEffect(() => {
-        //TODO Axios api call get user bids
-        var bids = [{
-            id: 10,
-            name: "Black Jacket",
-            auctionEndDate: "1605312000000",
-            userBid: 50,
-            highestBid: 100.25,
-            numberOfBids: 3,
-            imgUrl: "https://www.namepros.com/attachments/empty-png.89209/"
-        },
-        {
-            id: 11,
-            name: "Tablet",
-            auctionEndDate: "1605484800000",
-            userBid: 150,
-            highestBid: 500.17,
-            numberOfBids: 1,
-            imgUrl: "https://www.namepros.com/attachments/empty-png.89209/"
-        },
-        {
-            id: 5,
-            name: "Shoes",
-            auctionEndDate: "1606521600000",
-            userBid: 230,
-            highestBid: 230,
-            numberOfBids: 1,
-            imgUrl: "https://www.namepros.com/attachments/empty-png.89209/"
-        }
-        ]
-        setUserBids(bids)
+
+        var user = getUserFromToken()
+
+        var url = props.baseUrl + "/user/" + user.id + "/bids"
+        axios.get(url,
+            {
+                headers: {
+                    Authorization: "Bearer " + getToken("token")
+                }
+            })
+            .then(response => {
+                setUserBids(response.data)
+            })
+            .catch(error => {
+                console.log(error)
+                history.push("/500")
+            })
+
+
+
         setMonthOptions(getMonths())
         setYearOptions(Array(2100 - 1900 + 1).fill().map((item, index) => 1900 + index))
         setDayOptions(Array(31 - 1 + 1).fill().map((item, index) => 1 + index))
@@ -303,7 +299,10 @@ const User = props => {
             return <UserBids bids={userBids} />
         }
         else if (profileHeaderActive == "settings") {
-            return <Settings />
+            return <Settings
+                email={userInfo.email}
+                phone={userInfo.phoneNumber}
+            />
         }
         return <div></div>
     }
@@ -311,7 +310,6 @@ const User = props => {
 
     return (
         <div>
-            {console.log(userInfo)}
             <Header active={active} />
             <div className="wrapper">
                 <UserProfileHeader setActive={onHeaderClick} classes={headerClasses} />

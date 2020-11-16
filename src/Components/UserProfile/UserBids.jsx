@@ -28,14 +28,14 @@ const UserBids = props => {
             <td><img src={bid.imgUrl} /></td>
             <td colSpan={2}>
                 <div style={{ fontWeight: "bold" }}>{bid.name}</div>
-                <div style={{ color: "#8367D8" }}>#{bid.id}</div>
+                <div style={{ color: "#8367D8" }}>#{bid.productId}</div>
             </td>
             <td>{TimeLeft(bid.auctionEndDate)}</td>
             {UserPrice(bid.userBid, bid.highestBid)}
             <td><div className="user-bids-center">{bid.numberOfBids}</div></td>
             {HighestBid(bid.userBid, bid.highestBid)}
             <td>
-                <td><div onClick={() => window.location.href = "/product/" + bid.id} className="user-bids-center user-bid-view">VIEW</div></td>
+                <td><div onClick={() => window.location.href = "/product/" + bid.productId} className="user-bids-center user-bid-view">VIEW</div></td>
             </td>
         </tr>
     )

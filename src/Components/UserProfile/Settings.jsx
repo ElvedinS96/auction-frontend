@@ -38,11 +38,11 @@ const Settings = props => {
                     <div className="settings-text" >This information can be edited on your profile.</div>
                     <div className="settings-text" >
                         <div>Email&nbsp;</div>
-                        <div className="settings-contact">adam.smith@mail.com</div>
+                        <div className="settings-contact">{props.email}</div>
                     </div>
                     <div className="settings-text" >
                         <div>Phone</div>
-                        <div className="settings-contact">555-5555-5555</div>
+                        <div className="settings-contact">{props.phone}</div>
                     </div>
                 </div>
             </div>
