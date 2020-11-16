@@ -1830,4 +1830,20 @@ hr {
       width: 100%;
     }
 
+    .header-middle {
+      flex-direction: column;
+      height: 10em;
+    }
+
+    .header-middle-wrapper {
+      flex-direction: column;
+    }
+
+    .search {
+      display: flex;
+      margin-left: 0;
+      margin-top: 0.8em;
+      width: 70%;
+    }
+
 }
