@@ -124,44 +124,25 @@ const User = props => {
                 history.push("/500")
             })
 
-
+        url = props.baseUrl + "/country"
+        axios.get(url,
+            {
+                headers: {
+                    Authorization: "Bearer " + getToken("token")
+                }
+            })
+            .then(response => {
+                setCountries(response.data)
+                setCountryOptions(response.data.map(country => country.name))
+            })
+            .catch(error => {
+                console.log(error)
+                history.push("/500")
+            })
 
         setMonthOptions(getMonths())
         setYearOptions(Array(2100 - 1900 + 1).fill().map((item, index) => 1900 + index))
         setDayOptions(Array(31 - 1 + 1).fill().map((item, index) => 1 + index))
-
-        var response = [
-            {
-                id: 1,
-                name: "Bosnia and Herzegovina",
-                cities: [
-                    "Jajce",
-                    "Sarajevo",
-                    "Mostar"
-                ]
-            },
-            {
-                id: 2,
-                name: "Croatia",
-                cities: [
-                    "Zagreb",
-                    "Split",
-                    "Varazdin"
-                ]
-            },
-            {
-                id: 3,
-                name: "Germany",
-                cities: [
-                    "Berlin",
-                    "Hamburg",
-                    "Dresden"
-                ]
-            }
-        ]
-        setCountries(response)
-
-        setCountryOptions(response.map(country => country.name))
 
         //TODO Axios api call get user info
 
