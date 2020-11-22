@@ -6,7 +6,7 @@ import Dropdown from "react-dropdown"
 const AdressInfo = props => {
 
     return (
-        <div className="user-box profile-box">
+        <div ref={props.addressRef} className="user-box profile-box">
             <div className="profile-heading">OPTIONAL</div>
             <div className="profile">
                 <div className="profile-image">

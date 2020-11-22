@@ -16,10 +16,15 @@ import getToken from "../../Util/getToken";
 import { useHistory } from "react-router-dom";
 import PageName from "../HeaderFooter/PageName";
 import StatusBar from "../../Components/StatusBar/StatusBar"
+import { useRef } from "react";
 
 const User = props => {
 
     const history = useHistory()
+
+    const personalRef = useRef(null)
+    const cardInfoRef = useRef(null)
+    const addressRef = useRef(null)
 
     const [statusMessage, setStatusMessage] = useState("")
     const [statusStyle, setStatusStyle] = useState("")
@@ -515,21 +520,21 @@ const User = props => {
             setStatusMessage("")
             if (!validation.user) {
                 window.scrollTo({
-                    top: 250,
+                    top: personalRef.current.offsetTop,
                     left: 0,
                     behavior: "smooth"
                 })
             }
             else if (!validation.address) {
                 window.scrollTo({
-                    top: 1250,
+                    top: addressRef.current.offsetTop,
                     left: 0,
                     behavior: "smooth"
                 })
             }
             if (!validation.cardInfo) {
                 window.scrollTo({
-                    top: 900,
+                    top: cardInfoRef.current.offsetTop,
                     left: 0,
                     behavior: "smooth"
                 })
@@ -588,6 +593,10 @@ const User = props => {
                 addressValidation={addressValidation}
                 cardInfoValidation={cardInfoValidation}
                 userValidation={userValidation}
+
+                personalRef={personalRef}
+                addressRef={addressRef}
+                cardInfoRef={cardInfoRef}
             />
         }
         else if (profileHeaderActive == "bids") {

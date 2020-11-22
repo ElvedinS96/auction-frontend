@@ -6,7 +6,7 @@ import Dropdown from "react-dropdown"
 const CardInfo = props => {
 
     return (
-        <div className="user-box profile-box">
+        <div ref={props.cardInfoRef} className="user-box profile-box">
             <div className="profile-heading">CARD INFORMATION</div>
             <div className="profile">
                 <div className="profile-image"></div>

@@ -25,7 +25,7 @@ const PersonalInfo = props => {
 
                     </div>
                 </div>
-                <div className="profile-info">
+                <div ref={props.personalRef} className="profile-info">
                     <GenericField
                         placeholder="e.g. Adam"
                         key="firstName_input"
