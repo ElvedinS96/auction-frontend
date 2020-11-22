@@ -352,11 +352,46 @@ const User = props => {
         return isValid
     }
 
-    function saveInfo() {
+    function validate() {
+        var validation = {
+            valid: true,
+            user: true,
+            address: true,
+            cardInfo: true
+        }
 
         if (toUpdate.user) {
+            var valid = validateUserData()
+            if (!valid) {
+                validation.valid = false
+                validation.user = false
+            }
+        }
 
-            if (validateUserData()) {
+        if (toUpdate.address) {
+            var valid = validateAddress()
+            if (!valid) {
+                validation.valid = false
+                validation.address = false
+            }
+        }
+
+        if (toUpdate.cardInformation) {
+            var valid = validateCardInfo()
+            if (!valid) {
+                validation.valid = false
+                validation.cardInfo = false
+            }
+        }
+
+        return validation
+    }
+
+    function saveInfo() {
+
+        var validation = validate()
+        if (validation.valid) {
+            if (toUpdate.user) {
 
                 var yearBirth = parseInt(userInfo.birthYear)
                 var dayBirth = parseInt(userInfo.birthDay)
@@ -396,16 +431,19 @@ const User = props => {
                     .then(response => {
                         setStatusMessage("Data saved successfully")
                         setStatusStyle("status status-success")
-                        window.scrollTo(0, 0)
+                        window.scrollTo({
+                            top: 0,
+                            left: 0,
+                            behavior: "smooth"
+                        })
                     })
                     .catch(error => {
                         console.log(error)
                     })
             }
-        }
 
-        if (toUpdate.address) {
-            if (validateAddress()) {
+            if (toUpdate.address) {
+
                 var request = {
                     id: userInfo.addressId,
                     street: userInfo.street,
@@ -426,17 +464,19 @@ const User = props => {
                     .then(response => {
                         setStatusMessage("Data saved successfully")
                         setStatusStyle("status status-success")
-                        window.scrollTo(0, 0)
+                        window.scrollTo({
+                            top: 0,
+                            left: 0,
+                            behavior: "smooth"
+                        })
                     })
                     .catch(error => {
                         console.log(error)
                     })
+
             }
-        }
 
-        if (toUpdate.cardInformation) {
-
-            if (validateCardInfo()) {
+            if (toUpdate.cardInformation) {
 
                 var request = {
                     id: userInfo.cardId,
@@ -459,13 +499,44 @@ const User = props => {
                     .then(response => {
                         setStatusMessage("Data saved successfully")
                         setStatusStyle("status status-success")
-                        window.scrollTo(0, 0)
+                        window.scrollTo({
+                            top: 0,
+                            left: 0,
+                            behavior: "smooth"
+                        })
                     })
                     .catch(error => {
                         console.log(error)
                     })
             }
         }
+        else {
+            setStatusStyle("")
+            setStatusMessage("")
+            if (!validation.user) {
+                window.scrollTo({
+                    top: 250,
+                    left: 0,
+                    behavior: "smooth"
+                })
+            }
+            else if (!validation.address) {
+                window.scrollTo({
+                    top: 1250,
+                    left: 0,
+                    behavior: "smooth"
+                })
+            }
+            if (!validation.cardInfo) {
+                window.scrollTo({
+                    top: 900,
+                    left: 0,
+                    behavior: "smooth"
+                })
+            }
+        }
+
+
     }
 
     function changeImage(e) {
