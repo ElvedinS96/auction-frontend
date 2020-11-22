@@ -70,7 +70,12 @@ const Registration = props => {
     function handleRegisterClick(e, user) {
 
         if (validate(user)) {
-            axios.post(url, user)
+
+            var request = {
+                userRegister: user
+            }
+
+            axios.post(url, request)
                 .then(response => {
                     setMessage("You are registered! Login ")
                     setRefText("here")

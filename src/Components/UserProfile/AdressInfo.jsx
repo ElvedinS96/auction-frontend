@@ -19,7 +19,7 @@ const AdressInfo = props => {
                         placeholder="e.g. 5th Avenue"
                         genericClass="profile-generic"
                         value={props.userInfo.street}
-                        onChange={(e) => props.onChange("street", e.target.value)}
+                        onChange={(e) => props.onChange("street", e.target.value, "address")}
                         id={"street"}
                         label={"Street"}
                         type={"text"}
@@ -35,15 +35,18 @@ const AdressInfo = props => {
                             placeholder="Select country"
                             value={props.userInfo.country}
                             options={props.countryOptions}
-                            onChange={(e) => props.onCountryChange("gender", e.value)}
+                            onChange={(e) => props.onCountryChange("country", e.value, "address")}
                         />
+                        <small>
+                            <label className={"validation-error small"}>{props.validation.country}</label>
+                        </small>
                     </div>
                     <GenericField
                         key="state_input"
                         placeholder="e.g. New York"
                         genericClass="profile-generic"
                         value={props.userInfo.state}
-                        onChange={(e) => props.onChange("state", e.target.value)}
+                        onChange={(e) => props.onChange("state", e.target.value, "address")}
                         id={"state"}
                         label={"State"}
                         type={"text"}
@@ -60,8 +63,11 @@ const AdressInfo = props => {
                                 placeholder="Select city"
                                 value={props.userInfo.city}
                                 options={props.cityOptions}
-                                onChange={(e) => props.onChange("city", e.value)}
+                                onChange={(e) => props.onChange("city", e.value, "address")}
                             />
+                            <small>
+                                <label className={"validation-error small"}>{props.validation.city}</label>
+                            </small>
                         </div>
                         <div className="address-width">
                             <GenericField
@@ -69,7 +75,7 @@ const AdressInfo = props => {
                                 placeholder="e.g. 10065"
                                 genericClass="profile-generic"
                                 value={props.userInfo.zipCode}
-                                onChange={(e) => props.onChange("zipCode", e.target.value)}
+                                onChange={(e) => props.onChange("zipCode", e.target.value, "address")}
                                 id={"zipCode"}
                                 label={"ZipCode"}
                                 type={"text"}

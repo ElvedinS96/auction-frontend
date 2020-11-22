@@ -18,17 +18,17 @@ const CardInfo = props => {
                             id="notf-paypal"
                             name="notf-paypal"
                             value="PayPal"
-                            onChange={(e) => props.onChange("paypal", e.target.checked)} />
+                            onChange={(e) => props.onChange("paypal", e.target.checked, "cardInformation")} />
                         <label className="generic-field" for="notf-paypal">Pay Pal</label>
                     </div>
                     <div className="card-ckeckbox" >
                         <input
-                            checked={props.userInfo.card}
+                            checked={props.userInfo.creditCard}
                             type="checkbox"
                             id="notf-card"
                             name="notf-card"
                             value="Card"
-                            onChange={(e) => props.onChange("card", e.target.checked)} />
+                            onChange={(e) => props.onChange("creditCard", e.target.checked, "cardInformation")} />
                         <label className="generic-field" for="notf-card">Credit Card</label>
                     </div>
                     <div className="accept-cards">
@@ -46,8 +46,8 @@ const CardInfo = props => {
                                 key="nameOnCard_input"
                                 placeholder="e.g. Adam Smith"
                                 genericClass="profile-generic"
-                                value={props.userInfo.nameOnCard_input}
-                                onChange={(e) => props.onChange("nameOnCard", e.target.value)}
+                                value={props.userInfo.nameOnCard}
+                                onChange={(e) => props.onChange("nameOnCard", e.target.value, "cardInformation")}
                                 id={"nameOnCard"}
                                 label={"Name on card"}
                                 type={"text"}
@@ -61,7 +61,7 @@ const CardInfo = props => {
                                 placeholder="e.g. 4242 4242 4242 4242"
                                 genericClass="profile-generic"
                                 value={props.userInfo.cardNumber}
-                                onChange={(e) => props.onChange("cardNumber", e.target.value)}
+                                onChange={(e) => props.onChange("cardNumber", e.target.value, "cardInformation")}
                                 id={"cardNumber"}
                                 label={"Card Number"}
                                 type={"text"}
@@ -82,7 +82,7 @@ const CardInfo = props => {
                                         placeholder="Year"
                                         value={props.userInfo.cardExpYear}
                                         options={props.yearOptions}
-                                        onChange={(e) => props.onChange("cardExpYear", e.value.toString())}
+                                        onChange={(e) => props.onChange("cardExpYear", e.value.toString(), "cardInformation")}
                                     />
                                     <small>
                                         <label className={"validation-error small"}>{props.validation.cardExpYear}</label>
@@ -96,7 +96,7 @@ const CardInfo = props => {
                                         placeholder="Month"
                                         value={props.userInfo.cardExpMonth}
                                         options={props.monthOptions}
-                                        onChange={(e) => props.onChange("cardExpMonth", e.label.toString())}
+                                        onChange={(e) => props.onChange("cardExpMonth", e.label.toString(), "cardInformation")}
                                     />
                                     <small>
                                         <label className={"validation-error small"}>{props.validation.cardExpMonth}</label>
@@ -111,7 +111,7 @@ const CardInfo = props => {
                                     placeholder="e.g. 1234"
                                     genericClass="card-exp"
                                     value={props.userInfo.cvc}
-                                    onChange={(e) => props.onChange("cvc", e.target.value)}
+                                    onChange={(e) => props.onChange("cvc", e.target.value, "cardInformation")}
                                     id={"cvc"}
                                     label={"CVC/CW"}
                                     type={"text"}

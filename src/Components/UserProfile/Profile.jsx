@@ -18,7 +18,7 @@ const Profile = props => {
                 onChange={props.onChange}
                 userInfo={props.userInfo}
                 changeImage={props.changeImage}
-                validation={props.validation}
+                validation={props.userValidation}
 
             />
             <CardInfo
@@ -27,12 +27,12 @@ const Profile = props => {
 
                 onChange={props.onChange}
                 userInfo={props.userInfo}
-                validation={props.validation}
+                validation={props.cardInfoValidation}
             />
             <AdressInfo
                 onChange={props.onChange}
                 userInfo={props.userInfo}
-                validation={props.validation}
+                validation={props.addressValidation}
                 countryOptions={props.countryOptions}
                 onCountryChange={props.onCountryChange}
                 cityOptions={props.cityOptions}

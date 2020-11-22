@@ -27,10 +27,11 @@ const PersonalInfo = props => {
                 </div>
                 <div className="profile-info">
                     <GenericField
+                        placeholder="e.g. Adam"
                         key="firstName_input"
                         genericClass="profile-generic"
                         value={props.userInfo.firstName}
-                        onChange={(e) => props.onChange("firstName", e.target.value)}
+                        onChange={(e) => props.onChange("firstName", e.target.value, "user")}
                         id={"firstName"}
                         label={"First Name"}
                         type={"text"}
@@ -38,10 +39,11 @@ const PersonalInfo = props => {
                         validationMessage={props.validation.firstName}
                     />
                     <GenericField
+                        placeholder="e.g. Smith"
                         key="lastName_input"
                         genericClass="profile-generic"
                         value={props.userInfo.lastName}
-                        onChange={(e) => props.onChange("lastName", e.target.value)}
+                        onChange={(e) => props.onChange("lastName", e.target.value, "user")}
                         id={"lastName"}
                         label={"Last Name"}
                         type={"text"}
@@ -57,8 +59,11 @@ const PersonalInfo = props => {
                             placeholder="Select gender"
                             value={props.userInfo.gender}
                             options={props.genderOptions}
-                            onChange={(e) => props.onChange("gender", e.value)}
+                            onChange={(e) => props.onChange("gender", e.value, "user")}
                         />
+                        <small>
+                            <label className={"validation-error small"}>{props.validation.gender}</label>
+                        </small>
                     </div>
                     <div className="profile-label">
                         <label className="generic-field">Date of Birth</label>
@@ -71,7 +76,7 @@ const PersonalInfo = props => {
                                     placeholder="Month"
                                     value={props.userInfo.birthMonth}
                                     options={props.monthOptions}
-                                    onChange={(e) => props.onChange("birthMonth", e.label.toString())}
+                                    onChange={(e) => props.onChange("birthMonth", e.label.toString(), "user")}
                                 />
                             </div>
                             <div className="day-wrapper">
@@ -82,7 +87,7 @@ const PersonalInfo = props => {
                                     placeholder="Day"
                                     value={props.userInfo.birthDay}
                                     options={props.dayOptions}
-                                    onChange={(e) => props.onChange("birthDay", e.value.toString())}
+                                    onChange={(e) => props.onChange("birthDay", e.value.toString(), "user")}
                                 />
                             </div>
                             <div className="year-wrapper">
@@ -93,7 +98,7 @@ const PersonalInfo = props => {
                                     placeholder="Year"
                                     value={props.userInfo.birthYear}
                                     options={props.yearOptions}
-                                    onChange={(e) => props.onChange("birthYear", e.value.toString())}
+                                    onChange={(e) => props.onChange("birthYear", e.value.toString(), "user")}
                                 />
                             </div>
                         </div>
@@ -106,9 +111,10 @@ const PersonalInfo = props => {
                             <label>Phone Number</label>
                             <div style={{ display: "flex" }} >
                                 <input
+                                    placeholder="e.g. 999-999-999"
                                     key="phone_input"
                                     value={props.userInfo.phoneNumber}
-                                    onChange={(e) => props.onChange("phoneNumber", e.target.value)}
+                                    onChange={(e) => props.onChange("phoneNumber", e.target.value, "user")}
                                     id={"phoneNumber"}
                                     type={"text"}
                                     className="profile-phone"
@@ -122,10 +128,11 @@ const PersonalInfo = props => {
                         </div>
                     </div>
                     <GenericField
+                        placeholder="e.g. example@mail.com"
                         key="email_input"
                         genericClass="profile-generic"
                         value={props.userInfo.email}
-                        onChange={(e) => props.onChange("email", e.target.value)}
+                        onChange={(e) => props.onChange("email", e.target.value, "user")}
                         id={"email"}
                         label={"Email Address"}
                         type={"text"}

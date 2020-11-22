@@ -11,7 +11,7 @@ import getMonths from "../../Util/getMonths";
 import axios from "axios"
 import getUserFromToken from "../../Util/getUserFromToken"
 import { storage } from "../../firebase"
-import { validateFirstName, validateLastName, validateEmail, validateNumber, validateOnlyLettersAndNumbers, validateState, validateCardNumber, validateCVC, validateCardExpiration, validateBirthDate } from "../../Util/Validation"
+import { validateEmpty, validateFirstName, validateLastName, validateEmail, validateNumber, validateOnlyLettersAndNumbers, validateState, validateCardNumber, validateCVC, validateCardExpiration, validateBirthDate, validateStreet, validateZipCode, validateOnlyLetters, validateCity, validateCountry, validateNameOnCard } from "../../Util/Validation"
 import getToken from "../../Util/getToken";
 import { useHistory } from "react-router-dom";
 
@@ -50,57 +50,50 @@ const User = props => {
     const [countryOptions, setCountryOptions] = useState([])
     const [cityOptions, setCityOptions] = useState([])
 
-    const [userInfo, setUserInfo] = useState(
-        {
-            id: 1,
-            firstName: "John",
-            lastName: "Doe",
-            gender: "Male",
-            birthDay: "",
-            birthMonth: "",
-            birthYear: "",
-            phoneNumber: "555-5555-555",
-            email: "john.doe@mail.com",
-            imageUrl: "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",
-            street: "",
-            city: "",
-            zipCode: "",
-            state: "",
-            country: "",
-            nameOnCard: "",
-            paypal: false,
-            card: false,
-            cardNumber: "",
-            cardExpYear: "",
-            cardExpMonth: "",
-            cvc: ""
-        }
-    )
+    const [userInfo, setUserInfo] = useState({})
+    const [toUpdate, setToUpdate] = useState({
+        user: false,
+        address: false,
+        cardInformation: false
+    })
 
-    const [validation, setValidation] = useState(
+    const [addressValidation, setAddressValidation] = useState({
+        street: "",
+        zipCode: "",
+        state: "",
+        country: "",
+        city: ""
+    })
+
+    const [cardInfoValidation, setCardInfoValidation] = useState({
+        nameOnCard: "",
+        cardNumber: "",
+        cardExpYear: "",
+        cardExpMonth: "",
+        cvc: ""
+    })
+
+    const [userValidation, setUserValidation] = useState(
         {
             firstName: "",
             lastName: "",
-            birthDay: "",
-            birthMonth: "",
-            birthYear: "",
+            birthdate: "",
             phoneNumber: "",
             email: "",
-            street: "",
-            zipCode: "",
-            state: "",
-            nameOnCard: "",
-            cardNumber: "",
-            cardExpYear: "",
-            cardExpMonth: "",
-            cvc: ""
+            gender: ""
         }
     )
 
-    function handleUserInfoChange(name, value) {
+    function handleUserInfoChange(name, value, toUpdate) {
         setUserInfo(prevState => ({
             ...prevState,
             [name]: value
+        })
+        )
+
+        setToUpdate(prevState => ({
+            ...prevState,
+            [toUpdate]: true
         })
         )
     }
@@ -124,7 +117,11 @@ const User = props => {
                 history.push("/500")
             })
 
-        url = props.baseUrl + "/country"
+        setMonthOptions(getMonths())
+        setYearOptions(Array(2100 - 1900 + 1).fill().map((item, index) => 1900 + index))
+        setDayOptions(Array(31 - 1 + 1).fill().map((item, index) => 1 + index))
+
+        url = props.baseUrl + "/user/" + user.id
         axios.get(url,
             {
                 headers: {
@@ -132,19 +129,64 @@ const User = props => {
                 }
             })
             .then(response => {
-                setCountries(response.data)
-                setCountryOptions(response.data.map(country => country.name))
+                const dateOfBirth = new Date(response.data.userDetails.birthDate)
+                const month = getMonths().find(month => month.value == (dateOfBirth.getMonth() + 1)).label
+                const userRegister = response.data.userRegister
+                const userDetails = response.data.userDetails
+                const address = userDetails.address
+                const cardInformation = userDetails.cardInformation
+                setUserInfo({
+                    userId: response.data.id,
+                    userRegisterId: userRegister.id,
+                    firstName: userRegister.firstName,
+                    lastName: userRegister.lastName,
+                    email: userRegister.email,
+                    imageUrl: userRegister.imageUrl,
+                    userDetailsId: userDetails.id,
+                    gender: userDetails.gender == "" ? "" : userDetails.gender,
+                    birthDay: dateOfBirth.getDate().toString(),
+                    birthMonth: month,
+                    birthYear: dateOfBirth.getFullYear().toString(),
+                    phoneNumber: userDetails.phoneNumber == null ? "" : userDetails.phoneNumber,
+                    addressId: address.id,
+                    street: address.street == null ? "" : address.street,
+                    zipCode: address.zipCode == null ? "" : address.zipCode,
+                    state: address.state == null ? "" : address.state,
+                    cityId: address.city == null ? 0 : address.city.id,
+                    city: address.city == null ? "" : address.city.name,
+                    country: address.city == null ? "" : address.city.countryName,
+                    cardId: cardInformation.id,
+                    nameOnCard: cardInformation.nameOnCard == null ? "" : cardInformation.nameOnCard,
+                    paypal: cardInformation.paypal == null ? false : cardInformation.paypal,
+                    creditCard: cardInformation.creditCard == null ? false : cardInformation.creditCard,
+                    cardNumber: cardInformation.cardNumber == null ? "" : cardInformation.cardNumber,
+                    cardExpYear: cardInformation.yearExpiration == null ? "" : cardInformation.yearExpiration,
+                    cardExpMonth: cardInformation.monthExpiration == null ? "" : cardInformation.monthExpiration,
+                    cvc: cardInformation.cvc == null ? "" : cardInformation.cvc
+                })
+                url = props.baseUrl + "/country"
+                axios.get(url,
+                    {
+                        headers: {
+                            Authorization: "Bearer " + getToken("token")
+                        }
+                    })
+                    .then(response => {
+                        setCountries(response.data)
+                        setCountryOptions(response.data.map(country => country.name))
+                        if (address.city != null) {
+                            setCityOptions(response.data.find(country => country.name == address.city.countryName).cities)
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        history.push("/500")
+                    })
             })
             .catch(error => {
                 console.log(error)
                 history.push("/500")
             })
-
-        setMonthOptions(getMonths())
-        setYearOptions(Array(2100 - 1900 + 1).fill().map((item, index) => 1900 + index))
-        setDayOptions(Array(31 - 1 + 1).fill().map((item, index) => 1 + index))
-
-        //TODO Axios api call get user info
 
     }, [])
 
@@ -165,8 +207,91 @@ const User = props => {
         }
     }
 
-    function validate() {
+    function validateAddress() {
+        var isValid = true
+        var validationMessage = {
+            street: "",
+            zipCode: "",
+            state: "",
+            country: "",
+            city: ""
+        }
 
+        var streetValidation = validateStreet(userInfo.street)
+        if (!streetValidation.valid) {
+            validationMessage.street = streetValidation.message
+            isValid = false;
+        }
+
+        var zipCodeValidation = validateZipCode(userInfo.zipCode)
+        if (!zipCodeValidation.valid) {
+            validationMessage.zipCode = zipCodeValidation.message
+            isValid = false;
+        }
+
+        var stateValidation = validateState(userInfo.state)
+        if (!stateValidation.valid) {
+            validationMessage.state = stateValidation.message
+            isValid = false;
+        }
+
+        var countryValidation = validateCountry(userInfo.country)
+        if (!countryValidation.valid) {
+            validationMessage.country = countryValidation.message
+            isValid = false;
+        }
+
+        var cityValidation = validateCity(userInfo.city)
+        if (!cityValidation.valid) {
+            validationMessage.city = cityValidation.message
+            isValid = false;
+        }
+
+        setAddressValidation(validationMessage)
+        return isValid
+
+    }
+
+    function validateCardInfo() {
+        var isValid = true
+        var validationMessage = {
+            nameOnCard: "",
+            cardNumber: "",
+            cardExpYear: "",
+            cardExpMonth: "",
+            cvc: ""
+        }
+
+        var nameOnCardValidation = validateNameOnCard(userInfo.nameOnCard)
+        if (!nameOnCardValidation.valid) {
+            validationMessage.nameOnCard = nameOnCardValidation.message
+            isValid = false;
+        }
+
+        var cardNumberValidation = validateCardNumber(userInfo.cardNumber)
+        if (!cardNumberValidation.valid) {
+            validationMessage.cardNumber = cardNumberValidation.message
+            isValid = false;
+        }
+
+        var expirationValidation = validateCardExpiration(userInfo.cardExpYear, userInfo.cardExpMonth)
+        if (!expirationValidation.valid) {
+            validationMessage.cardExpMonth = expirationValidation.messageMonth
+            validationMessage.cardExpYear = expirationValidation.messageYear
+            isValid = false;
+        }
+
+        var cvcValidation = validateCVC(userInfo.cvc)
+        if (!cvcValidation.valid) {
+            validationMessage.cvc = cvcValidation.message
+            isValid = false;
+        }
+
+        setCardInfoValidation(validationMessage)
+        return isValid
+    }
+
+    function validateUserData() {
         var isValid = true
         var validationMessage = {
             firstName: "",
@@ -174,14 +299,7 @@ const User = props => {
             birthdate: "",
             phoneNumber: "",
             email: "",
-            street: "",
-            zipCode: "",
-            state: "",
-            nameOnCard: "",
-            cardNumber: "",
-            cardExpYear: "",
-            cardExpMonth: "",
-            cvc: ""
+            gender: ""
         }
 
         var firstNameValidation = validateFirstName(userInfo.firstName)
@@ -208,68 +326,130 @@ const User = props => {
             isValid = false;
         }
 
-        var nameOnCardValidation = validateOnlyLettersAndNumbers(userInfo.nameOnCard, "Name on card")
-        if (!nameOnCardValidation.valid) {
-            validationMessage.nameOnCard = nameOnCardValidation.message
-            isValid = false;
-        }
-
-        var streetValidation = validateOnlyLettersAndNumbers(userInfo.street, "Street")
-        if (!streetValidation.valid) {
-            validationMessage.street = streetValidation.message
-            isValid = false;
-        }
-
-        var zipCodeValidation = validateOnlyLettersAndNumbers(userInfo.zipCode, "Zip Code")
-        if (!zipCodeValidation.valid) {
-            validationMessage.zipCode = zipCodeValidation.message
-            isValid = false;
-        }
-
-        var stateValidation = validateState(userInfo.state)
-        if (!stateValidation.valid) {
-            validationMessage.state = stateValidation.message
-            isValid = false;
-        }
-
-        if (userInfo.cardNumber.length > 0) {
-            var cardNumberValidation = validateCardNumber(userInfo.cardNumber)
-            if (!cardNumberValidation.valid) {
-                validationMessage.cardNumber = cardNumberValidation.message
-                isValid = false;
-            }
-        }
-
-        if (userInfo.cvc.length > 0) {
-            var cvcValidation = validateCVC(userInfo.cvc)
-            if (!cvcValidation.valid) {
-                validationMessage.cvc = cvcValidation.message
-                isValid = false;
-            }
-        }
-
-        var expirationValidation = validateCardExpiration(userInfo.cardExpYear, userInfo.cardExpMonth)
-        if (!expirationValidation.valid) {
-            validationMessage.cardExpMonth = expirationValidation.messageMonth
-            validationMessage.cardExpYear = expirationValidation.messageYear
-            isValid = false;
-        }
-
         var birthDateValidation = validateBirthDate(userInfo.birthYear, userInfo.birthMonth, userInfo.birthDay)
         if (!birthDateValidation.valid) {
             validationMessage.birthdate = birthDateValidation.message
             isValid = false
         }
 
-        setValidation(validationMessage)
+        var genderValidation = validateEmpty(userInfo.gender, "Gender")
+        if (!genderValidation.valid) {
+            validationMessage.gender = genderValidation.message
+            isValid = false
+        }
+
+        setUserValidation(validationMessage)
+        return isValid
     }
 
     function saveInfo() {
-        if (validate()) {
-            //TODO call api to save data
-            //TODO give user feedback on saving
+
+        if (toUpdate.user) {
+
+            if (validateUserData()) {
+
+                var yearBirth = parseInt(userInfo.birthYear)
+                var dayBirth = parseInt(userInfo.birthDay)
+                var monthBirth = getMonths().find(m => m.label == userInfo.birthMonth).value
+
+
+                const request = {
+                    id: userInfo.userId,
+                    userRegister: {
+                        id: userInfo.userRegisterId,
+                        firstName: userInfo.firstName,
+                        lastName: userInfo.lastName,
+                        email: userInfo.email,
+                        imageUrl: userInfo.imageUrl
+                    },
+                    userDetails: {
+                        id: userInfo.userDetailsId,
+                        phoneNumber: userInfo.phoneNumber,
+                        birthDate: new Date(yearBirth, monthBirth - 1, dayBirth).getTime(),
+                        gender: userInfo.gender,
+                        address: {
+                            id: userInfo.addressId
+                        },
+                        cardInformation: {
+                            id: userInfo.cardId
+                        }
+                    }
+                }
+
+                var url = props.baseUrl + "/user"
+                axios.put(url, request,
+                    {
+                        headers: {
+                            Authorization: "Bearer " + getToken("token")
+                        }
+                    })
+                    .then(response => {
+                        alert("Data saved successfully")
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            }
         }
-        window.scrollTo(0, 0)
+
+        if (toUpdate.address) {
+            if (validateAddress()) {
+                var request = {
+                    id: userInfo.addressId,
+                    street: userInfo.street,
+                    state: userInfo.state,
+                    zipCode: userInfo.zipCode,
+                    city: {
+                        name: userInfo.city
+                    }
+                }
+
+                var url = props.baseUrl + "/address"
+                axios.put(url, request,
+                    {
+                        headers: {
+                            Authorization: "Bearer " + getToken("token")
+                        }
+                    })
+                    .then(response => {
+                        alert("Address data saved successfully")
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            }
+        }
+
+        if (toUpdate.cardInformation) {
+
+            if (validateCardInfo()) {
+
+                var request = {
+                    id: userInfo.cardId,
+                    nameOnCard: userInfo.nameOnCard,
+                    cardNumber: userInfo.cardNumber,
+                    yearExpiration: userInfo.cardExpYear,
+                    monthExpiration: userInfo.cardExpMonth,
+                    cvc: userInfo.cvc,
+                    paypal: userInfo.paypal,
+                    creditCard: userInfo.creditCard
+                }
+
+                var url = props.baseUrl + "/card-info"
+                axios.put(url, request,
+                    {
+                        headers: {
+                            Authorization: "Bearer " + getToken("token")
+                        }
+                    })
+                    .then(response => {
+                        alert("Card data saved successfully")
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            }
+        }
     }
 
     function changeImage(e) {
@@ -288,7 +468,7 @@ const User = props => {
                         .child(image.name)
                         .getDownloadURL()
                         .then(url => {
-                            handleUserInfoChange("imageUrl", url)
+                            handleUserInfoChange("imageUrl", url, "user")
                         });
                 }
             );
@@ -318,7 +498,9 @@ const User = props => {
                 changeImage={changeImage}
                 onCountryChange={onCountryChange}
 
-                validation={validation}
+                addressValidation={addressValidation}
+                cardInfoValidation={cardInfoValidation}
+                userValidation={userValidation}
             />
         }
         else if (profileHeaderActive == "bids") {
@@ -336,7 +518,6 @@ const User = props => {
 
     return (
         <div>
-            {console.log(countries)}
             <Header active={active} />
             <div className="wrapper">
                 <UserProfileHeader setActive={onHeaderClick} classes={headerClasses} />
