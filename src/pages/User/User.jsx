@@ -14,11 +14,15 @@ import { storage } from "../../firebase"
 import { validateEmpty, validateFirstName, validateLastName, validateEmail, validateNumber, validateOnlyLettersAndNumbers, validateState, validateCardNumber, validateCVC, validateCardExpiration, validateBirthDate, validateStreet, validateZipCode, validateOnlyLetters, validateCity, validateCountry, validateNameOnCard } from "../../Util/Validation"
 import getToken from "../../Util/getToken";
 import { useHistory } from "react-router-dom";
+import PageName from "../HeaderFooter/PageName";
+import StatusBar from "../../Components/StatusBar/StatusBar"
 
 const User = props => {
 
     const history = useHistory()
 
+    const [statusMessage, setStatusMessage] = useState("")
+    const [statusStyle, setStatusStyle] = useState("")
     const [active, setActive] = useState({
         home: "nav-inactive",
         shop: "nav-inactive",
@@ -31,7 +35,7 @@ const User = props => {
         bids: "",
         settings: ""
     })
-
+    const [selectedPage, setSelectedPage] = useState("PROFILE")
     const [userBids, setUserBids] = useState([{
         productId: 0,
         name: "",
@@ -99,6 +103,9 @@ const User = props => {
     }
 
     useEffect(() => {
+
+        localStorage.statusMessage = ""
+        localStorage.statusClass = ""
 
         var user = getUserFromToken()
 
@@ -194,14 +201,17 @@ const User = props => {
         switch (activeButton) {
             case "profile":
                 setProfileHeaderActive("profile")
+                setSelectedPage("PROFILE")
                 setHeaderClasses({ profile: headerActiveClass, bids: "", settings: "" })
                 break;
             case "bids":
                 setProfileHeaderActive("bids")
+                setSelectedPage("BIDS")
                 setHeaderClasses({ profile: "", bids: headerActiveClass, settings: "" })
                 break;
             case "settings":
                 setProfileHeaderActive("settings")
+                setSelectedPage("SETTINGS")
                 setHeaderClasses({ profile: "", bids: "", settings: headerActiveClass })
                 break;
         }
@@ -384,7 +394,9 @@ const User = props => {
                         }
                     })
                     .then(response => {
-                        alert("Data saved successfully")
+                        setStatusMessage("Data saved successfully")
+                        setStatusStyle("status status-success")
+                        window.scrollTo(0, 0)
                     })
                     .catch(error => {
                         console.log(error)
@@ -412,7 +424,9 @@ const User = props => {
                         }
                     })
                     .then(response => {
-                        alert("Address data saved successfully")
+                        setStatusMessage("Data saved successfully")
+                        setStatusStyle("status status-success")
+                        window.scrollTo(0, 0)
                     })
                     .catch(error => {
                         console.log(error)
@@ -443,7 +457,9 @@ const User = props => {
                         }
                     })
                     .then(response => {
-                        alert("Card data saved successfully")
+                        setStatusMessage("Data saved successfully")
+                        setStatusStyle("status status-success")
+                        window.scrollTo(0, 0)
                     })
                     .catch(error => {
                         console.log(error)
@@ -519,6 +535,8 @@ const User = props => {
     return (
         <div>
             <Header active={active} />
+            <PageName pageName="MY ACCOUNT" pageNav={<div>MY ACCOUNT /<span style={{ fontWeight: 'bold', marginLeft: '1em' }}>{selectedPage}</span></div>} />
+            <StatusBar statusMessage={statusMessage} href="" refText="" className={statusStyle} />
             <div className="wrapper">
                 <UserProfileHeader setActive={onHeaderClick} classes={headerClasses} />
                 {SetSection()}
