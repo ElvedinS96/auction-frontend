@@ -24,6 +24,7 @@ const Header = props => {
     const [searchText, setSearchText] = useState("")
 
     useEffect(() => {
+
         if (tokenExists()) {
             setLoginText({ login: "Logout", or: "", create: "" })
         }
@@ -31,6 +32,7 @@ const Header = props => {
         if (props.active != null) {
             setActive(props.active)
         }
+
     }, [])
 
     return (
@@ -71,9 +73,28 @@ const Header = props => {
                     </div>
 
                     <div className="header-nav">
-                        <a className={active.home} href="/">HOME</a>
-                        <a className={active.shop} href="/shop">SHOP</a>
-                        <a className={active.account} href="/account">MY ACCOUNT</a>
+                        <div><a className={active.home} href="/">HOME</a></div>
+                        <div><a className={active.shop} href="/shop">SHOP</a></div>
+                        <div className="my-account-header">
+                            <a className={active.account}>MY ACCOUNT</a>
+                            <div class="dropdown-content">
+                                <a
+                                    className={"my-account " + (props.accountActive == null ? "" : props.accountActive.profile)}
+                                    href="/account?tab=profile">
+                                    Profile
+                                </a>
+                                <a
+                                    className={"my-account " + (props.accountActive == null ? "" : props.accountActive.bids)}
+                                    href="/account?tab=bids">
+                                    Your Bids
+                                </a>
+                                <a
+                                    className={"my-account " + (props.accountActive == null ? "" : props.accountActive.settings)}
+                                    href="/account?tab=settings">
+                                    Settings
+                                </a>
+                            </div></div>
+
                     </div>
                 </div>
 

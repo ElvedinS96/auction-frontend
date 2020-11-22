@@ -13,7 +13,7 @@ import getUserFromToken from "../../Util/getUserFromToken"
 import { storage } from "../../firebase"
 import { validateEmpty, validateFirstName, validateLastName, validateEmail, validateNumber, validateOnlyLettersAndNumbers, validateState, validateCardNumber, validateCVC, validateCardExpiration, validateBirthDate, validateStreet, validateZipCode, validateOnlyLetters, validateCity, validateCountry, validateNameOnCard } from "../../Util/Validation"
 import getToken from "../../Util/getToken";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import PageName from "../HeaderFooter/PageName";
 import StatusBar from "../../Components/StatusBar/StatusBar"
 import { useRef } from "react";
@@ -26,12 +26,23 @@ const User = props => {
     const cardInfoRef = useRef(null)
     const addressRef = useRef(null)
 
+    function useQuery() {
+        return new URLSearchParams(useLocation().search);
+    }
+
+    const query = useQuery()
+
     const [statusMessage, setStatusMessage] = useState("")
     const [statusStyle, setStatusStyle] = useState("")
     const [active, setActive] = useState({
         home: "nav-inactive",
         shop: "nav-inactive",
         account: "nav-active"
+    })
+    const [activeAccount, setActiveAccount] = useState({
+        profile: "",
+        bids: "",
+        settings: ""
     })
     const headerActiveClass = "nav-profile-button-active"
     const [profileHeaderActive, setProfileHeaderActive] = useState("profile")
@@ -111,6 +122,11 @@ const User = props => {
 
         localStorage.statusMessage = ""
         localStorage.statusClass = ""
+
+        var tab = query.get("tab")
+        if (tab != null) {
+            onHeaderClick(tab)
+        }
 
         var user = getUserFromToken()
 
@@ -208,16 +224,19 @@ const User = props => {
                 setProfileHeaderActive("profile")
                 setSelectedPage("PROFILE")
                 setHeaderClasses({ profile: headerActiveClass, bids: "", settings: "" })
+                setActiveAccount({ profile: "my-account-active", bids: "", settings: "" })
                 break;
             case "bids":
                 setProfileHeaderActive("bids")
                 setSelectedPage("BIDS")
                 setHeaderClasses({ profile: "", bids: headerActiveClass, settings: "" })
+                setActiveAccount({ profile: "", bids: "my-account-active", settings: "" })
                 break;
             case "settings":
                 setProfileHeaderActive("settings")
                 setSelectedPage("SETTINGS")
                 setHeaderClasses({ profile: "", bids: "", settings: headerActiveClass })
+                setActiveAccount({ profile: "", bids: "", settings: "my-account-active" })
                 break;
         }
     }
@@ -614,7 +633,7 @@ const User = props => {
 
     return (
         <div>
-            <Header active={active} />
+            <Header active={active} accountActive={activeAccount} />
             <PageName pageName="MY ACCOUNT" pageNav={<div>MY ACCOUNT /<span style={{ fontWeight: 'bold', marginLeft: '1em' }}>{selectedPage}</span></div>} />
             <StatusBar statusMessage={statusMessage} href="" refText="" className={statusStyle} />
             <div className="wrapper">

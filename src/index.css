@@ -1100,6 +1100,7 @@ hr {
 }
 
 .header-nav {
+  display: flex;
   margin-top: 0.8em;
 }
 
@@ -1680,6 +1681,40 @@ hr {
 
 .city-label {
   margin-top: 0.65em;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  min-width: 172px;
+  border: 1px solid #ECECEC;
+  margin-top: 0.9em;
+}
+
+.my-account-header:hover .dropdown-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.my-account {
+  font-size: 16px;
+  color: #9B9B9B;
+  letter-spacing: 0.56px;
+  padding: 12px 16px;
+  text-decoration: none;
+}
+
+.my-account:hover {
+  color: #807e7e;
+}
+
+.my-account-active {
+  color: #8367D8;
+}
+
+.my-account-active:hover {
+  color: #7058b6;
 }
 
 @media screen and (max-width: 750px) {
