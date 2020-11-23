@@ -12,8 +12,9 @@ import NotFound from "./Components/Error/NotFound"
 import InternalServerError from "./Components/Error/InternalServerError"
 import Home from "./pages/Home/Home"
 import SearchResult from './pages/Product/SearchResult';
-import Header from './pages/HeaderFooter/Header';
 import Shop from './pages/Shop/Shop';
+import PrivateRoute from "./Util/PrivateRoute"
+import User from './pages/User/User';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="/product/:id"><Product baseUrl={BASE_URL} /></Route>
           <Route path="/products"><SearchResult baseUrl={BASE_URL} /></Route>
           <Route path="/shop"><Shop baseUrl={BASE_URL} /></Route>
+          <PrivateRoute path="/account"><User baseUrl={BASE_URL} /></PrivateRoute>
         </Switch>
       </BrowserRouter>
       <Footer />
