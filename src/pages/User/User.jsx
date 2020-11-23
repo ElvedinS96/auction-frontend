@@ -478,7 +478,7 @@ const User = props => {
                     }
                 }
 
-                var url = props.baseUrl + "/address"
+                var url = props.baseUrl + "/user/address"
                 axios.put(url, request,
                     {
                         headers: {
@@ -513,7 +513,7 @@ const User = props => {
                     creditCard: userInfo.creditCard
                 }
 
-                var url = props.baseUrl + "/card-info"
+                var url = props.baseUrl + "/user/card-info"
                 axios.put(url, request,
                     {
                         headers: {

@@ -58,7 +58,7 @@ const CardInfo = props => {
                         <div className="address-width">
                             <GenericField
                                 key="cardNumber_input"
-                                placeholder="e.g. 4242 4242 4242 4242"
+                                placeholder="e.g. 4242-4242-4242-4242"
                                 genericClass="profile-generic"
                                 value={props.userInfo.cardNumber}
                                 onChange={(e) => props.onChange("cardNumber", e.target.value, "cardInformation")}
