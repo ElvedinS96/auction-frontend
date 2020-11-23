@@ -7,7 +7,7 @@ import CardInfo from "./CardInfo";
 const Profile = props => {
 
     return (
-        <div>
+        <div id="user-page-main">
             <PersonalInfo
                 genderOptions={props.genderOptions}
 

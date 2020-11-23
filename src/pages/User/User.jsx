@@ -634,9 +634,9 @@ const User = props => {
     return (
         <div>
             <Header active={active} accountActive={activeAccount} />
-            <PageName pageName="MY ACCOUNT" pageNav={<div>MY ACCOUNT /<span style={{ fontWeight: 'bold', marginLeft: '1em' }}>{selectedPage}</span></div>} />
+            <PageName pageName="MY ACCOUNT" pageNav={<div>MY ACCOUNT /<span style={{ color: "#252525", marginLeft: '1em' }}>{selectedPage}</span></div>} />
             <StatusBar statusMessage={statusMessage} href="" refText="" className={statusStyle} />
-            <div className="wrapper">
+            <div id="user-page" className="wrapper">
                 <UserProfileHeader setActive={onHeaderClick} classes={headerClasses} />
                 {SetSection()}
             </div>

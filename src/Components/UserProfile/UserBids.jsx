@@ -40,6 +40,15 @@ const UserBids = props => {
         </tr>
     )
 
+    function Biddings() {
+        if (props.bids.length == 0) {
+            return <tr className="bider-row"><td colSpan={4} className="bider-name">You don't have bids yet</td></tr>
+        }
+        else {
+            return listBids
+        }
+    }
+
 
 
     return (
@@ -55,7 +64,7 @@ const UserBids = props => {
                         <td><div className="user-bids-center">Highest Bid</div></td>
                         <td><div className="user-bids-center"></div></td>
                     </tr>
-                    {listBids}
+                    {Biddings()}
                 </table>
             </div>
         </div>

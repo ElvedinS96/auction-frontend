@@ -7,6 +7,7 @@ import showDate from "../../Util/showDate"
 const BiddingTable = ({ ...props }) => {
 
     const [bidders, setBidders] = useState([])
+    const [highestBid, setHighestBid] = useState(0)
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -15,6 +16,7 @@ const BiddingTable = ({ ...props }) => {
             axios.get(url)
                 .then(response => {
                     setBidders(response.data.bids)
+                    setHighestBid(props.highestBid)
                 })
                 .catch(error => {
                     console.log(error)
@@ -31,7 +33,7 @@ const BiddingTable = ({ ...props }) => {
             <td className="bider-name-img"><img src={bidder.userImage} /></td>
             <td className="bider-name-text">{bidder.userName}</td>
             <td>{showDate(bidder.bidTime)}</td>
-            <td className="bider-name-text">${parseFloat(bidder.bidAmount).toFixed(2)}</td>
+            <td className={bidder.bidAmount === highestBid ? "bider-name-text-highest" : "bider-name-text"}>$ {parseFloat(bidder.bidAmount).toFixed(2)}</td>
         </tr>
     )
 
@@ -45,12 +47,12 @@ const BiddingTable = ({ ...props }) => {
     }
 
     return (
-        <div className="product-bidding-table">
+        <div id="single-product-table" className="product-bidding-table">
             <table cellspacing="0">
                 <tr className="heading-row">
-                    <th colSpan={2} className="bider-name">Bider</th>
-                    <th>Date</th>
-                    <th>Bid</th>
+                    <td colSpan={2} className="bider-name">Bidder</td>
+                    <td>Date</td>
+                    <td>Bid</td>
                 </tr>
                 {<Biddings />}
             </table>

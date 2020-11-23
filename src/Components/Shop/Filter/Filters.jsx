@@ -8,12 +8,13 @@ import ProductCategories from "./ProductCategories"
 const Filters = ({ ...props }) => {
     return (
 
-        <div className="filters">
+        <div id="shop-filters" className="filters">
             <ProductCategories
                 activeCategory={props.activeCategory}
                 activeSubcategory={props.activeSubcategory}
                 setCategory={props.setCategory}
                 setSubcategory={props.setSubcategory}
+                setSubcategoryName={props.setSubcategoryName}
                 categories={props.filters.categories}
                 resetPageNumber={props.resetPageNumber}
             />

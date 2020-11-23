@@ -7,18 +7,21 @@ import { RiSettings5Fill } from "react-icons/ri";
 const UserProfileHeader = props => {
 
     return (
-        <div className="profile-header">
+        <div id="user-page-header" className="profile-header">
             <span
+                id="user-page-header-profile"
                 className={"nav-profile-button " + props.classes.profile}
                 onClick={() => props.setActive("profile")} >
                 <FaUser className="profile-header-icon" /> <label>Profile</label>
             </span>
             <span
+                id="user-page-header-bids"
                 className={"nav-profile-button " + props.classes.bids}
                 onClick={() => props.setActive("bids")} >
                 <ImHammer2 className="profile-header-icon" /> <label>Bids</label>
             </span>
             <span
+                id="user-page-header-settings"
                 className={"nav-profile-button " + props.classes.settings}
                 onClick={() => props.setActive("settings")} >
                 <RiSettings5Fill className="profile-header-icon" /> <label>Settings</label>

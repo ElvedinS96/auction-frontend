@@ -5,7 +5,7 @@ import { FaThList } from "react-icons/fa"
 
 const ShopHeader = ({ ...props }) => {
     return (
-        <div className="shop-header">
+        <div id="shop-right-header" className="shop-header">
             <div>
                 <select className="sorting-dropdown" onChange={props.handleDropdown} value={props.dropValue}>
                     <option value="default">Default Sorting</option>
@@ -15,7 +15,7 @@ const ShopHeader = ({ ...props }) => {
                     <option value="price">Sort by Price</option>
                 </select>
             </div>
-            <div className="shop-header-view">
+            <div id="shop-right-select-view" className="shop-header-view">
                 <span className={props.gridClass} onClick={(e) => props.onClick(true)}><BsFillGrid3X3GapFill /> <label>Grid</label></span>
                 <span className={props.listClass} onClick={(e) => props.onClick(false)}><FaThList /> <label>List</label></span>
             </div>

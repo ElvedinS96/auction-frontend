@@ -6,7 +6,7 @@ import Dropdown from "react-dropdown"
 const AdressInfo = props => {
 
     return (
-        <div ref={props.addressRef} className="user-box profile-box">
+        <div id="user-page-address" ref={props.addressRef} className="user-box profile-box">
             <div className="profile-heading">OPTIONAL</div>
             <div className="profile">
                 <div className="profile-image">
@@ -26,7 +26,7 @@ const AdressInfo = props => {
                         className="profile-input"
                         validationMessage={props.validation.street}
                     />
-                    <div className="profile-label">
+                    <div id="user-address-country" className="profile-label">
                         <label className="generic-field">Country</label>
                         <Dropdown
                             className="country-dropdown"
@@ -54,7 +54,7 @@ const AdressInfo = props => {
                         validationMessage={props.validation.state}
                     />
                     <div className="city-zip">
-                        <div className="address-width profile-label city-label">
+                        <div id="user-address-city" className="address-width profile-label city-label">
                             <label className="generic-field">City</label>
                             <Dropdown
                                 className="country-dropdown"
