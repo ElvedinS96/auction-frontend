@@ -14,12 +14,12 @@ const ProductPreview = ({ ...props }) => {
     })
 
     return (
-        <div className="product-preview">
+        <div id="product-preview" className="product-preview">
             <div>
                 <a href={"/product/" + props.product.id}><img src={props.product.imagesUrl[0]} alt="product" /></a>
             </div>
             <h4>{props.product.name}</h4>
-            <label>Start from: ${price}</label>
+            <label>Start From: ${price}</label>
         </div>
     );
 

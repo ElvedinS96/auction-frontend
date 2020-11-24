@@ -35,6 +35,12 @@ const Header = props => {
 
     }, [])
 
+    function handleEnterPress(e) {
+        if (e.key === "Enter") {
+            onSearchClick()
+        }
+    }
+
     return (
         <div>
             <div className="header header-top">
@@ -68,7 +74,7 @@ const Header = props => {
                     </div>
 
                     <div className="search">
-                        <input value={searchText} type="text" onChange={(e) => setSearchText(e.target.value)} />
+                        <input onKeyPress={(e) => handleEnterPress(e)} placeholder="Try enter: Shoes" value={searchText} type="text" onChange={(e) => setSearchText(e.target.value)} />
                         <button onClick={() => onSearchClick()}></button>
                     </div>
 

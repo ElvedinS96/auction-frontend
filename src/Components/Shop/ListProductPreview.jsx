@@ -17,7 +17,7 @@ const ListProductPreview = ({ ...props }) => {
     })
 
     return (
-        <div className="product-preview-list">
+        <div id="shop-list-preview" className="product-preview-list">
             <div className="image-list">
                 <img className="" src={props.product.imagesUrl[0]} alt="product" />
             </div>
@@ -25,7 +25,7 @@ const ListProductPreview = ({ ...props }) => {
                 <h4>{props.product.name}</h4>
                 <p>{props.product.description}</p>
                 <label>Start From ${price}</label>
-                <div onClick={() => history.push("/product/" + props.product.id)} className="shop-bid-button">Bid <span style={{ color: "#ECECEC", "margin-left": "0.5em" }}> <RiAuctionFill /></span></div>
+                <div id="shop-list-btn-bid" onClick={() => history.push("/product/" + props.product.id)} className="shop-bid-button">Bid <span style={{ color: "#ECECEC", "margin-left": "0.5em" }}> <RiAuctionFill /></span></div>
             </div>
 
 

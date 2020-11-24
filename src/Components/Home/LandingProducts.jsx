@@ -5,7 +5,7 @@ import ProductPreview from "../Product/ProductPreview"
 const LandingProducts = ({ ...props }) => {
 
     const listFeatures = props.products.map((product) =>
-        <div className={props.viewClass}>
+        <div id="home-feature-products-single" className={props.viewClass}>
             <ProductPreview product={product} />
         </div>
     )
@@ -19,10 +19,10 @@ const LandingProducts = ({ ...props }) => {
     }
 
     return (
-        <div className={props.listClass}>
-            < h4 >{props.heading}</h4 >
+        <div id="home-feature-products" className={props.listClass}>
+            < h4 className="feature-products-heading" >{props.heading}</h4 >
             {getHr(props.hr)}
-            <div className="feature-products-list">
+            <div id="feature-products-list" className="feature-products-list">
                 {listFeatures}
             </div>
         </div >

@@ -6,7 +6,7 @@ import Dropdown from "react-dropdown"
 const PersonalInfo = props => {
 
     return (
-        <div className="user-box profile-box">
+        <div id="user-page-personal" className="user-box profile-box">
             <div className="profile-heading">REQUIRED</div>
             <div className="profile">
                 <div className="profile-image">
@@ -68,7 +68,7 @@ const PersonalInfo = props => {
                     <div className="profile-label">
                         <label className="generic-field">Date of Birth</label>
                         <div className="birth-date">
-                            <div className="month-wrapper">
+                            <div id="user-profile-birth-month" className="month-wrapper">
                                 <Dropdown
                                     className="month-dropdown"
                                     menuClassName="birth-dropdown-menu"
@@ -79,7 +79,7 @@ const PersonalInfo = props => {
                                     onChange={(e) => props.onChange("birthMonth", e.label.toString(), "user")}
                                 />
                             </div>
-                            <div className="day-wrapper">
+                            <div id="user-profile-birth-day" className="day-wrapper">
                                 <Dropdown
                                     className="day-dropdown"
                                     menuClassName="birth-dropdown-menu"
@@ -90,7 +90,7 @@ const PersonalInfo = props => {
                                     onChange={(e) => props.onChange("birthDay", e.value.toString(), "user")}
                                 />
                             </div>
-                            <div className="year-wrapper">
+                            <div id="user-profile-birth-year" className="year-wrapper">
                                 <Dropdown
                                     className="year-dropdown"
                                     menuClassName="birth-dropdown-menu"

@@ -71,17 +71,17 @@ const Bidding = ({ ...props }) => {
     }, [])
 
     return (
-        <div>
+        <div id="single-product-bidding">
             <div className="bidding">
                 <div className="bidding-field">
-                    <GenericField type="number" className="bid-input" onChange={props.inputOnChange} disabled={disabled} />
-                    <button className="basic-button" type="btn" onClick={props.onClick} disabled={disabled}>PLACE BID <span className="bid-arrow">&#10095;</span></button>
+                    <GenericField id="single-product-input-bid" value={props.bidValue} type="number" className="bid-input" onChange={props.inputOnChange} disabled={disabled} />
+                    <button id="single-product-btn-bid" className="basic-button" type="btn" onClick={props.onClick} disabled={disabled}>PLACE BID <span className="bid-arrow">&#10095;</span></button>
                 </div>
                 <label>Enter ${(parseFloat(highestBid) + 1).toFixed(2)} or more</label>
             </div>
             <div className="bidding-info">
-                <div>Highest bid: <p>${highestBid.toFixed(2)}</p></div>
-                <div>No bids: {numberOfBids}</div>
+                <div id="single-product-highest">Highest bid: <p>${highestBid.toFixed(2)}</p></div>
+                <div id="single-product-number-buds">No bids: {numberOfBids}</div>
                 <div>{auctionTime}{time}</div>
             </div>
         </div>

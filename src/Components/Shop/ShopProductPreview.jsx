@@ -18,11 +18,11 @@ const ShopProductPreview = ({ ...props }) => {
 
     return (
 
-        <div className="product-preview">
+        <div id="shop-grid-preview" className="product-preview">
             <div className="container">
                 <img src={props.product.imagesUrl[0]} alt="product" className="image" />
                 <div className="overlay">
-                    <div onClick={() => history.push("/product/" + props.product.id)} className="text">Bid <RiAuctionFill /></div>
+                    <div id="shop-grid-preview-btn-bid" onClick={() => history.push("/product/" + props.product.id)} className="text">Bid <RiAuctionFill /></div>
                 </div>
             </div>
             <h4>{props.product.name}</h4>
