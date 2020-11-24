@@ -15,10 +15,16 @@ const BecomeSeller = props => {
         shop: "nav-inactive",
         account: "nav-active"
     })
+    const [activeAccount, setActiveAccount] = useState({
+        profile: "",
+        seller: "my-account-active",
+        bids: "",
+        settings: ""
+    })
 
     return (
         <div>
-            <Header active={active} />
+            <Header active={active} accountActive={activeAccount} />
             <PageName pageName="BECOME SELLER" pageNav={<div>MY ACCOUNT /<span style={{ color: "#252525", marginLeft: '1em' }}>BECOME SELLER</span></div>} />
             <div id="become-seller-wrapper" className="wrapper seller-wrapper">
                 <div className="user-box seller-box">

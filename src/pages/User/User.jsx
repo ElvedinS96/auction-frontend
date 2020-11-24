@@ -41,6 +41,7 @@ const User = props => {
     })
     const [activeAccount, setActiveAccount] = useState({
         profile: "",
+        seller: "",
         bids: "",
         settings: ""
     })
@@ -48,6 +49,7 @@ const User = props => {
     const [profileHeaderActive, setProfileHeaderActive] = useState("profile")
     const [headerClasses, setHeaderClasses] = useState({
         profile: headerActiveClass,
+        seller: "",
         bids: "",
         settings: ""
     })
@@ -223,20 +225,26 @@ const User = props => {
             case "profile":
                 setProfileHeaderActive("profile")
                 setSelectedPage("PROFILE")
-                setHeaderClasses({ profile: headerActiveClass, bids: "", settings: "" })
-                setActiveAccount({ profile: "my-account-active", bids: "", settings: "" })
+                setHeaderClasses({ profile: headerActiveClass, seller: "", bids: "", settings: "" })
+                setActiveAccount({ profile: "my-account-active", seller: "", bids: "", settings: "" })
+                break;
+            case "seller":
+                setProfileHeaderActive("seller")
+                setSelectedPage("SELLER")
+                setHeaderClasses({ profile: "", seller: headerActiveClass, bids: "", settings: "" })
+                setActiveAccount({ profile: "", seller: "my-account-active", bids: "", settings: "" })
                 break;
             case "bids":
                 setProfileHeaderActive("bids")
                 setSelectedPage("BIDS")
-                setHeaderClasses({ profile: "", bids: headerActiveClass, settings: "" })
-                setActiveAccount({ profile: "", bids: "my-account-active", settings: "" })
+                setHeaderClasses({ profile: "", seller: "", bids: headerActiveClass, settings: "" })
+                setActiveAccount({ profile: "", seller: "", bids: "my-account-active", settings: "" })
                 break;
             case "settings":
                 setProfileHeaderActive("settings")
                 setSelectedPage("SETTINGS")
-                setHeaderClasses({ profile: "", bids: "", settings: headerActiveClass })
-                setActiveAccount({ profile: "", bids: "", settings: "my-account-active" })
+                setHeaderClasses({ profile: "", seller: "", bids: "", settings: headerActiveClass })
+                setActiveAccount({ profile: "", seller: "", bids: "", settings: "my-account-active" })
                 break;
         }
     }
@@ -617,6 +625,14 @@ const User = props => {
                 addressRef={addressRef}
                 cardInfoRef={cardInfoRef}
             />
+        }
+        else if (profileHeaderActive == "seller") {
+            if (localStorage.userRole == "USER") {
+                history.push("/become-seller")
+            }
+            else {
+                return <div>Comming soon...</div>
+            }
         }
         else if (profileHeaderActive == "bids") {
             return <UserBids bids={userBids} />

@@ -3,6 +3,7 @@ import "../../index.css"
 import { FaUser } from "react-icons/fa"
 import { ImHammer2 } from "react-icons/im";
 import { RiSettings5Fill } from "react-icons/ri";
+import { FaListUl } from "react-icons/fa"
 
 const UserProfileHeader = props => {
 
@@ -13,6 +14,12 @@ const UserProfileHeader = props => {
                 className={"nav-profile-button " + props.classes.profile}
                 onClick={() => props.setActive("profile")} >
                 <FaUser className="profile-header-icon" /> <label>Profile</label>
+            </span>
+            <span
+                id="user-page-header-bids"
+                className={"nav-profile-button " + props.classes.seller}
+                onClick={() => props.setActive("seller")} >
+                <FaListUl className="profile-header-icon" /> <label>Seller</label>
             </span>
             <span
                 id="user-page-header-bids"

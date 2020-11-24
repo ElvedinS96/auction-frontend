@@ -90,6 +90,11 @@ const Header = props => {
                                     Profile
                                 </a>
                                 <a
+                                    className={"my-account " + (props.accountActive == null ? "" : props.accountActive.seller)}
+                                    href={localStorage.userRole == "USER" ? "/become-seller" : "/account?tab=seller"}>
+                                    {localStorage.userRole == "USER" ? "Become Seller" : "Seller"}
+                                </a>
+                                <a
                                     className={"my-account " + (props.accountActive == null ? "" : props.accountActive.bids)}
                                     href="/account?tab=bids">
                                     Your Bids

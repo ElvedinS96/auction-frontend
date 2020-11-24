@@ -11,10 +11,16 @@ const SellingWizard = props => {
         shop: "nav-inactive",
         account: "nav-active"
     })
+    const [activeAccount, setActiveAccount] = useState({
+        profile: "",
+        seller: "my-account-active",
+        bids: "",
+        settings: ""
+    })
 
     return (
         <div>
-            <Header active={active} />
+            <Header active={active} accountActive={activeAccount} />
             <PageName pageName="SELLING WIZARD" pageNav={<div>MY ACCOUNT /<span style={{ color: "#252525", marginLeft: '1em' }}>SELLING</span></div>} />
             <div id="wizard-wrapper" className="wrapper wizard-wrapper">
                 <div className="user-box wizard-box">
