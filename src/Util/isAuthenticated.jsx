@@ -1,8 +1,8 @@
-import getToken from "./getToken"
+import tokenExists from "./tokenExists"
 
 function isAuthenticated() {
 
-    return getToken("token") != null
+    return tokenExists()
 }
 
 export default isAuthenticated;

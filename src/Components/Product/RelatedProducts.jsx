@@ -5,16 +5,16 @@ import ProductPreview from "./ProductPreview"
 const RelatedProducts = ({ ...props }) => {
 
     const listProducts = props.relatedProducts.map((product) =>
-        <div className={props.viewClass}>
+        <div id="single-product-related-single" className={props.viewClass}>
             <ProductPreview product={product} />
         </div>
     )
 
     return (
-        <div className="feature-products">
+        <div id="single-product-related" className="feature-products">
             <h3>Related products</h3>
             <hr />
-            <div className="feature-products-collections">
+            <div id="single-product-related-list" className="feature-products-collections">
                 {listProducts}
             </div>
         </div>

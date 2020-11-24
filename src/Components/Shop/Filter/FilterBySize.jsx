@@ -5,18 +5,18 @@ import { BiX } from "react-icons/bi"
 const FilterBySize = ({ ...props }) => {
 
     const listSizes = props.sizes.map((size) =>
-        <div className="each-filter-text" onClick={() => { props.setSize(size); props.resetPageNumber() }}>
+        <div id="shop-filters-size-single" className="each-filter-text" onClick={() => { props.setSize(size); props.resetPageNumber() }}>
             {size}
         </div >
     )
 
     return (
-        <div className="filter-box">
-            <div className="heading-filter">
+        <div id="shop-filters-size" className="filter-box">
+            <div id="shop-filters-size-heading" className="heading-filter">
                 <h5>FILTER BY SIZE</h5 >
                 <div className="cancel" onClick={() => props.setSize("")}><BiX /></div>
             </div>
-            <div>
+            <div id="shop-filters-size-list">
                 {listSizes}
             </div>
         </div>
