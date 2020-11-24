@@ -43,6 +43,7 @@ const Shop = ({ ...props }) => {
     const [dropdownSelected, setDropdownSelected] = useState("default")
     const [activeCategory, setActiveCategory] = useState(0)
     const [activeSubcategory, setActiveSubcategory] = useState(0)
+    const [activeSubcategoryName, setActiveSubcategoryName] = useState("")
     const [activeColor, setActiveColor] = useState("")
     const [activeSize, setActiveSize] = useState("")
     const [activeName, setActiveName] = useState("")
@@ -167,24 +168,32 @@ const Shop = ({ ...props }) => {
         }
         return <div></div>
     }
+    function ShowSearchSubcategory() {
+        if (activeSubcategoryName != "") {
+            return <div ><div className="active-name">{activeSubcategoryName} <div className="cancel" onClick={() => { setActiveSubcategoryName(""); setActiveSubcategory(0); resetPageNumber() }}><BiX /></div></div></div>
+        }
+        return <div></div>
+    }
 
     return (
-        <div>
+        <div id="shop-page">
             <Header active={active} inputValue={activeName} onClick={onSearchClick} />
-            <PageName pageName="SHOP" pageNav={<div>SHOP /<span style={{ fontWeight: 'bold', marginLeft: '1em' }}>ALL CATEGORIES</span></div>} />
+            <PageName pageName="SHOP" pageNav={<div>SHOP /<span style={{ color: "#252525", marginLeft: '1em' }}>ALL CATEGORIES</span></div>} />
             <div className="wrapper selected-filters">
                 <ShowSearchName />
                 <ShowSearchColor />
                 <ShowSearchSize />
+                <ShowSearchSubcategory />
             </div>
-            <div className="wrapper">
-                <div className="shop-page">
+            <div id="shop-page-wrapper" className="wrapper">
+                <div id="shop-page-main" className="shop-page">
                     <Filters
                         filters={fillFilters}
                         activeCategory={activeCategory}
                         activeSubcategory={activeSubcategory}
                         setCategory={setActiveCategory}
                         setSubcategory={setActiveSubcategory}
+                        setSubcategoryName={setActiveSubcategoryName}
                         setColor={setActiveColor}
                         setSize={setActiveSize}
                         resetPageNumber={resetPageNumber}

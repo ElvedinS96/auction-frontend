@@ -6,7 +6,7 @@ import Dropdown from "react-dropdown"
 const CardInfo = props => {
 
     return (
-        <div ref={props.cardInfoRef} className="user-box profile-box">
+        <div id="user-page-card-info" ref={props.cardInfoRef} className="user-box profile-box">
             <div className="profile-heading">CARD INFORMATION</div>
             <div className="profile">
                 <div className="profile-image"></div>
@@ -15,8 +15,8 @@ const CardInfo = props => {
                         <input
                             checked={props.userInfo.paypal}
                             type="checkbox"
-                            id="notf-paypal"
-                            name="notf-paypal"
+                            id="paypal"
+                            name="paypal"
                             value="PayPal"
                             onChange={(e) => props.onChange("paypal", e.target.checked, "cardInformation")} />
                         <label className="generic-field" for="notf-paypal">Pay Pal</label>
@@ -25,8 +25,8 @@ const CardInfo = props => {
                         <input
                             checked={props.userInfo.creditCard}
                             type="checkbox"
-                            id="notf-card"
-                            name="notf-card"
+                            id="card"
+                            name="card"
                             value="Card"
                             onChange={(e) => props.onChange("creditCard", e.target.checked, "cardInformation")} />
                         <label className="generic-field" for="notf-card">Credit Card</label>
@@ -74,7 +74,7 @@ const CardInfo = props => {
                         <div className="address-width profile-label">
                             <label className="generic-field">Expiration Date</label>
                             <div className="birth-date exp-date">
-                                <div className="year-wrapper-exp">
+                                <div id="user-card-exp-year" className="year-wrapper-exp">
                                     <Dropdown
                                         className="year-dropdown"
                                         menuClassName="birth-dropdown-menu"
@@ -88,7 +88,7 @@ const CardInfo = props => {
                                         <label className={"validation-error small"}>{props.validation.cardExpYear}</label>
                                     </small>
                                 </div>
-                                <div className="month-wrapper-exp">
+                                <div id="user-card-exp-month" className="month-wrapper-exp">
                                     <Dropdown
                                         className="month-dropdown"
                                         menuClassName="birth-dropdown-menu"

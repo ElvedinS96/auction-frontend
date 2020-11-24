@@ -125,9 +125,7 @@ const Home = ({ ...props }) => {
     }
 
     useEffect(() => {
-        console.log(Date.now())
-        console.log("1603654252")
-        console.log((Date.now() - new Date(1603654252000)) / (1000 * 60))
+        window.scrollTo(0, 0)
         getCategories()
         getFeatureCollections()
         getFeatureProducts()
@@ -140,23 +138,23 @@ const Home = ({ ...props }) => {
     return (
         <div>
             <Header active={active} />
-            <div className="home">
-                <div className="home-top">
+            <div id="home" className="home">
+                <div id="home-top" className="home-top">
                     <div className="home-top-inside">
                         <Category categories={categories} />
                         <FeatureProduct product={featureProduct} onClick={() => handleBidNowClick(featureProduct.id)} />
                     </div>
                 </div>
-                <div className="feature-collection">
+                <div id="home-feature-collection" className="feature-collection">
                     <FeatureCollection collections={featureCollections} product={featureProduct} />
                 </div>
                 <div>
-                    <LandingProducts products={feature} heading="Feature products" hr={true} viewClass="landing-product" listClass="feature-products" />
-                    <div className="feature-products">
-                        <div className="home-nav">
-                            <button autoFocus onClick={() => onClick("new-arrivals")} >New Arrivals</button>
-                            <button onClick={() => onClick("top-rated")}>Top Rated</button>
-                            <button onClick={() => onClick("last-chance")}> Last Chance</button>
+                    <LandingProducts products={feature} heading="Feature Products" hr={true} viewClass="landing-product" listClass="feature-products" />
+                    <div id="home-other-collections" className="feature-products">
+                        <div id="home-collections-nav" className="home-nav">
+                            <button id="home-nav-new-arrivals" autoFocus onClick={() => onClick("new-arrivals")} >New Arrivals</button>
+                            <button id="home-nav-top-rated" onClick={() => onClick("top-rated")}>Top Rated</button>
+                            <button id="home-nav-last-chance" onClick={() => onClick("last-chance")}> Last Chance</button>
                         </div>
                         <LandingProducts products={showProducts} heading="" hr={false} viewClass="landing-product" listClass="arrivals" />
                     </div >

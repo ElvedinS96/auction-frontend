@@ -59,13 +59,13 @@ const FilterByPrice = ({ ...props }) => {
     }
 
     return (
-        <div className="filter-box">
-            <div className="heading-filter">
+        <div id="shop-filters-price" className="filter-box">
+            <div id="shop-filters-price-heading" className="heading-filter">
                 <h5>FILTER BY PRICE</h5>
                 <div className="cancel" onClick={() => cancelPrice()}><BiX /></div>
             </div>
 
-            <div className="histogram">
+            <div id="shop-filters-price-histogram" className="histogram">
                 {listHistogram}
             </div>
             <Range
@@ -77,7 +77,7 @@ const FilterByPrice = ({ ...props }) => {
                 onChange={handleChange}
                 onAfterChange={handleAfterChange}
             />
-            <div className="price-labels">
+            <div id="shop-filters-price-prices" className="price-labels">
                 <label>${minPrice} - ${maxPrice}</label>
                 <label>The average price is ${Math.round(props.prices.avgPrice)}. </label>
             </div>

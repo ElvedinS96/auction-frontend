@@ -15,10 +15,18 @@ const ProductDetails = ({ ...props }) => {
     })
 
     return (
-        <div className="product-right">
+        <div id="single-product-right" className="product-right">
             <h2>{props.product.name}</h2>
             <h5>Start from - ${price}</h5>
-            <Bidding baseUrl={props.baseUrl} productId={props.product.id} numberOfBids={props.numberOfBids} highestBid={props.highestBid} inputOnChange={props.inputOnChange} onClick={props.onClick} />
+            <Bidding
+                bidValue={props.bidValue}
+                baseUrl={props.baseUrl}
+                productId={props.product.id}
+                numberOfBids={props.numberOfBids}
+                highestBid={props.highestBid}
+                inputOnChange={props.inputOnChange}
+                onClick={props.onClick}
+            />
             <div className="product-details">
                 <h6>Details</h6>
                 <hr />

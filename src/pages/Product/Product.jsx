@@ -30,7 +30,7 @@ const Product = ({ ...props }) => {
     })
     const [images, setImages] = useState([])
     const [relatedProducts, setRelatedProducts] = useState([])
-    const [bid, setBid] = useState(0)
+    const [bid, setBid] = useState("")
     const [highestBid, setHighestBid] = useState(0)
     const [productBids, setProductBids] = useState([])
     const [numberOfBids, setNumberOfBids] = useState(0)
@@ -41,6 +41,7 @@ const Product = ({ ...props }) => {
     })
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         localStorage.statusMessage = ""
         localStorage.statusClass = ""
         url = url + "/" + id
@@ -108,6 +109,7 @@ const Product = ({ ...props }) => {
                         bids.push(response.data)
                         setProductBids(bids)
                         localStorage.userBid = bid
+                        setBid("")
                     })
                     .catch(error => {
                         window.location.href = "/login"
@@ -121,7 +123,7 @@ const Product = ({ ...props }) => {
 
     function ProductBottom() {
         if (tokenExists()) {
-            return <BiddingTable baseUrl={props.baseUrl} bidders={productBids} />
+            return <BiddingTable highestBid={highestBid} baseUrl={props.baseUrl} bidders={productBids} />
         }
         else {
             return <RelatedProducts relatedProducts={relatedProducts} viewClass="landing-product" />
@@ -131,9 +133,9 @@ const Product = ({ ...props }) => {
     return (
         <div>
             <Header active={active} />
-            <PageName pageName="SINGLE PRODUCT" pageNav={<div>SHOP /<span style={{ fontWeight: 'bold', marginLeft: '1em' }}>SINGLE PRODUCT</span></div>} />
+            <PageName pageName="SINGLE PRODUCT" pageNav={<div>SHOP /<span style={{ color: "#252525", marginLeft: '1em' }}>SINGLE PRODUCT</span></div>} />
             <StatusBar statusMessage={localStorage.statusMessage} className={localStorage.statusClass} />
-            <div className="product">
+            <div id="single-product" className="product">
                 <ProductImages urls={images} />
                 <ProductDetails
                     baseUrl={props.baseUrl}
@@ -143,6 +145,7 @@ const Product = ({ ...props }) => {
                     numberOfBids={numberOfBids}
                     onClick={() => handleBidClick(product)}
                     inputOnChange={(e) => setBid(e.target.value)}
+                    bidValue={bid}
                 />
             </div>
             <div>
