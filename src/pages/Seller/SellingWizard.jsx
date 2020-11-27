@@ -35,8 +35,8 @@ const SellingWizard = props => {
         description: "",
         images: [],
         price: 0,
-        startDate: 0,
-        endDate: 0,
+        startDate: new Date(),
+        endDate: new Date(),
     })
     const [productValidation, setProductValidation] = useState({
         name: "",
@@ -129,7 +129,11 @@ const SellingWizard = props => {
                 onCategoryChange={onCategoryChange}
                 setSelectedPhotos={setSelectedPhotos}
             />
-            <Pricing />
+            <Pricing
+                product={product}
+                onChange={handleProductChange}
+                validation={productValidation}
+            />
             <LocationAndShipping />
         </div >
 
