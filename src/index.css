@@ -1035,7 +1035,7 @@ hr {
 
 .container {
   position: relative;
-  width: 90%;
+  max-width: 100%;
 }
 
 .image {
@@ -1917,6 +1917,27 @@ hr {
   width: 85%;
 }
 
+.wizard-images-droper {
+  flex: 1 1 0%; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  padding: 20px; 
+  border-width: 2px; 
+  border-radius: 2px; 
+  border-color: rgb(216, 216, 216); 
+  border-style: dashed; 
+  background-color: rgb(252, 252, 252); 
+  color: rgb(37, 37, 37); 
+  font-size: 0.8em; 
+  letter-spacing: 0.48px; 
+  outline: none; 
+  transition: border 0.24s ease-in-out 0s; 
+  max-width: 100%; 
+  height: 16em;
+}
+
 #wizard-entering-price {
   margin-top: 2.5em;
   width: 85%;
@@ -2011,6 +2032,71 @@ hr {
 
 #wizard-auction-paragraph p {
   width: 85%;
+}
+
+.wizard-country-city {
+  margin-top: 1.5em;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#wizard-country-dropdown {
+  width: 40%;
+}
+
+#wizard-city-dropdown {
+  margin-right: 1.4em;
+  width: 40%;
+}
+
+.bear-shipping {
+  margin-top: 3em;
+  font-size: 0.8em;
+  color: #252525;
+  letter-spacing: 0.63px;
+  line-height: 26px;
+  width: 80%;
+}
+
+.bear-shipping label {
+  margin-left: 1em;
+}
+
+.bear-shipping p {
+  color: #9B9B9B;
+  margin-top: 0.6em;
+  margin-left: 1.7em;
+}
+
+.wizard-card-info {
+  display: flex;
+  margin-top: 3em;
+  width: 80%;
+}
+
+.wizard-card-info-inactive {
+  display: none;
+}
+
+.wizard-card-info-wrapper {
+  width: 100%;
+}
+
+.back-arrow {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-right: 0.5em;
+}
+
+.wizard-nav-buttons {
+  width: 85%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.back-inactive {
+  display: none;
 }
 
 @media screen and (max-width: 750px) {
@@ -2215,5 +2301,51 @@ hr {
       margin-left: 0;
       margin-top: 0.8em;
       width: 70%;
+    }
+
+    .seller-box {
+      width: 90%;
+    }
+
+    .wizard-categories {
+      flex-direction: column;
+    }
+
+    .wizard-dropdowns {
+      width: 95%;
+    }
+
+    #wizard-dates {
+      flex-direction: column;
+    }
+
+    #wizard-start-date {
+      margin-top: -2em;
+      width: 106%;
+    }
+
+    #wizard-end-date {
+      margin-top: 0.6em;
+      width: 106%;
+    }
+
+    #wizard-auction-paragraph {
+      width: 85%;
+    }
+
+    #wizard-auction-paragraph p {
+      width: 100%;
+    }
+
+    .wizard-country-city {
+      flex-direction: column;
+    }
+
+    #wizard-country-dropdown {
+      width: 95%;
+    }
+
+    #wizard-city-dropdown {
+      width: 95%;
     }
 }

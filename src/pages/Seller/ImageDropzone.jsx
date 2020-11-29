@@ -44,24 +44,13 @@ function ImageDropzone(props) {
         acceptedFiles
     } = useDropzone({ accept: 'image/jpeg, image/png', maxFiles: "5", onDropAccepted: acceptedFiles => { props.setSelectedPhotos(acceptedFiles) } });
 
-    const style = useMemo(() => ({
-        ...baseStyle,
-        ...(isDragActive ? activeStyle : {}),
-        ...(isDragAccept ? acceptStyle : {}),
-        ...(isDragReject ? rejectStyle : {})
-    }), [
-        isDragActive,
-        isDragReject,
-        isDragAccept
-    ]);
-
     const listSelected = acceptedFiles.map((image) =>
-        <div style={{ marginTop: "0.3em" }}>- {image.name} </div>
+        <div style={{ marginTop: "0.3em", maxWidth: "100%" }}>- {image.name} </div>
     )
 
     return (
         <div className="container">
-            <div {...getRootProps({ style })}>
+            <div className="wizard-images-droper" {...getRootProps()}>
                 <input {...getInputProps()} />
                 <label style={{ color: "#8367D8", cursor: "pointer" }}>Upload Photos <label style={{ marginLeft: "0.7em" }}>or just drag and drop</label></label>
                 <p style={{ marginTop: "0.8em", marginBottom: "0.8em" }}>+ Add at least 3 photos and maximum 5</p>

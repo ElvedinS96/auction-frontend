@@ -3,6 +3,8 @@ import "../../index.css"
 import GenericField from "../FormField/GenericField";
 import Dropdown from "react-dropdown"
 import ImageDropzone from "../../pages/Seller/ImageDropzone";
+import NextButton from "../../pages/Seller/NextButton";
+import BackButton from "../../pages/Seller/BackButton";
 
 const GeneralInformation = props => {
 
@@ -75,6 +77,16 @@ const GeneralInformation = props => {
                         </div>
                         <div className="wizard-images">
                             <ImageDropzone setSelectedPhotos={props.setSelectedPhotos} />
+                        </div>
+                        <div id="wizard-general-button" className="wizard-nav-buttons">
+                            <BackButton
+                                className="back-inactive"
+                            />
+                            <NextButton
+                                text="NEXT"
+                                className="next-button"
+                                onClick={props.onNextClick}
+                            />
                         </div>
                     </div>
                 </div>

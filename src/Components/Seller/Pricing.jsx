@@ -3,6 +3,8 @@ import "../../index.css"
 import "react-datetime/css/react-datetime.css"
 import DateTime from "react-datetime"
 import { FaRegCalendarAlt } from "react-icons/fa"
+import BackButton from "../../pages/Seller/BackButton";
+import NextButton from "../../pages/Seller/NextButton";
 
 const Pricing = props => {
 
@@ -56,6 +58,16 @@ const Pricing = props => {
                         </div>
                         <div id="wizard-auction-paragraph">
                             <p>The auction will be automatically closed when the end time comes. The highest bid will win the auction.</p>
+                        </div>
+                        <div id="wizard-general-button" className="wizard-nav-buttons">
+                            <BackButton
+                                onClick={props.onBackClick}
+                            />
+                            <NextButton
+                                text="NEXT"
+                                className="next-button"
+                                onClick={props.onNextClick}
+                            />
                         </div>
                     </div>
                 </div>
