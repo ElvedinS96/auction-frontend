@@ -11,6 +11,7 @@ import axios from "axios"
 import getUserFromToken from "../../Util/getUserFromToken";
 import getToken from "../../Util/getToken";
 import getMonths from "../../Util/getMonths";
+import ProgressBar from "./ProgressBar";
 
 const SellingWizard = props => {
 
@@ -303,6 +304,7 @@ const SellingWizard = props => {
         <div id="selling-wizard-global">
             <Header active={active} accountActive={activeAccount} />
             <PageName pageName="SELLING WIZARD" pageNav={<div>MY ACCOUNT /<span style={{ color: "#252525", marginLeft: '1em' }}>SELLING</span></div>} />
+            <ProgressBar step={currentStep} />
             {ShowContent()}
         </div >
 
