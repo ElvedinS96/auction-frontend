@@ -425,9 +425,14 @@ const SellingWizard = props => {
 
         if (validAddress && validCard) {
             //TODO call api for adding product
-            //Redirect to success page
             //Change user role to seller if he is first time seller
             //If address and card info are changed, call api for updating user profile info
+
+
+            localStorage.createdId = 1
+            localStorage.createdName = "Android Tablet"
+            localStorage.createdImage = "https://www.android.com/static/2016/img/devices/tablets/transparent/sony-xperia-z4_1x.png"
+            history.push("/selling-done")
         }
     }
 

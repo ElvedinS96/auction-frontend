@@ -2157,6 +2157,10 @@ hr {
   background-color: #ECECEC;
 }
 
+.selling-done-img img {
+  max-width: 10em;
+}
+
 @media screen and (max-width: 750px) {
     .product {
       display: flex;
