@@ -12,6 +12,7 @@ import getUserFromToken from "../../Util/getUserFromToken";
 import getToken from "../../Util/getToken";
 import getMonths from "../../Util/getMonths";
 import ProgressBar from "./ProgressBar";
+import { validateCardExpiration, validateCardNumber, validateCity, validateCountry, validateCVC, validateFirstName, validateNameOnCard, validateNumber, validateProductName, validateStreet, validateZipCode } from "../../Util/Validation";
 
 const SellingWizard = props => {
 
@@ -45,6 +46,7 @@ const SellingWizard = props => {
     const [monthOptions, setMonthOptions] = useState([])
     const [yearOptions, setYearOptions] = useState([])
     const [bearShipping, setBearShipping] = useState(false)
+    const [featureProduct, setFeatureProduct] = useState(false)
     const [currentStep, setCurrentStep] = useState(1)
 
     const [product, setProduct] = useState({
@@ -59,19 +61,27 @@ const SellingWizard = props => {
         startDate: new Date(),
         endDate: new Date(),
     })
-    const [productValidation, setProductValidation] = useState({
+    const [userInfo, setUserInfo] = useState({})
+
+    const [productGeneralValidation, setProductGeneralValidation] = useState({
         name: "",
         category: "",
         subcategory: "",
         description: "",
         images: "",
+    })
+    const [productPriceValidation, setProductPriceValidation] = useState({
         price: "",
         startDate: "",
-        endDate: "",
+        endDate: ""
     })
-
-    const [userInfo, setUserInfo] = useState({})
-
+    const [addressValidation, setAddressValidation] = useState({
+        street: "",
+        country: "",
+        city: "",
+        zipCode: "",
+        phoneNumber: ""
+    })
     const [cardInfoValidation, setCardInfoValidation] = useState({
         nameOnCard: "",
         cardNumber: "",
@@ -231,16 +241,169 @@ const SellingWizard = props => {
         setCityOptions(countries.find(country => country.name == value).cities)
     }
 
-    function onNextClick() {
-        var validation = true
+    function validateGeneral() {
+        var isValid = true
+        var validationMessage = {
+            name: "",
+            category: "",
+            subcategory: "",
+            description: "",
+            images: "",
+        }
 
-        //TODO validate
+        var productName = validateProductName(product.name)
+        if (!productName.valid) {
+            validationMessage.name = productName.message
+            isValid = false
+        }
+
+        if (product.categoryId == 0) {
+            validationMessage.category = "Category is required"
+            isValid = false
+        }
+
+        if (product.subcategoryId == 0) {
+            validationMessage.subcategory = "Subcategory is required"
+            isValid = false
+        }
+
+        if (product.description.length > 700) {
+            validationMessage.description = "Description is too long"
+            isValid = false
+        }
+
+        if (selectedPhotos.length < 3) {
+            validationMessage.images = "Select at least 3 photos"
+            isValid = false
+        }
+
+        setProductGeneralValidation(validationMessage)
+        return isValid
+
+    }
+
+    function validatePricing() {
+        var isValid = true
+        var validatinMessage = {
+            price: "",
+            startDate: "",
+            endDate: ""
+        }
+
+        if (product.price.length == 0 || product.price < 0) {
+            validatinMessage.price = "Price must be greater than 0"
+            isValid = false
+        }
+
+        if (product.startDate < new Date()) {
+            validatinMessage.startDate = "Start date must be in future"
+            isValid = false
+        }
+
+        if (product.endDate < product.startDate) {
+            validatinMessage.endDate = "End date must be after start date"
+            isValid = false
+        }
+
+        setProductPriceValidation(validatinMessage)
+        return isValid
+    }
+
+    function validateAddress() {
+        var isValid = true
+        var validationMessage = {
+            street: "",
+            zipCode: "",
+            country: "",
+            city: "",
+            phoneNumber: ""
+        }
+
+        var streetValidation = validateStreet(userInfo.street)
+        if (!streetValidation.valid) {
+            validationMessage.street = streetValidation.message
+            isValid = false;
+        }
+
+        var zipCodeValidation = validateZipCode(userInfo.zipCode)
+        if (!zipCodeValidation.valid) {
+            validationMessage.zipCode = zipCodeValidation.message
+            isValid = false;
+        }
+
+        var countryValidation = validateCountry(userInfo.country)
+        if (!countryValidation.valid) {
+            validationMessage.country = countryValidation.message
+            isValid = false;
+        }
+
+        var cityValidation = validateCity(userInfo.city)
+        if (!cityValidation.valid) {
+            validationMessage.city = cityValidation.message
+            isValid = false;
+        }
+
+        var numberValidation = validateNumber(userInfo.phoneNumber)
+        if (!numberValidation.valid) {
+            validationMessage.phoneNumber = numberValidation.message
+            isValid = false;
+        }
+
+        setAddressValidation(validationMessage)
+        return isValid
+    }
+
+    function validateCardInfo() {
+        var isValid = true
+        var validationMessage = {
+            nameOnCard: "",
+            cardNumber: "",
+            cardExpYear: "",
+            cardExpMonth: "",
+            cvc: ""
+        }
+
+        var nameOnCardValidation = validateNameOnCard(userInfo.nameOnCard)
+        if (!nameOnCardValidation.valid) {
+            validationMessage.nameOnCard = nameOnCardValidation.message
+            isValid = false;
+        }
+
+        var cardNumberValidation = validateCardNumber(userInfo.cardNumber)
+        if (!cardNumberValidation.valid) {
+            validationMessage.cardNumber = cardNumberValidation.message
+            isValid = false;
+        }
+
+        var expirationValidation = validateCardExpiration(userInfo.cardExpYear, userInfo.cardExpMonth)
+        if (!expirationValidation.valid) {
+            validationMessage.cardExpMonth = expirationValidation.messageMonth
+            validationMessage.cardExpYear = expirationValidation.messageYear
+            isValid = false;
+        }
+
+        var cvcValidation = validateCVC(userInfo.cvc)
+        if (!cvcValidation.valid) {
+            validationMessage.cvc = cvcValidation.message
+            isValid = false;
+        }
+
+        setCardInfoValidation(validationMessage)
+        return isValid
+    }
+
+    function onNextClick() {
+
         switch (currentStep) {
             case 1:
+                if (!validateGeneral()) {
+                    return false
+                }
                 break;
             case 2:
-                break;
-            case 3:
+                if (!validatePricing()) {
+                    return false
+                }
                 break;
         }
 
@@ -252,9 +415,20 @@ const SellingWizard = props => {
     }
 
     function onDoneClick() {
-        //TODO final validation
-        //TODO call api for adding product
-        //Change user role to seller if he is first time seller
+        var validAddress = true;
+        var validCard = true;
+        validAddress = validateAddress()
+
+        if (bearShipping || featureProduct) {
+            validCard = validateCardInfo()
+        }
+
+        if (validAddress && validCard) {
+            //TODO call api for adding product
+            //Redirect to success page
+            //Change user role to seller if he is first time seller
+            //If address and card info are changed, call api for updating user profile info
+        }
     }
 
     function ShowContent() {
@@ -263,7 +437,7 @@ const SellingWizard = props => {
                 return <GeneralInformation
                     product={product}
                     onChange={handleProductChange}
-                    validation={productValidation}
+                    validation={productGeneralValidation}
                     categoryOptions={categoryOptions}
                     subcategoryOptions={subcategoryOptions}
                     onCategoryChange={onCategoryChange}
@@ -275,7 +449,7 @@ const SellingWizard = props => {
                 return <Pricing
                     product={product}
                     onChange={handleProductChange}
-                    validation={productValidation}
+                    validation={productPriceValidation}
                     onNextClick={onNextClick}
                     onBackClick={onBackClick}
                 />
@@ -291,9 +465,12 @@ const SellingWizard = props => {
                     setBearShipping={setBearShipping}
                     userInfo={userInfo}
                     onChange={handleUserInfoChange}
-                    validation={cardInfoValidation}
+                    validation={addressValidation}
+                    cardValidation={cardInfoValidation}
                     onBackClick={onBackClick}
                     onDoneClick={onDoneClick}
+                    featureProduct={featureProduct}
+                    setFeatureProduct={setFeatureProduct}
                 />
                 break;
 

@@ -25,7 +25,7 @@ const LocationAndShipping = props => {
                             label={"Address"}
                             type={"text"}
                             className="wizard-input"
-                        //validationMessage={props.validation.street}
+                            validationMessage={props.validation.street}
                         />
                         <div className="wizard-country-city">
                             <div id="wizard-country-dropdown">
@@ -39,7 +39,7 @@ const LocationAndShipping = props => {
                                     onChange={(e) => props.onCountryChange("country", e.value, "address")}
                                 />
                                 <small>
-                                    <label className={"validation-error small"}>{ }</label>
+                                    <label className={"validation-error small"}>{props.validation.country}</label>
                                 </small>
                             </div>
                             <div id="wizard-city-dropdown">
@@ -53,7 +53,7 @@ const LocationAndShipping = props => {
                                     onChange={(e) => props.onChange("city", e.value, "address")}
                                 />
                                 <small>
-                                    <label className={"validation-error small"}>{ }</label>
+                                    <label className={"validation-error small"}>{props.validation.city}</label>
                                 </small>
                             </div>
                         </div>
@@ -67,7 +67,7 @@ const LocationAndShipping = props => {
                             label={"Zip Code"}
                             type={"text"}
                             className="wizard-input"
-                        //validationMessage={props.validation.street}
+                            validationMessage={props.validation.zipCode}
                         />
                         <GenericField
                             key="wizard_phone_input"
@@ -79,22 +79,27 @@ const LocationAndShipping = props => {
                             label={"Phone"}
                             type={"text"}
                             className="wizard-input"
-                        //validationMessage={props.validation.street}
+                            validationMessage={props.validation.phoneNumber}
                         />
 
                         <div className="bear-shipping">
                             <input id="bear_shipp_cost" name="bear_shipp_cost" type="checkbox" value={props.bearShipping} onChange={(e) => props.setBearShipping(e.target.checked)} />
                             <label for="bear_shipp_cost">Do you want to bear shipping cost?</label>
-                            <p>The average priece of shipping cost is $10.00. <br /> You have to provide us payment infromations.</p>
+                            <p>The average priece of shipping cost is $10.00. <br /> You have to provide us payment information.</p>
+                        </div>
+                        <div className="bear-shipping">
+                            <input id="feature_product" name="feature_product" type="checkbox" value={props.featureProduct} onChange={(e) => props.setFeatureProduct(e.target.checked)} />
+                            <label for="feature_product">Do you want to feature this product?</label>
+                            <p>You have to provide us payment information.</p>
                         </div>
 
-                        <div id="wizard-card-info" className={props.bearShipping ? "wizard-card-info" : "wizard-card-info-inactive"}>
+                        <div id="wizard-card-info" className={props.bearShipping || props.featureProduct ? "wizard-card-info" : "wizard-card-info-inactive"}>
                             <CardInfoContent
                                 monthOptions={props.monthOptions}
                                 yearOptions={props.yearOptions}
                                 onChange={props.onChange}
                                 userInfo={props.userInfo}
-                                validation={props.validation}
+                                validation={props.cardValidation}
                                 wrapperClass="wizard-card-info-wrapper"
                             />
                         </div>

@@ -27,7 +27,7 @@ const GeneralInformation = props => {
                                 className="wizard-input"
                                 validationMessage={props.validation.name}
                             />
-                            <div className="wizard-input-field-desc"><label>2-5 words (60 characters)</label></div>
+                            <div className="wizard-input-field-desc"><label>2-5 words ({60 - props.product.name.length} characters)</label></div>
                         </div>
                         <div className="wizard-categories">
                             <div className="wizard-dropdowns">
@@ -73,10 +73,13 @@ const GeneralInformation = props => {
                             <small>
                                 <label className={"validation-error small"}>{props.validation.description}</label>
                             </small>
-                            <div className="wizard-input-field-desc"><label>100 words (700 characters)</label></div>
+                            <div className="wizard-input-field-desc"><label>100 words ({700 - props.product.description.length} characters)</label></div>
                         </div>
                         <div className="wizard-images">
                             <ImageDropzone setSelectedPhotos={props.setSelectedPhotos} />
+                            <small>
+                                <label className={"validation-error small"}>{props.validation.images}</label>
+                            </small>
                         </div>
                         <div id="wizard-general-button" className="wizard-nav-buttons">
                             <BackButton

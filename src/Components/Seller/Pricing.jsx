@@ -44,6 +44,9 @@ const Pricing = props => {
                                     closeOnSelect={true}
                                 />
                                 <div className="wizard-calendar-icon-start"><FaRegCalendarAlt /></div>
+                                <small>
+                                    <label className={"validation-error small"}>{props.validation.startDate}</label>
+                                </small>
                             </div>
                             <div id="wizard-end-date">
                                 <label>End date</label>
@@ -54,6 +57,9 @@ const Pricing = props => {
                                     closeOnSelect={true}
                                 />
                                 <div className="wizard-calendar-icon-end"><FaRegCalendarAlt /></div>
+                                <small>
+                                    <label className={"validation-error small"}>{props.validation.endDate}</label>
+                                </small>
                             </div>
                         </div>
                         <div id="wizard-auction-paragraph">

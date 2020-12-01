@@ -33,7 +33,7 @@ const BecomeSeller = props => {
                         <div>
                             <HiOutlineShoppingBag size={200} style={{ color: "#8367D8", marginTop: "2em" }} />
                         </div>
-                        <div>
+                        <div className="become-seller-label">
                             <label>You do not have any scheduled items for sale.</label>
                         </div>
                         <div>
