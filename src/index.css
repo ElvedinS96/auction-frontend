@@ -2178,7 +2178,8 @@ hr {
   color: #252525;
   letter-spacing: 0.63px;
   cursor: pointer;
-
+  display: flex;
+  align-items: center;
 }
 
 .profile-seller-header-button-active {

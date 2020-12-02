@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "../../index.css"
 import calculateTimeUserBids from "../../Util/calculateTimeUserBids";
+import { BiAddToQueue } from "react-icons/bi"
 
 const Seller = props => {
 
@@ -56,7 +57,7 @@ const Seller = props => {
                     </div>
                 </div>
                 <div onClick={() => history.push("/selling")} className="profile-seller-header-button profile-seller-header-button-active" >
-                    Sell New
+                    <BiAddToQueue style={{ color: "#FFFFFF", marginRight: "0.5em" }} /> Sell New
                 </div>
             </div>
             <table cellspacing="0">
