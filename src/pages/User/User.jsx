@@ -64,6 +64,8 @@ const User = props => {
         numberOfBids: 0,
         imgUrl: ""
     }])
+    const [userActiveProducts, setUserActiveProducts] = useState([])
+    const [userSoldProducts, setUserSoldProducts] = useState([])
 
     const [genderOptions, setGenderOptions] = useState(["Male", "Female", "Other"])
     const [monthOptions, setMonthOptions] = useState([])
@@ -142,6 +144,36 @@ const User = props => {
             })
             .then(response => {
                 setUserBids(response.data)
+            })
+            .catch(error => {
+                console.log(error)
+                history.push("/500")
+            })
+
+        url = props.baseUrl + "/user/" + user.id + "/products?active=true"
+        axios.get(url,
+            {
+                headers: {
+                    Authorization: "Bearer " + getToken("token")
+                }
+            })
+            .then(response => {
+                setUserActiveProducts(response.data)
+            })
+            .catch(error => {
+                console.log(error)
+                history.push("/500")
+            })
+
+        url = props.baseUrl + "/user/" + user.id + "/products?active=false"
+        axios.get(url,
+            {
+                headers: {
+                    Authorization: "Bearer " + getToken("token")
+                }
+            })
+            .then(response => {
+                setUserSoldProducts(response.data)
             })
             .catch(error => {
                 console.log(error)
@@ -633,8 +665,8 @@ const User = props => {
             }
             else {
                 return <Seller
-                    activeProducts={[]}
-                    soldProducts={[]}
+                    activeProducts={userActiveProducts}
+                    soldProducts={userSoldProducts}
                 />
             }
         }

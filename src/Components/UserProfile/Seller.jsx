@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import "../../index.css"
 import calculateTimeUserBids from "../../Util/calculateTimeUserBids";
@@ -8,38 +8,42 @@ const Seller = props => {
 
     const history = useHistory()
     const [active, setActive] = useState(true)
-    const products = []
 
+    function FormatDate(date) {
+        return date.toLocaleString('en-us', { month: "short" }) + ' ' + date.getDate() + ' ' + date.getFullYear()
+    }
 
-    const listBids = products.map((product) =>
-        <tr>
-            <td><img src={product.imgUrl} /></td>
-            <td colSpan={2}>
-                <div style={{ fontWeight: "bold" }}>{product.name}</div>
-                <div style={{ color: "#8367D8" }}>#{product.productId}</div>
-            </td>
-            <td>{active ? calculateTimeUserBids(Date.now(), product.auctionEndDate) : product.auctionEndDate}</td>
-            {product.userPrice}
-            <td><div className="user-bids-center">{product.numberOfBids}</div></td>
-            {product.highestBid}
-            <td>
-                <td><div onClick={() => window.location.href = "/product/" + product.productId} className="user-bids-center user-bid-view">VIEW</div></td>
-            </td>
-        </tr>
-    )
+    function ListProducts(products) {
+        return products.map((product) =>
+            <tr>
+                <td><img src={product.imgUrl} /></td>
+                <td colSpan={2}>
+                    <div style={{ fontWeight: "bold" }}>{product.name}</div>
+                    <div style={{ color: "#8367D8" }}>#{product.productId}</div>
+                </td>
+                <td>{active ? calculateTimeUserBids(Date.now(), product.auctionEndDate) : FormatDate(new Date(product.auctionEndDate))}</td>
+                <td><div className="user-bids-center">$ {product.userBid.toFixed(2)}</div></td>
+                <td><div className="user-bids-center">{product.numberOfBids}</div></td>
+                <td><div className="user-bids-center">{product.highestBid != 0 ? "$ " + product.highestBid.toFixed(2) : "no bids"}</div></td>
+                <td>
+                    <td><div onClick={() => window.location.href = "/product/" + product.productId} className="user-bids-center user-bid-view">VIEW</div></td>
+                </td>
+            </tr>
+        )
+    }
 
     function Biddings() {
         if (active && props.activeProducts.length == 0) {
             return <tr className="bider-row"><td colSpan={4} className="bider-name">You don't have active products</td></tr>
         }
         else if (active) {
-            return <div>tabela</div>
+            return ListProducts(props.activeProducts)
         }
         if (!active && props.soldProducts.length == 0) {
             return <tr className="bider-row"><td colSpan={4} className="bider-name">You don't have sold products</td></tr>
         }
         else if (!active) {
-            return <div>tabela</div>
+            return ListProducts(props.soldProducts)
         }
     }
 
