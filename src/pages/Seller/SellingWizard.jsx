@@ -114,57 +114,20 @@ const SellingWizard = props => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        //TODO call api for getting categories with subcategories
-        var cat = [
-            {
-                id: 1,
-                name: "Fashion",
-                subcategories: [
-                    {
-                        id: 1,
-                        name: "Jacket"
-                    },
-                    {
-                        id: 2,
-                        name: "Shirt"
-                    }
-                ]
-            },
-            {
-                id: 2,
-                name: "Electronic",
-                subcategories: [
-                    {
-                        id: 3,
-                        name: "Mobile"
-                    },
-                    {
-                        id: 4,
-                        name: "Tablet"
-                    }
-                ]
-            },
-            {
-                id: 3,
-                name: "Home",
-                subcategories: [
-                    {
-                        id: 5,
-                        name: "Table"
-                    },
-                    {
-                        id: 6,
-                        name: "Lamp"
-                    }
-                ]
-            }
-        ]
-        setCategories(cat)
-        setCategoryOptions(cat.map(category => ({ value: category.id, label: category.name })))
+
+        var url = props.baseUrl + "/category"
+        axios.get(url)
+            .then(response => {
+                setCategories(response.data)
+                setCategoryOptions(response.data.map(category => ({ value: category.id, label: category.name })))
+            })
+            .catch(error => {
+                history.push("/500")
+            })
 
         var user = getUserFromToken()
 
-        var url = props.baseUrl + "/user/" + user.id
+        url = props.baseUrl + "/user/" + user.id
         axios.get(url,
             {
                 headers: {
