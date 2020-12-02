@@ -1,11 +1,31 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "../../index.css"
+import calculateTimeUserBids from "../../Util/calculateTimeUserBids";
 
 const Seller = props => {
 
     const history = useHistory()
     const [active, setActive] = useState(true)
+    const products = []
+
+
+    const listBids = products.map((product) =>
+        <tr>
+            <td><img src={product.imgUrl} /></td>
+            <td colSpan={2}>
+                <div style={{ fontWeight: "bold" }}>{product.name}</div>
+                <div style={{ color: "#8367D8" }}>#{product.productId}</div>
+            </td>
+            <td>{active ? calculateTimeUserBids(Date.now(), product.auctionEndDate) : product.auctionEndDate}</td>
+            {product.userPrice}
+            <td><div className="user-bids-center">{product.numberOfBids}</div></td>
+            {product.highestBid}
+            <td>
+                <td><div onClick={() => window.location.href = "/product/" + product.productId} className="user-bids-center user-bid-view">VIEW</div></td>
+            </td>
+        </tr>
+    )
 
     function Biddings() {
         if (active && props.activeProducts.length == 0) {
