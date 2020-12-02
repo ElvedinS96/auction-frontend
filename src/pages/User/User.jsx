@@ -17,6 +17,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import PageName from "../HeaderFooter/PageName";
 import StatusBar from "../../Components/StatusBar/StatusBar"
 import { useRef } from "react";
+import Seller from "../../Components/UserProfile/Seller";
 
 const User = props => {
 
@@ -631,7 +632,10 @@ const User = props => {
                 history.push("/become-seller")
             }
             else {
-                return <div>Comming soon...</div>
+                return <Seller
+                    activeProducts={[]}
+                    soldProducts={[]}
+                />
             }
         }
         else if (profileHeaderActive == "bids") {

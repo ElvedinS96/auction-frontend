@@ -2161,6 +2161,32 @@ hr {
   max-width: 10em;
 }
 
+.profile-seller-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-seller-header-left {
+  display: flex;
+}
+
+.profile-seller-header-button {
+  background: #FAFAFA;
+  border: 1px solid #D8D8D8;
+  padding: 0.6em 1.5em 0.6em 1.5em;
+  font-size: 0.8em;
+  color: #252525;
+  letter-spacing: 0.63px;
+  cursor: pointer;
+
+}
+
+.profile-seller-header-button-active {
+  background: #8367D8;
+  border: 1px solid #8367D8;
+  color: #FFFFFF;
+}
+
 @media screen and (max-width: 750px) {
     .product {
       display: flex;

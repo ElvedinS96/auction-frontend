@@ -113,6 +113,7 @@ const SellingWizard = props => {
     }
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         //TODO call api for getting categories with subcategories
         var cat = [
             {
