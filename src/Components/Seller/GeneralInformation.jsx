@@ -59,6 +59,36 @@ const GeneralInformation = props => {
                                 </small>
                             </div>
                         </div>
+                        <div className="wizard-categories">
+                            <div className="wizard-dropdowns">
+                                <Dropdown
+                                    className="country-dropdown"
+                                    menuClassName="gender-dropdown-menu"
+                                    controlClassName="control-dropdown"
+                                    placeholder="Select Color"
+                                    value={props.product.color}
+                                    options={props.colorOptions}
+                                    onChange={(e) => props.onChange("color", e.label)}
+                                />
+                                <small>
+                                    <label className={"validation-error small"}>{props.validation.color}</label>
+                                </small>
+                            </div>
+                            <div className="wizard-dropdowns">
+                                <Dropdown
+                                    className="country-dropdown"
+                                    menuClassName="gender-dropdown-menu"
+                                    controlClassName="control-dropdown"
+                                    placeholder="Select Size"
+                                    value={props.product.size}
+                                    options={props.sizeOptions}
+                                    onChange={(e) => props.onChange("size", e.label)}
+                                />
+                                <small>
+                                    <label className={"validation-error small"}>{props.validation.size}</label>
+                                </small>
+                            </div>
+                        </div>
                         <div className="wizard-description">
                             <div>
                                 <label className="wizard-description-label">Description</label>

@@ -40,6 +40,8 @@ const SellingWizard = props => {
     const [categories, setCategories] = useState([])
     const [categoryOptions, setCategoryOptions] = useState([])
     const [subcategoryOptions, setSubcategoryOptions] = useState([])
+    const [colorOptions, setColorOptions] = useState([])
+    const [sizeOptions, setSizeOptions] = useState([])
     const [countries, setCountries] = useState([])
     const [countryOptions, setCountryOptions] = useState([])
     const [cityOptions, setCityOptions] = useState([])
@@ -60,6 +62,8 @@ const SellingWizard = props => {
         price: 0,
         startDate: new Date(),
         endDate: new Date(),
+        color: "",
+        size: ""
     })
     const [userInfo, setUserInfo] = useState({})
 
@@ -69,6 +73,8 @@ const SellingWizard = props => {
         subcategory: "",
         description: "",
         images: "",
+        color: "",
+        size: ""
     })
     const [productPriceValidation, setProductPriceValidation] = useState({
         price: "",
@@ -125,6 +131,16 @@ const SellingWizard = props => {
                 history.push("/500")
             })
 
+        url = props.baseUrl + "/shop/filters"
+        axios.get(url)
+            .then(response => {
+                setColorOptions(response.data.colors)
+                setSizeOptions(response.data.sizes)
+            })
+            .catch(error => {
+                history.push("/500")
+            })
+
         var user = getUserFromToken()
 
         url = props.baseUrl + "/user/" + user.id
@@ -140,7 +156,10 @@ const SellingWizard = props => {
                 const cardInformation = userDetails.cardInformation
                 setUserInfo({
                     userId: response.data.id,
+                    userRegister: response.data.userRegister,
                     userDetailsId: userDetails.id,
+                    gender: userDetails.gender == "" ? "Other" : userDetails.gender,
+                    birthDate: userDetails.birthDate,
                     phoneNumber: userDetails.phoneNumber == null ? "" : userDetails.phoneNumber,
                     addressId: address.id,
                     street: address.street == null ? "" : address.street,
@@ -213,6 +232,8 @@ const SellingWizard = props => {
             subcategory: "",
             description: "",
             images: "",
+            color: "",
+            size: ""
         }
 
         var productName = validateProductName(product.name)
@@ -238,6 +259,16 @@ const SellingWizard = props => {
 
         if (selectedPhotos.length < 3) {
             validationMessage.images = "Select at least 3 photos"
+            isValid = false
+        }
+
+        if (product.color == "") {
+            validationMessage.color = "Color is required"
+            isValid = false
+        }
+
+        if (product.size == "") {
+            validationMessage.size = "Size is required"
             isValid = false
         }
 
@@ -378,6 +409,95 @@ const SellingWizard = props => {
         setCurrentStep(currentStep - 1)
     }
 
+    function UpdateUserData() {
+        if (toUpdate.user) {
+            const request = {
+                id: userInfo.userId,
+                userRegister: userInfo.userRegister,
+                userDetails: {
+                    id: userInfo.userDetailsId,
+                    phoneNumber: userInfo.phoneNumber,
+                    birthDate: userInfo.birthDate,
+                    gender: userInfo.gender,
+                    address: {
+                        id: userInfo.addressId
+                    },
+                    cardInformation: {
+                        id: userInfo.cardId
+                    }
+                }
+            }
+
+            var url = props.baseUrl + "/user"
+            axios.put(url, request,
+                {
+                    headers: {
+                        Authorization: "Bearer " + getToken("token")
+                    }
+                })
+                .then(response => {
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        }
+        console.log(userInfo)
+        alert(toUpdate.address)
+        if (toUpdate.address) {
+
+            var request = {
+                id: userInfo.addressId,
+                street: userInfo.street,
+                state: userInfo.state,
+                zipCode: userInfo.zipCode,
+                city: {
+                    name: userInfo.city
+                }
+            }
+
+            var url = props.baseUrl + "/user/address"
+            axios.put(url, request,
+                {
+                    headers: {
+                        Authorization: "Bearer " + getToken("token")
+                    }
+                })
+                .then(response => {
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+
+        }
+
+        if (toUpdate.cardInformation) {
+
+            var request = {
+                id: userInfo.cardId,
+                nameOnCard: userInfo.nameOnCard,
+                cardNumber: userInfo.cardNumber,
+                yearExpiration: userInfo.cardExpYear,
+                monthExpiration: userInfo.cardExpMonth,
+                cvc: userInfo.cvc,
+                paypal: userInfo.paypal,
+                creditCard: userInfo.creditCard
+            }
+
+            var url = props.baseUrl + "/user/card-info"
+            axios.put(url, request,
+                {
+                    headers: {
+                        Authorization: "Bearer " + getToken("token")
+                    }
+                })
+                .then(response => {
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        }
+    }
+
     function onDoneClick() {
         var validAddress = true;
         var validCard = true;
@@ -390,8 +510,8 @@ const SellingWizard = props => {
         if (validAddress && validCard) {
             //TODO call api for adding product
             //Change user role to seller if he is first time seller
-            //If address and card info are changed, call api for updating user profile info
 
+            UpdateUserData()
 
             localStorage.createdId = 1
             localStorage.createdName = "Android Tablet"
@@ -412,6 +532,8 @@ const SellingWizard = props => {
                     onCategoryChange={onCategoryChange}
                     setSelectedPhotos={setSelectedPhotos}
                     onNextClick={onNextClick}
+                    colorOptions={colorOptions}
+                    sizeOptions={sizeOptions}
                 />
                 break;
             case 2:
