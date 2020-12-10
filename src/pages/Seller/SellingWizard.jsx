@@ -13,6 +13,7 @@ import getToken from "../../Util/getToken";
 import getMonths from "../../Util/getMonths";
 import ProgressBar from "./ProgressBar";
 import { validateCardExpiration, validateCardNumber, validateCity, validateCountry, validateCVC, validateFirstName, validateNameOnCard, validateNumber, validateProductName, validateStreet, validateZipCode } from "../../Util/Validation";
+import { storage } from "../../firebase"
 
 const SellingWizard = props => {
 
@@ -387,6 +388,33 @@ const SellingWizard = props => {
         return isValid
     }
 
+    function saveImages() {
+
+        for (const i in selectedPhotos) {
+            const image = selectedPhotos[i]
+            const uploadTask = storage.ref(`product_images/${image.name}`).put(image);
+            uploadTask.on(
+                "state_changed",
+                snapshot => { },
+                error => {
+                    console.log(error);
+                },
+                () => {
+                    storage
+                        .ref("product_images")
+                        .child(image.name)
+                        .getDownloadURL()
+                        .then(url => {
+                            var images = product.images
+                            images.push(url)
+                            handleProductChange("images", images)
+                        });
+                }
+            );
+        }
+
+    }
+
     function onNextClick() {
 
         switch (currentStep) {
@@ -394,6 +422,7 @@ const SellingWizard = props => {
                 if (!validateGeneral()) {
                     return false
                 }
+                saveImages()
                 break;
             case 2:
                 if (!validatePricing()) {
@@ -441,8 +470,6 @@ const SellingWizard = props => {
                     console.log(error)
                 })
         }
-        console.log(userInfo)
-        alert(toUpdate.address)
         if (toUpdate.address) {
 
             var request = {
@@ -508,15 +535,88 @@ const SellingWizard = props => {
         }
 
         if (validAddress && validCard) {
-            //TODO call api for adding product
-            //Change user role to seller if he is first time seller
+
+
+            var createProductRQ = {
+                name: product.name,
+                price: product.price,
+                auctionEndDate: product.endDate,
+                auctionStartDate: product.startDate,
+                description: product.description,
+                subcategoryId: product.subcategoryId,
+                userId: userInfo.userId,
+                color: product.color,
+                size: product.size,
+                feature: featureProduct,
+                imagesUrl: product.images
+            }
+
+            if (localStorage.userRole === "USER") {
+
+                var updateRoleRQ = { userId: userInfo.userId, roleId: 3 }
+
+                var url = props.baseUrl + "/user/update-role"
+                axios.put(url, updateRoleRQ,
+                    {
+                        headers: {
+                            Authorization: "Bearer " + getToken("token")
+                        }
+                    })
+                    .then(response => {
+
+                        localStorage.userRole = "SELLER"
+                        var refreshTokenRQ = { token: getToken("token") }
+                        url = props.baseUrl + "/token/refresh"
+
+                        axios.post(url, refreshTokenRQ)
+                            .then(response => {
+                                document.cookie = "token=" + response.data.token + "; path=/; max-age=6000;"
+
+                                url = props.baseUrl + "/product"
+                                axios.post(url, createProductRQ,
+                                    {
+                                        headers: {
+                                            Authorization: "Bearer " + response.data.token
+                                        }
+                                    })
+                                    .then(response => {
+                                        localStorage.createdId = response.data.id
+                                        localStorage.createdName = response.data.name
+                                        localStorage.createdImage = response.data.imagesUrl[0]
+                                        history.push("/selling-done")
+                                    })
+                                    .catch(error => {
+                                        console.log(error)
+                                    })
+                            })
+                            .catch(error => {
+                                console.log(error)
+                            })
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            }
+            else {
+                url = props.baseUrl + "/product"
+                axios.post(url, createProductRQ,
+                    {
+                        headers: {
+                            Authorization: "Bearer " + getToken("token")
+                        }
+                    })
+                    .then(response => {
+                        localStorage.createdId = response.data.id
+                        localStorage.createdName = response.data.name
+                        localStorage.createdImage = response.data.imagesUrl[0]
+                        history.push("/selling-done")
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            }
 
             UpdateUserData()
-
-            localStorage.createdId = 1
-            localStorage.createdName = "Android Tablet"
-            localStorage.createdImage = "https://www.android.com/static/2016/img/devices/tablets/transparent/sony-xperia-z4_1x.png"
-            history.push("/selling-done")
         }
     }
 
