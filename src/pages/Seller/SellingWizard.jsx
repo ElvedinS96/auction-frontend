@@ -565,12 +565,13 @@ const SellingWizard = props => {
                     .then(response => {
 
                         localStorage.userRole = "SELLER"
-                        var refreshTokenRQ = { token: getToken("token") }
+                        var refreshTokenRQ = { refreshToken: localStorage.refreshToken }
                         url = props.baseUrl + "/token/refresh"
 
                         axios.post(url, refreshTokenRQ)
                             .then(response => {
                                 document.cookie = "token=" + response.data.token + "; path=/; max-age=6000;"
+                                localStorage.refreshToken = response.data.refreshToken
 
                                 url = props.baseUrl + "/product"
                                 axios.post(url, createProductRQ,

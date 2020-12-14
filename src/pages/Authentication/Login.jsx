@@ -43,6 +43,7 @@ const Login = props => {
             .then(response => {
                 document.cookie = "token=" + response.data.token + "; path=/; max-age=6000;"
                 localStorage.userRole = getUserFromToken().role
+                localStorage.refreshToken = response.data.refreshToken
                 if (history.location.state != null && history.location.state.from == "registration") {
                     history.push("/")
                 }
