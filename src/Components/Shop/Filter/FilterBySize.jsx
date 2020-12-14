@@ -11,7 +11,7 @@ const FilterBySize = ({ ...props }) => {
     )
 
     return (
-        <div id="shop-filters-size" className="filter-box">
+        <div id="shop-filters-size" className="filter-box filter-size-box">
             <div id="shop-filters-size-heading" className="heading-filter">
                 <h5>FILTER BY SIZE</h5 >
                 <div className="cancel" onClick={() => props.setSize("")}><BiX /></div>

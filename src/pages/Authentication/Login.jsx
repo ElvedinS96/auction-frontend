@@ -6,6 +6,7 @@ import "../../index.css"
 import PageName from "../HeaderFooter/PageName"
 import { useHistory } from "react-router-dom";
 import Header from "../HeaderFooter/Header";
+import getUserFromToken from "../../Util/getUserFromToken";
 
 const Login = props => {
     const [user, setUser] = React.useState({
@@ -41,6 +42,8 @@ const Login = props => {
         axios.post(url, user)
             .then(response => {
                 document.cookie = "token=" + response.data.token + "; path=/; max-age=6000;"
+                localStorage.userRole = getUserFromToken().role
+                localStorage.refreshToken = response.data.refreshToken
                 if (history.location.state != null && history.location.state.from == "registration") {
                     history.push("/")
                 }
