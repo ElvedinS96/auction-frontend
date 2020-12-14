@@ -15,6 +15,9 @@ import SearchResult from './pages/Product/SearchResult';
 import Shop from './pages/Shop/Shop';
 import PrivateRoute from "./Util/PrivateRoute"
 import User from './pages/User/User';
+import BecomeSeller from './pages/Seller/BecomeSeller';
+import SellingWizard from './pages/Seller/SellingWizard'
+import SuccessPage from './Components/Seller/SuccessPage';
 
 function App() {
 
@@ -36,6 +39,9 @@ function App() {
           <Route path="/products"><SearchResult baseUrl={BASE_URL} /></Route>
           <Route path="/shop"><Shop baseUrl={BASE_URL} /></Route>
           <PrivateRoute path="/account"><User baseUrl={BASE_URL} /></PrivateRoute>
+          <PrivateRoute path="/become-seller"><BecomeSeller baseUrl={BASE_URL} /></PrivateRoute>
+          <PrivateRoute path="/selling"><SellingWizard baseUrl={BASE_URL} /></PrivateRoute>
+          <PrivateRoute path="/selling-done"><SuccessPage baseUrl={BASE_URL} /></PrivateRoute>
         </Switch>
       </BrowserRouter>
       <Footer />

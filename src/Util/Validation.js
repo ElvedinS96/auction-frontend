@@ -290,8 +290,27 @@ function validateBirthDate(year, month, day) {
     return validation
 }
 
+function validateProductName(name) {
+
+    var validation = validateEmpty(name, "Product Name")
+    if (!validation.valid) {
+        return validation
+    }
+
+    if (name.length > 60) {
+        return {
+            valid: false,
+            message: "Product Name is too long"
+        }
+    }
+
+    validation = validateOnlyLettersAndNumbers(name, "Product Name")
+
+    return validation
+}
+
 export {
     validateFirstName, validateLastName, validateEmail, validateNumber, validateOnlyLettersAndNumbers,
     validateState, validateCardNumber, validateCVC, validateCardExpiration, validateBirthDate,
-    validateOnlyLetters, validateStreet, validateZipCode, validateCountry, validateCity, validateNameOnCard, validateEmpty
+    validateOnlyLetters, validateStreet, validateZipCode, validateCountry, validateCity, validateNameOnCard, validateEmpty, validateProductName
 }

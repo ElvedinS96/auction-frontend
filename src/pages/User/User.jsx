@@ -17,6 +17,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import PageName from "../HeaderFooter/PageName";
 import StatusBar from "../../Components/StatusBar/StatusBar"
 import { useRef } from "react";
+import Seller from "../../Components/UserProfile/Seller";
 
 const User = props => {
 
@@ -41,6 +42,7 @@ const User = props => {
     })
     const [activeAccount, setActiveAccount] = useState({
         profile: "",
+        seller: "",
         bids: "",
         settings: ""
     })
@@ -48,6 +50,7 @@ const User = props => {
     const [profileHeaderActive, setProfileHeaderActive] = useState("profile")
     const [headerClasses, setHeaderClasses] = useState({
         profile: headerActiveClass,
+        seller: "",
         bids: "",
         settings: ""
     })
@@ -61,6 +64,8 @@ const User = props => {
         numberOfBids: 0,
         imgUrl: ""
     }])
+    const [userActiveProducts, setUserActiveProducts] = useState([])
+    const [userSoldProducts, setUserSoldProducts] = useState([])
 
     const [genderOptions, setGenderOptions] = useState(["Male", "Female", "Other"])
     const [monthOptions, setMonthOptions] = useState([])
@@ -145,6 +150,36 @@ const User = props => {
                 history.push("/500")
             })
 
+        url = props.baseUrl + "/user/" + user.id + "/products?active=true"
+        axios.get(url,
+            {
+                headers: {
+                    Authorization: "Bearer " + getToken("token")
+                }
+            })
+            .then(response => {
+                setUserActiveProducts(response.data)
+            })
+            .catch(error => {
+                console.log(error)
+                history.push("/500")
+            })
+
+        url = props.baseUrl + "/user/" + user.id + "/products?active=false"
+        axios.get(url,
+            {
+                headers: {
+                    Authorization: "Bearer " + getToken("token")
+                }
+            })
+            .then(response => {
+                setUserSoldProducts(response.data)
+            })
+            .catch(error => {
+                console.log(error)
+                history.push("/500")
+            })
+
         setMonthOptions(getMonths())
         setYearOptions(Array(2100 - 1900 + 1).fill().map((item, index) => 1900 + index))
         setDayOptions(Array(31 - 1 + 1).fill().map((item, index) => 1 + index))
@@ -223,20 +258,26 @@ const User = props => {
             case "profile":
                 setProfileHeaderActive("profile")
                 setSelectedPage("PROFILE")
-                setHeaderClasses({ profile: headerActiveClass, bids: "", settings: "" })
-                setActiveAccount({ profile: "my-account-active", bids: "", settings: "" })
+                setHeaderClasses({ profile: headerActiveClass, seller: "", bids: "", settings: "" })
+                setActiveAccount({ profile: "my-account-active", seller: "", bids: "", settings: "" })
+                break;
+            case "seller":
+                setProfileHeaderActive("seller")
+                setSelectedPage("SELLER")
+                setHeaderClasses({ profile: "", seller: headerActiveClass, bids: "", settings: "" })
+                setActiveAccount({ profile: "", seller: "my-account-active", bids: "", settings: "" })
                 break;
             case "bids":
                 setProfileHeaderActive("bids")
                 setSelectedPage("BIDS")
-                setHeaderClasses({ profile: "", bids: headerActiveClass, settings: "" })
-                setActiveAccount({ profile: "", bids: "my-account-active", settings: "" })
+                setHeaderClasses({ profile: "", seller: "", bids: headerActiveClass, settings: "" })
+                setActiveAccount({ profile: "", seller: "", bids: "my-account-active", settings: "" })
                 break;
             case "settings":
                 setProfileHeaderActive("settings")
                 setSelectedPage("SETTINGS")
-                setHeaderClasses({ profile: "", bids: "", settings: headerActiveClass })
-                setActiveAccount({ profile: "", bids: "", settings: "my-account-active" })
+                setHeaderClasses({ profile: "", seller: "", bids: "", settings: headerActiveClass })
+                setActiveAccount({ profile: "", seller: "", bids: "", settings: "my-account-active" })
                 break;
         }
     }
@@ -617,6 +658,17 @@ const User = props => {
                 addressRef={addressRef}
                 cardInfoRef={cardInfoRef}
             />
+        }
+        else if (profileHeaderActive == "seller") {
+            if (localStorage.userRole == "USER") {
+                history.push("/become-seller")
+            }
+            else {
+                return <Seller
+                    activeProducts={userActiveProducts}
+                    soldProducts={userSoldProducts}
+                />
+            }
         }
         else if (profileHeaderActive == "bids") {
             return <UserBids bids={userBids} />
